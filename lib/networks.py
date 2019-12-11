@@ -44,15 +44,16 @@ class MainNet(AbstractNet):
     ADDRTYPE_P2SH = 5
     ADDRTYPE_P2SH_BITPAY = 40
     CASHADDR_PREFIX = "bitcoincash"
-    HEADERS_URL = "http://bitcoincash.com/files/blockchain_headers"
-    GENESIS = "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f"
-    DEFAULT_PORTS = {'t': '50001', 's': '50002'}
+    SEGWIT_HRP = "bc"
+    #HEADERS_URL = "http://bitcoincash.com/files/blockchain_headers"
+    GENESIS = "dfc8e3d348da67cf64fef22c927e593860465ada0546fa1719556958b95c7cf6"
+    DEFAULT_PORTS = {'t': '60998', 's': '60999'}
     DEFAULT_SERVERS = _read_json_dict('servers.json')  # DO NOT MODIFY IN CLIENT CODE
     TITLE = 'Electron Cash'
 
     # Bitcoin Cash fork block specification
-    BITCOIN_CASH_FORK_BLOCK_HEIGHT = 478559
-    BITCOIN_CASH_FORK_BLOCK_HASH = "000000000000000000651ef99cb9fcbe0dadde1d424bd9f15ff20136191a5eec"
+    #BITCOIN_CASH_FORK_BLOCK_HEIGHT = 478559
+    #BITCOIN_CASH_FORK_BLOCK_HASH = "000000000000000000651ef99cb9fcbe0dadde1d424bd9f15ff20136191a5eec"
 
     # Note: this is not the Merkle root of the verification block itself , but a Merkle root of
     # all blockchain headers up until and including this block. To get this value you need to
@@ -62,17 +63,25 @@ class MainNet(AbstractNet):
     #    network.synchronous_get(("blockchain.block.header", [height, height]))
     #
     # Consult the ElectrumX documentation for more details.
-    VERIFICATION_BLOCK_MERKLE_ROOT = "fcf0ac1b7d7efc16d93e8ec9211def5977827482420b5210718731ecd6c4edb4"
-    VERIFICATION_BLOCK_HEIGHT = 592911
+    VERIFICATION_BLOCK_MERKLE_ROOT = "0ba34c8de9be42563ebe6fb10bc687e4f19f19f6cb565cc75536afdc91e43d0b"
+    VERIFICATION_BLOCK_HEIGHT = 0
 
     # Version numbers for BIP32 extended keys
     # standard: xprv, xpub
     XPRV_HEADERS = {
-        'standard': 0x0488ade4,
+        'standard':    0x0488ade4,  # xprv
+        'p2wpkh-p2sh': 0x049d7878,  # yprv
+        'p2wsh-p2sh':  0x0295b005,  # Yprv
+        'p2wpkh':      0x04b2430c,  # zprv
+        'p2wsh':       0x02aa7a99,  # Zprv
     }
 
     XPUB_HEADERS = {
-        'standard': 0x0488b21e,
+        'standard':    0x0488b21e,  # xpub
+        'p2wpkh-p2sh': 0x049d7cb2,  # ypub
+        'p2wsh-p2sh':  0x0295b43f,  # Ypub
+        'p2wpkh':      0x04b24746,  # zpub
+        'p2wsh':       0x02aa7ed3,  # Zpub
     }
 
 
@@ -84,32 +93,42 @@ class TestNet(AbstractNet):
     ADDRTYPE_P2SH = 196
     ADDRTYPE_P2SH_BITPAY = 196  # Unsure
     CASHADDR_PREFIX = "bchtest"
-    HEADERS_URL = "http://bitcoincash.com/files/testnet_headers"
-    GENESIS = "000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943"
-    DEFAULT_PORTS = {'t':'51001', 's':'51002'}
+    SEGWIT_HRP = "tb"
+    #HEADERS_URL = "http://bitcoincash.com/files/testnet_headers"
+    GENESIS = "54746281650914f19f4b4e80002c4a9b7ab6e2334b25d6e141bc9130ea4ec572"
+    DEFAULT_PORTS = {'t':'20998', 's':'20999'}
     DEFAULT_SERVERS = _read_json_dict('servers_testnet.json')  # DO NOT MODIFY IN CLIENT CODE
     TITLE = 'Electron Cash Testnet'
 
     # Bitcoin Cash fork block specification
-    BITCOIN_CASH_FORK_BLOCK_HEIGHT = 1155876
-    BITCOIN_CASH_FORK_BLOCK_HASH = "00000000000e38fef93ed9582a7df43815d5c2ba9fd37ef70c9a0ea4a285b8f5"
+    #BITCOIN_CASH_FORK_BLOCK_HEIGHT = 1155876
+    #BITCOIN_CASH_FORK_BLOCK_HASH = "00000000000e38fef93ed9582a7df43815d5c2ba9fd37ef70c9a0ea4a285b8f5"
 
-    VERIFICATION_BLOCK_MERKLE_ROOT = "c3cc7a7b6fe5e0ff19b750ae200ae93664b3abf09bf510e26e15ba338afe1f1a"
-    VERIFICATION_BLOCK_HEIGHT = 1273800
+    VERIFICATION_BLOCK_MERKLE_ROOT = "3adb98d48ff23bf6f75972faca104652538b38b8c343159aa88a223fa9e79029"
+    VERIFICATION_BLOCK_HEIGHT = 0
 
     # Version numbers for BIP32 extended keys
     # standard: tprv, tpub
     XPRV_HEADERS = {
-        'standard': 0x04358394,
+        'standard':    0x04358394,  # tprv
+        'p2wpkh-p2sh': 0x044a4e28,  # uprv
+        'p2wsh-p2sh':  0x024285b5,  # Uprv
+        'p2wpkh':      0x045f18bc,  # vprv
+        'p2wsh':       0x02575048,  # Vprv
     }
 
     XPUB_HEADERS = {
-        'standard': 0x043587cf,
+        'standard':    0x043587cf,  # tpub
+        'p2wpkh-p2sh': 0x044a5262,  # upub
+        'p2wsh-p2sh':  0x024289ef,  # Upub
+        'p2wpkh':      0x045f1cf6,  # vpub
+        'p2wsh':       0x02575483,  # Vpub
     }
 
 
 # All new code should access this to get the current network config.
-net = MainNet
+#net = MainNet
+net = TestNet
 
 def set_mainnet():
     global net

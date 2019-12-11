@@ -115,20 +115,21 @@ class BaseWizard(util.PrintError):
         if self.wallet_type =='standard' or i==0:
             message = _('Do you want to create a new seed, or to restore a wallet using an existing seed?')
             choices = [
-                ('create_standard_seed', _('Create a new seed')),
+                #('create_standard_seed', _('Create a new seed')),
+                ('choose_seed_type', _('Create a new seed')),
                 ('restore_from_seed', _('I already have a seed')),
                 ('restore_from_key', _('Use public or private keys')),
             ]
-            if not self.is_kivy:
-                choices.append(('choose_hw_device',  _('Use a hardware device')))
+            #if not self.is_kivy:
+            #    choices.append(('choose_hw_device',  _('Use a hardware device')))
         else:
             message = _('Add a cosigner to your multi-sig wallet')
             choices = [
                 ('restore_from_key', _('Enter cosigner key')),
                 ('restore_from_seed', _('Enter cosigner seed')),
             ]
-            if not self.is_kivy:
-                choices.append(('choose_hw_device',  _('Cosign with hardware device')))
+            #if not self.is_kivy:
+            #    choices.append(('choose_hw_device',  _('Cosign with hardware device')))
 
         self.choice_dialog(title=title, message=message, choices=choices, run_next=self.run)
 
@@ -324,11 +325,19 @@ class BaseWizard(util.PrintError):
         if self.seed_type == 'bip39':
             f=lambda passphrase: self.on_restore_bip39(seed, passphrase)
             self.passphrase_dialog(run_next=f) if is_ext else f('')
-        elif self.seed_type in ['standard']:
+        #elif self.seed_type in ['standard']:
+        #    f = lambda passphrase: self.run('create_keystore', seed, passphrase)
+        #    self.passphrase_dialog(run_next=f) if is_ext else f('')
+        #elif self.seed_type == 'old':
+        #    self.run('create_keystore', seed, '')
+        elif self.seed_type in ['standard', 'segwit']:
             f = lambda passphrase: self.run('create_keystore', seed, passphrase)
-            self.passphrase_dialog(run_next=f) if is_ext else f('')
+            self.passphrase_dialog(run_next=f, is_restoring=True) if is_ext else f('')
         elif self.seed_type == 'old':
             self.run('create_keystore', seed, '')
+        #elif mnemonic.is_any_2fa_seed_type(self.seed_type):
+        #    self.load_2fa()
+        #    self.run('on_restore_seed', seed, is_ext)
         else:
             raise BaseException('Unknown seed type', self.seed_type)
 
@@ -349,8 +358,9 @@ class BaseWizard(util.PrintError):
         if has_xpub:
             from .bitcoin import xpub_type
             t1 = xpub_type(k.xpub)
+            self.txin_type = t1 # wdy add
         if self.wallet_type == 'standard':
-            if has_xpub and t1 not in ['standard']:
+            if has_xpub and t1 not in ['standard', 'p2wpkh', 'p2wpkh-p2sh']:
                 self.show_error(_('Wrong key type') + ' %s'%t1)
                 self.run('choose_keystore')
                 return
@@ -358,7 +368,7 @@ class BaseWizard(util.PrintError):
             self.run('create_wallet')
         elif self.wallet_type == 'multisig':
             assert has_xpub
-            if t1 not in ['standard']:
+            if t1 not in ['standard', 'p2wsh', 'p2wsh-p2sh']:
                 self.show_error(_('Wrong key type') + ' %s'%t1)
                 self.run('choose_keystore')
                 return
@@ -398,7 +408,7 @@ class BaseWizard(util.PrintError):
             self.storage.put('seed_type', self.seed_type)
             keys = self.keystores[0].dump()
             self.storage.put('keystore', keys)
-            self.wallet = Standard_Wallet(self.storage)
+            self.wallet = Standard_Wallet(self.storage, self.txin_type)
             self.run('create_addresses')
         elif self.wallet_type == 'multisig':
             for i, k in enumerate(self.keystores):
@@ -416,6 +426,23 @@ class BaseWizard(util.PrintError):
         k = keystore.from_master_key(text, password)
         self.on_keystore(k)
 
+    def choose_seed_type(self, message=None, choices=None):
+        title = _('Choose Seed type')
+        if message is None:
+            message = ' '.join([
+                _("The type of addresses used by your wallet will depend on your seed."),
+                _("Segwit wallets use bech32 addresses, defined in BIP173."),
+                _("Please note that websites and other wallets may not support these addresses yet."),
+                _("Thus, you might want to keep using a non-segwit wallet in order to be able to receive bitcoins during the transition period.")
+            ])
+        if choices is None:
+            choices = [
+                ('create_segwit_seed', _('Segwit')),
+                ('create_standard_seed', _('Legacy')),
+            ]
+        self.choice_dialog(title=title, message=message, choices=choices, run_next=self.run)
+
+    def create_segwit_seed(self): self.create_seed('segwit')
     def create_standard_seed(self): self.create_seed('standard')
 
     def create_seed(self, seed_type):

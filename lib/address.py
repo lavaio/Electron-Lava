@@ -191,6 +191,9 @@ P2PKH_suffix = bytes([OpCodes.OP_EQUALVERIFY, OpCodes.OP_CHECKSIG])
 P2SH_prefix = bytes([OpCodes.OP_HASH160, 20])
 P2SH_suffix = bytes([OpCodes.OP_EQUAL])
 
+P2WPKH_prefix = bytes([OpCodes.OP_0, 20])
+P2WSH_prefix = bytes([OpCodes.OP_0, 32])
+
 # Utility functions
 
 def to_bytes(x):
@@ -473,13 +476,149 @@ class ScriptOutput(namedtuple("ScriptAddressTuple", "script")):
         ''' One shot -- find the right class and construct object based on script '''
         return __class__.find_protocol_class(script)(script)
 
+################ segwit address encode/decode begin
+# Copyright (c) 2017 Pieter Wuille
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 
+"""Reference implementation for Bech32 and segwit addresses."""
+
+
+CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l"
+
+
+def bech32_polymod(values):
+    """Internal function that computes the Bech32 checksum."""
+    generator = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3]
+    chk = 1
+    for value in values:
+        top = chk >> 25
+        chk = (chk & 0x1ffffff) << 5 ^ value
+        for i in range(5):
+            chk ^= generator[i] if ((top >> i) & 1) else 0
+    return chk
+
+
+def bech32_hrp_expand(hrp):
+    """Expand the HRP into values for checksum computation."""
+    return [ord(x) >> 5 for x in hrp] + [0] + [ord(x) & 31 for x in hrp]
+
+
+def bech32_verify_checksum(hrp, data):
+    """Verify a checksum given HRP and converted data characters."""
+    return bech32_polymod(bech32_hrp_expand(hrp) + data) == 1
+
+
+def bech32_create_checksum(hrp, data):
+    """Compute the checksum values given HRP and data."""
+    values = bech32_hrp_expand(hrp) + data
+    polymod = bech32_polymod(values + [0, 0, 0, 0, 0, 0]) ^ 1
+    return [(polymod >> 5 * (5 - i)) & 31 for i in range(6)]
+
+
+def bech32_encode(hrp, data):
+    """Compute a Bech32 string given HRP and data values."""
+    combined = data + bech32_create_checksum(hrp, data)
+    return hrp + '1' + ''.join([CHARSET[d] for d in combined])
+
+
+def bech32_decode(bech):
+    """Validate a Bech32 string, and determine HRP and data."""
+    if ((any(ord(x) < 33 or ord(x) > 126 for x in bech)) or
+            (bech.lower() != bech and bech.upper() != bech)):
+        return (None, None)
+    bech = bech.lower()
+    pos = bech.rfind('1')
+    if pos < 1 or pos + 7 > len(bech) or len(bech) > 90:
+        return (None, None)
+    if not all(x in CHARSET for x in bech[pos+1:]):
+        return (None, None)
+    hrp = bech[:pos]
+    data = [CHARSET.find(x) for x in bech[pos+1:]]
+    if not bech32_verify_checksum(hrp, data):
+        return (None, None)
+    return (hrp, data[:-6])
+
+
+def convertbits(data, frombits, tobits, pad=True):
+    """General power-of-2 base conversion."""
+    acc = 0
+    bits = 0
+    ret = []
+    maxv = (1 << tobits) - 1
+    max_acc = (1 << (frombits + tobits - 1)) - 1
+    for value in data:
+        if value < 0 or (value >> frombits):
+            return None
+        acc = ((acc << frombits) | value) & max_acc
+        bits += frombits
+        while bits >= tobits:
+            bits -= tobits
+            ret.append((acc >> bits) & maxv)
+    if pad:
+        if bits:
+            ret.append((acc << (tobits - bits)) & maxv)
+    elif bits >= frombits or ((acc << (tobits - bits)) & maxv):
+        return None
+    return ret
+
+
+def segwit_address_decode(hrp, addr):
+    """Decode a segwit address."""
+    hrpgot, data = bech32_decode(addr)
+    if hrpgot != hrp:
+        return (None, None)
+    decoded = convertbits(data[1:], 5, 8, False)
+    if decoded is None or len(decoded) < 2 or len(decoded) > 40:
+        return (None, None)
+    if data[0] > 16:
+        return (None, None)
+    if data[0] == 0 and len(decoded) != 20 and len(decoded) != 32:
+        return (None, None)
+    return (data[0], decoded)
+
+def segwit_address_encode(hrp, witver, witprog):
+    """Encode a segwit address."""
+    ret = bech32_encode(hrp, [witver] + convertbits(witprog, 8, 5))
+    assert segwit_address_decode(hrp, ret) is not (None, None)
+    return ret
+
+def p2wpkh_nested_script(pubkey: str) -> str:
+    pkh = bh2u(hash_160(bfh(pubkey)))
+    return '00' + push_script(pkh)
+
+def is_segwit_address(addr: str, hrp) -> bool:
+    try:
+        witver, witprog = segwit_address_decode(hrp, addr)
+    except Exception as e:
+        return False
+    return witprog is not None
+
+################ segwit address encode/decode end
 # A namedtuple for easy comparison and unique hashing
 class Address(namedtuple("AddressTuple", "hash160 kind")):
 
     # Address kinds
     ADDR_P2PKH = 0
     ADDR_P2SH = 1
+    ADDR_P2WPKH = 2
+    ADDR_P2WSH = 3
 
     # Address formats
     FMT_CASHADDR = 0
@@ -491,17 +630,19 @@ class Address(namedtuple("AddressTuple", "hash160 kind")):
     # Default to CashAddr
     FMT_UI = FMT_CASHADDR
 
-    def __new__(cls, hash160, kind):
-        assert kind in (cls.ADDR_P2PKH, cls.ADDR_P2SH)
+    def __new__(cls, hash160, kind, witver=None):
+        assert kind in (cls.ADDR_P2PKH, cls.ADDR_P2SH, cls.ADDR_P2WPKH, cls.ADDR_P2WSH)
         hash160 = to_bytes(hash160)
-        assert len(hash160) == 20, "hash must be 20 bytes"
+        #assert len(hash160) == 20, "hash must be 20 bytes"
         ret = super().__new__(cls, hash160, kind)
         ret._addr2str_cache = [None] * cls._NUM_FMTS
+        ret.witver = witver
         return ret
 
     @classmethod
     def show_cashaddr(cls, on):
-        cls.FMT_UI = cls.FMT_CASHADDR if on else cls.FMT_LEGACY
+        #cls.FMT_UI = cls.FMT_CASHADDR if on else cls.FMT_LEGACY
+        cls.FMT_UI = cls.FMT_LEGACY
 
     @classmethod
     def from_cashaddr_string(cls, string, *, net=None):
@@ -527,11 +668,14 @@ class Address(namedtuple("AddressTuple", "hash160 kind")):
     def from_string(cls, string, *, net=None):
         '''Construct from an address string.'''
         if net is None: net = networks.net
-        if len(string) > 35:
-            try:
-                return cls.from_cashaddr_string(string, net=net)
-            except ValueError as e:
-                raise AddressError(str(e))
+        if is_segwit_address(string, net.SEGWIT_HRP):
+            witver, witprog = segwit_address_decode(net.SEGWIT_HRP, string)
+            return cls(bytes(witprog), cls.ADDR_P2WPKH, witver=witver)
+        #if len(string) > 35:
+        #    try:
+        #        return cls.from_cashaddr_string(string, net=net)
+        #    except ValueError as e:
+        #        raise AddressError(str(e))
 
         try:
             raw = Base58.decode_check(string)
@@ -555,6 +699,27 @@ class Address(namedtuple("AddressTuple", "hash160 kind")):
         return cls(hash160, kind)
 
     @classmethod
+    def guess_txintype_from_address(cls, addr, net=None):
+        # It's not possible to tell the script type in general
+        # just from an address.
+        # - "1" addresses are of course p2pkh
+        # - "3" addresses are p2sh but we don't know the redeem script..
+        # - "bc1" addresses (if they are 42-long) are p2wpkh
+        # - "bc1" addresses that are 62-long are p2wsh but we don't know the script..
+        # If we don't know the script, we _guess_ it is pubkeyhash.
+        # As this method is used e.g. for tx size estimation,
+        # the estimation will not be precise.
+        if net is None: net = networks.net
+        witver, witprog = segwit_address_decode(net.SEGWIT_HRP, addr)
+        if witprog is not None:
+            return 'p2wpkh'
+        addrtype, hash_160_ = b58_address_to_hash160(addr)
+        if addrtype == net.ADDRTYPE_P2PKH:
+            return 'p2pkh'
+        elif addrtype == net.ADDRTYPE_P2SH:
+            return 'p2wpkh-p2sh'
+            
+    @classmethod
     def is_valid(cls, string, *, net=None):
         if net is None: net = networks.net
         try:
@@ -570,13 +735,24 @@ class Address(namedtuple("AddressTuple", "hash160 kind")):
         return [cls.from_string(string, net=net) for string in strings]
 
     @classmethod
-    def from_pubkey(cls, pubkey):
+    def from_pubkey(cls, pubkey, txin_type='standard'):
         '''Returns a P2PKH address from a public key.  The public key can
         be bytes or a hex string.'''
+        pubkey_byte = pubkey
         if isinstance(pubkey, str):
-            pubkey = hex_to_bytes(pubkey)
-        PublicKey.validate(pubkey)
-        return cls(hash160(pubkey), cls.ADDR_P2PKH)
+            pubkey_byte = hex_to_bytes(pubkey)
+        #PublicKey.validate(pubkey)
+        #return cls(hash160(pubkey), cls.ADDR_P2PKH)
+        if txin_type == 'standard': #'p2pkh':
+            #return public_key_to_p2pkh(bfh(pubkey), net=net)
+            return cls(hash160(pubkey_byte), cls.ADDR_P2PKH)
+        elif txin_type == 'p2wpkh':
+            return cls(hash160(pubkey_byte), cls.ADDR_P2WPKH, witver=0)
+        elif txin_type == 'p2wpkh-p2sh':
+            scriptSig = p2wpkh_nested_script(pubkey)
+            return cls(hash_160(bfh(scriptSig)), cls.ADDRTYPE_P2SH)
+        else:
+            raise AddressError('unknown type : {}'.format(txin_type))
 
     @classmethod
     def from_P2PKH_hash(cls, hash160):
@@ -587,6 +763,16 @@ class Address(namedtuple("AddressTuple", "hash160 kind")):
     def from_P2SH_hash(cls, hash160):
         '''Construct from a P2PKH hash160.'''
         return cls(hash160, cls.ADDR_P2SH)
+
+    @classmethod
+    def from_P2WPKH_hash(cls, hash160, witver):
+        '''Construct from a P2PKSH hash160.'''
+        return cls(hash160, cls.ADDR_P2WPKH, witver)
+
+    @classmethod
+    def from_P2WSH_hash(cls, hash160, witver):
+        '''Construct from a P2WSH hash160.'''
+        return cls(hash160, cls.ADDR_P2WSH, witver)
 
     @classmethod
     def from_multisig_script(cls, script):
@@ -626,8 +812,12 @@ class Address(namedtuple("AddressTuple", "hash160 kind")):
             if fmt == self.FMT_LEGACY:
                 if self.kind == self.ADDR_P2PKH:
                     verbyte = net.ADDRTYPE_P2PKH
-                else:
+                elif self.kind == self.ADDR_P2SH:
                     verbyte = net.ADDRTYPE_P2SH
+                elif self.kind == self.ADDR_P2WPKH or self.kind == self.ADDR_P2WSH:
+                    return segwit_address_encode(net.SEGWIT_HRP, self.witver, self.hash160)
+                else : 
+                    raise AddressError('invalid address kind')
             elif fmt == self.FMT_BITPAY:
                 if self.kind == self.ADDR_P2PKH:
                     verbyte = net.ADDRTYPE_P2PKH_BITPAY
@@ -673,12 +863,27 @@ class Address(namedtuple("AddressTuple", "hash160 kind")):
         if net is None: net = networks.net
         return self.to_string(self.FMT_LEGACY, net=net)
 
-    def to_script(self):
+    def to_script_bch(self):
         '''Return a binary script to pay to the address.'''
         if self.kind == self.ADDR_P2PKH:
             return Script.P2PKH_script(self.hash160)
         else:
             return Script.P2SH_script(self.hash160)
+
+    def to_script(self):
+        '''Return a binary script to pay to the address.'''
+        #ADDR_P2PKH = 0
+        #ADDR_P2SH = 1
+        #ADDR_P2WPKH = 2
+        #ADDR_P2WSH = 3
+        if self.kind == self.ADDR_P2PKH:
+            return Script.P2PKH_script(self.hash160)
+        elif self.kind == self.ADDR_P2SH:
+            return Script.P2SH_script(self.hash160)
+        elif self.kind == self.ADDR_P2WPKH:
+            return Script.P2WPKH_script(self.witver, self.hash160)
+        else:
+            raise AddressError('unknown address kind: {}'.format(self.kind))
 
     def to_script_hex(self):
         '''Return a script to pay to the address as a hex string.'''
@@ -725,6 +930,15 @@ class Script:
         return P2PKH_prefix + hash160 + P2PKH_suffix
 
     @classmethod
+    def P2WPKH_script(cls, witver, hash160):
+        if not (0 <= witver <= 16):
+            raise AddressError('impossible witness version: {}'.format(witver))
+        assert len(hash160) == 20
+        script = cls.push_data(cls.script_num_to_hex(witver))
+        script += cls.push_data(hash160)
+        return script
+
+    @classmethod
     def P2PK_script(cls, pubkey):
         return cls.push_data(pubkey) + bytes([OpCodes.OP_CHECKSIG])
 
@@ -744,7 +958,7 @@ class Script:
                 + bytes([OpCodes.OP_1 + n - 1, OpCodes.OP_CHECKMULTISIG]))
 
     @classmethod
-    def push_data(cls, data):
+    def push_data_bch(cls, data):
         '''Returns the OpCodes to push the data on the stack.'''
         assert isinstance(data, (bytes, bytearray))
 
@@ -756,6 +970,53 @@ class Script:
         if n < 65536:
             return bytes([OpCodes.OP_PUSHDATA2]) + struct.pack('<H', n) + data
         return bytes([OpCodes.OP_PUSHDATA4]) + struct.pack('<I', n) + data
+
+    @classmethod
+    def push_data(cls, data):
+        '''Returns the OpCodes to push the data on the stack.'''
+        assert isinstance(data, (bytes, bytearray))
+        data_len = len(data)
+        # "small integer" opcodes
+        if data_len == 0 or data_len == 1 and data[0] == 0:
+            return bytes([OpCodes.OP_0])
+        elif data_len == 1 and data[0] <= 16:
+            return bytes([OpCodes.OP_1 - 1 + data[0]])
+        elif data_len == 1 and data[0] == 0x81:
+            return bytes([OpCodes.OP_1NEGATE])
+
+        n = len(data)
+        if n < OpCodes.OP_PUSHDATA1:
+            return bytes([n]) + data
+        if n < 256:
+            return bytes([OpCodes.OP_PUSHDATA1, n]) + data
+        if n < 65536:
+            return bytes([OpCodes.OP_PUSHDATA2]) + struct.pack('<H', n) + data
+        return bytes([OpCodes.OP_PUSHDATA4]) + struct.pack('<I', n) + data
+
+    @classmethod
+    def script_num_to_hex(cls, i: int):
+        """See CScriptNum in Bitcoin Core.
+        Encodes an integer as hex, to be used in script.
+
+        ported from https://github.com/bitcoin/bitcoin/blob/8cbc5c4be4be22aca228074f087a374a7ec38be8/src/script/script.h#L326
+        """
+        result = bytearray()
+        if i == 0:
+            return result
+
+        neg = i < 0
+        absvalue = abs(i)
+        while absvalue > 0:
+            result.append(absvalue & 0xff)
+            absvalue >>= 8
+
+        if result[-1] & 0x80:
+            result.append(0x80 if neg else 0x00)
+        elif neg:
+            result[-1] |= 0x80
+
+        #return bh2u(result)
+        return result
 
     @classmethod
     def get_ops(cls, script):
@@ -877,3 +1138,4 @@ class Base58:
         into a Base58Check string."""
         be_bytes = payload + double_sha256(payload)[:4]
         return Base58.encode(be_bytes)
+

@@ -209,7 +209,7 @@ class Abstract_Wallet(PrintError, SPVDelegate):
         # checks are O(logN) rather than O(N). This creates/resets that cache.
         self.invalidate_address_set_cache()
 
-        self.gap_limit_for_change = 20 # constant
+        self.gap_limit_for_change = 6 # constant
         # saved fields
         self.use_change            = storage.get('use_change', True)
         self.multiple_change       = storage.get('multiple_change', False)
@@ -469,6 +469,7 @@ class Abstract_Wallet(PrintError, SPVDelegate):
         ''' Note this method assumes that the entire address set is
         composed of self.get_change_addresses() + self.get_receiving_addresses().
         In subclasses, if that is not the case -- REIMPLEMENT this method! '''
+        self.print_error('wdy type={}'.format(type(address)))
         assert not isinstance(address, str)
         # assumption here is get_receiving_addresses and get_change_addresses
         # are cheap constant-time operations returning a list reference.
@@ -943,6 +944,7 @@ class Abstract_Wallet(PrintError, SPVDelegate):
             # bad tx came in off the wire -- all 0's or something, see #987
             self.print_error("add_transaction: WARNING a tx came in from the network with 0 inputs! Bad server? Ignoring tx:", tx_hash)
             return
+        self.print_error("wdy tx inputs=", tx.inputs())
         is_coinbase = tx.inputs()[0]['type'] == 'coinbase'
         with self.lock:
             # add inputs
@@ -965,11 +967,13 @@ class Abstract_Wallet(PrintError, SPVDelegate):
                     else:
                         self.pruned_txo[ser] = tx_hash
                     self._addr_bal_cache.pop(addr, None)  # invalidate cache entry
+            #self.txi[tx_hash] = d # wdy add
 
             # add outputs
             self.txo[tx_hash] = d = {}
             op_return_ct = 0
             deferred_cashacct_add = None
+            self.print_error("wdy outputs=", tx.outputs())
             for n, txo in enumerate(tx.outputs()):
                 ser = tx_hash + ':%d'%n
                 _type, addr, v = txo
@@ -986,6 +990,7 @@ class Abstract_Wallet(PrintError, SPVDelegate):
                                 self.cashacct.add_transaction_hook(_tx_hash, _tx, _n, _addr)
                         )
                 elif self.is_mine(addr):
+                #if self.is_mine(addr):
                     if addr not in d:
                         d[addr] = []
                     d[addr].append((n, v, is_coinbase))
@@ -1052,7 +1057,11 @@ class Abstract_Wallet(PrintError, SPVDelegate):
 
 
     def receive_tx_callback(self, tx_hash, tx, tx_height):
-        self.add_transaction(tx_hash, tx)
+        try:
+            self.add_transaction(tx_hash, tx)
+        except Exception as ex:
+            self.print_error("cannot add_transaction", ex)
+        
         self.add_unverified_tx(tx_hash, tx_height)
 
     def receive_history_callback(self, addr, hist, tx_fees):
@@ -1515,7 +1524,8 @@ class Abstract_Wallet(PrintError, SPVDelegate):
         outputs = [(TYPE_ADDRESS, address, value - fee)]
         locktime = self.get_local_height()
         # note: no need to call tx.BIP_LI01_sort() here - single input/output
-        return Transaction.from_io(inputs, outputs, locktime=locktime, sign_schnorr=sign_schnorr)
+        #return Transaction.from_io(inputs, outputs, locktime=locktime, sign_schnorr=sign_schnorr)
+        return Transaction.from_io(inputs, outputs, locktime=locktime)
 
     def add_input_info(self, txin):
         address = txin['address']
@@ -2361,8 +2371,10 @@ class Simple_Deterministic_Wallet(Simple_Wallet, Deterministic_Wallet):
 
     """ Deterministic Wallet with a single pubkey per address """
 
-    def __init__(self, storage):
+    def __init__(self, storage, txin_type='standard'): # replace 'p2pkh' with 'standard'
         Deterministic_Wallet.__init__(self, storage)
+        self.txin_type = txin_type
+        storage.print_error('wdy self.txin_type={}'.format(self.txin_type))
 
     def get_public_key(self, address):
         sequence = self.get_address_index(address)
@@ -2405,8 +2417,12 @@ class Standard_Wallet(Simple_Deterministic_Wallet):
     wallet_type = 'standard'
 
     def pubkeys_to_address(self, pubkey):
-        return Address.from_pubkey(pubkey)
-
+        return Address.from_pubkey(pubkey, self.txin_type)
+    def get_txin_type(self, address):
+        self.storage.print_error('wdy address type={}'.format(type(address)))
+        if self.storage.get('seed_type', '') == 'segwit':
+            return Address.guess_txintype_from_address(address.to_ui_string())
+        return self.txin_type
 
 class Multisig_Wallet(Deterministic_Wallet):
     # generic m of n

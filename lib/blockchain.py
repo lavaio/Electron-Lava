@@ -73,7 +73,8 @@ def target_to_bits(target):
     assert size < 256
     return compact | size << 24
 
-HEADER_SIZE = 80 # bytes
+#HEADER_SIZE = 80 # bytes
+HEADER_SIZE = 136 # bytes
 MAX_BITS = 0x1d00ffff
 MAX_TARGET = bits_to_target(MAX_BITS)
 # indicates no header in data file
@@ -87,7 +88,8 @@ def serialize_header(res):
         + rev_hex(res.get('merkle_root')) \
         + int_to_hex(int(res.get('timestamp')), 4) \
         + int_to_hex(int(res.get('bits')), 4) \
-        + int_to_hex(int(res.get('nonce')), 4)
+        + int_to_hex(int(res.get('nonce')), 4) \
+        + rev_hex(res.get('extra')) 
     return s
 
 def deserialize_header(s, height):
@@ -98,6 +100,7 @@ def deserialize_header(s, height):
     h['timestamp'] = int.from_bytes(s[68:72], 'little')
     h['bits'] = int.from_bytes(s[72:76], 'little')
     h['nonce'] = int.from_bytes(s[76:80], 'little')
+    h['extra'] = hash_encode(s[80:136])
     h['block_height'] = height
     return h
 
@@ -261,16 +264,16 @@ class Blockchain(util.PrintError):
             raise VerifyError("prev hash mismatch: %s vs %s" % (prev_header_hash, header.get('prev_block_hash')))
 
         # We do not need to check the block difficulty if the chain of linked header hashes was proven correct against our checkpoint.
-        if bits is not None:
+        #if bits is not None:
             # checkpoint BitcoinCash fork block
-            if (header.get('block_height') == networks.net.BITCOIN_CASH_FORK_BLOCK_HEIGHT and hash_header(header) != networks.net.BITCOIN_CASH_FORK_BLOCK_HASH):
-                err_str = "block at height %i is not cash chain fork block. hash %s" % (header.get('block_height'), hash_header(header))
-                raise VerifyError(err_str)
-            if bits != header.get('bits'):
-                raise VerifyError("bits mismatch: %s vs %s" % (bits, header.get('bits')))
-            target = bits_to_target(bits)
-            if int('0x' + this_header_hash, 16) > target:
-                raise VerifyError("insufficient proof of work: %s vs target %s" % (int('0x' + this_header_hash, 16), target))
+            #if (header.get('block_height') == networks.net.BITCOIN_CASH_FORK_BLOCK_HEIGHT and hash_header(header) != networks.net.BITCOIN_CASH_FORK_BLOCK_HASH):
+            #    err_str = "block at height %i is not cash chain fork block. hash %s" % (header.get('block_height'), hash_header(header))
+            #    raise VerifyError(err_str)
+            #if bits != header.get('bits'):
+            #    raise VerifyError("bits mismatch: %s vs %s" % (bits, header.get('bits')))
+            #target = bits_to_target(bits)
+            #if int('0x' + this_header_hash, 16) > target:
+            #    raise VerifyError("insufficient proof of work: %s vs target %s" % (int('0x' + this_header_hash, 16), target))
 
     def verify_chunk(self, chunk_base_height, chunk_data):
         chunk = HeaderChunk(chunk_base_height, chunk_data)
@@ -283,8 +286,9 @@ class Blockchain(util.PrintError):
         for i in range(header_count):
             header = chunk.get_header_at_index(i)
             # Check the chain of hashes and the difficulty.
-            bits = self.get_bits(header, chunk)
-            self.verify_header(header, prev_header, bits)
+            #bits = self.get_bits(header, chunk)
+            #self.verify_header(header, prev_header, bits)
+            self.verify_header(header, prev_header)
             prev_header = header
 
     def path(self):
@@ -294,6 +298,7 @@ class Blockchain(util.PrintError):
 
     def save_chunk(self, base_height, chunk_data):
         chunk_offset = (base_height - self.base_height) * HEADER_SIZE
+        self.print_error('wdy chunk_offset={} len={}'.format(chunk_offset, len(chunk_data)))
         if chunk_offset < 0:
             chunk_data = chunk_data[-chunk_offset:]
             chunk_offset = 0
@@ -527,9 +532,10 @@ class Blockchain(util.PrintError):
         prev_hash = hash_header(previous_header)
         if prev_hash != header.get('prev_block_hash'):
             return False
-        bits = self.get_bits(header)
+        #bits = self.get_bits(header)
         try:
-            self.verify_header(header, previous_header, bits)
+            #self.verify_header(header, previous_header, bits)
+            self.verify_header(header, previous_header)
         except VerifyError as e:
             self.print_error('verify header {} failed at height {:d}: {}'
                              .format(hash_header(header), height, e))
@@ -557,23 +563,33 @@ class Blockchain(util.PrintError):
             if top_height <= self.height():
                 return CHUNK_ACCEPTED
         elif base_height != self.height() + 1:
+            self.print_error('1 base_height={}, self height={}'.format(base_height, self.height()))
             # This chunk covers a segment of this blockchain which we already have headers
             # for. We need to verify that there isn't a split within the chunk, and if
             # there is, indicate the need for the server to fork.
             intersection_height = min(top_height, self.height())
             chunk_header = chunk.get_header_at_height(intersection_height)
             our_header = self.read_header(intersection_height)
+            self.print_error('1 our header hash={}, self chunk={}'.format(hash_header(our_header), chunk_header))
             if hash_header(chunk_header) != hash_header(our_header):
                 return CHUNK_FORKS
             if intersection_height <= self.height():
                 return CHUNK_ACCEPTED
         else:
+            self.print_error('2 base_height={}, self height={}'.format(base_height, self.height()))
             # This base of this chunk joins to the top of the blockchain in theory.
             # We need to rule out the case where the chunk is actually a fork at the
             # connecting height.
             our_header = self.read_header(self.height())
+            self.print_error('our_header={}'.format(our_header))
             chunk_header = chunk.get_header_at_height(base_height)
-            if hash_header(our_header) != chunk_header['prev_block_hash']:
+            self.print_error('2 hash={}, self chunk={}'.format(hash_header(our_header), chunk_header))
+            header_str = None
+            if self.height():
+                header_str = hash_header(our_header)
+            else:
+                header_str = networks.net.GENESIS
+            if header_str != chunk_header['prev_block_hash']:
                 return CHUNK_FORKS
 
         try:

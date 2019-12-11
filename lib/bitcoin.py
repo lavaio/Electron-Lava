@@ -61,8 +61,9 @@ FEE_STEP = 10000
 MAX_FEE_RATE = 20000
 FEE_TARGETS = [25, 10, 5, 2]
 
-COINBASE_MATURITY = 100
+COINBASE_MATURITY = 32
 COIN = 100000000
+TOTAL_COIN_SUPPLY_LIMIT_IN_BTC = 332800000
 
 # supported types of transction outputs
 TYPE_ADDRESS = 0
@@ -196,6 +197,11 @@ def var_int(i):
     else:
         return "ff"+int_to_hex(i,8)
 
+def witness_push(item: str) -> str:
+    """Returns data in the form it should be present in the witness.
+    hex -> hex
+    """
+    return var_int(len(item) // 2) + item
 
 def op_push(i):
     if i<0x4c:
@@ -266,6 +272,12 @@ def seed_type(x):
         return 'old'
     elif is_new_seed(x):
         return 'standard'
+    elif is_new_seed(x, version.SEED_PREFIX_SW):
+        return 'segwit'
+    elif is_new_seed(x, version.SEED_PREFIX_2FA):
+        return '2fa'
+    elif is_new_seed(x, version.SEED_PREFIX_2FA_SW):
+        return '2fa_segwit'
     return ''
 
 is_seed = lambda x: bool(seed_type(x))
@@ -331,6 +343,11 @@ def pubkey_to_address(txin_type, pubkey, *, net=None):
     if net is None: net = networks.net
     if txin_type == 'p2pkh':
         return public_key_to_p2pkh(bfh(pubkey), net=net)
+    elif txin_type == 'p2wpkh':
+        return public_key_to_p2wpkh(bfh(pubkey), net=net)
+    elif txin_type == 'p2wpkh-p2sh':
+        scriptSig = p2wpkh_nested_script(pubkey)
+        return hash160_to_p2sh(hash_160(bfh(scriptSig)), net=net)
     else:
         raise NotImplementedError(txin_type)
 
@@ -439,8 +456,14 @@ def DecodeBase58Check(psz):
 
 
 SCRIPT_TYPES = {
+    #'p2pkh':0,
+    #'p2sh':5,
     'p2pkh':0,
+    'p2wpkh':1,
+    'p2wpkh-p2sh':2,
     'p2sh':5,
+    'p2wsh':6,
+    'p2wsh-p2sh':7
 }
 
 

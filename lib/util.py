@@ -95,7 +95,8 @@ class PrintError:
 
     def print_error(self, *msg):
         # only prints with --verbose flag
-        print_error("[%s]" % self.diagnostic_name(), *msg)
+        #print_error("[%s]" % self.diagnostic_name(), *msg)
+        print_stderr("[%s]" % self.diagnostic_name(), *msg)
 
     def print_stderr(self, *msg):
         print_stderr("[%s]" % self.diagnostic_name(), *msg)
@@ -173,7 +174,7 @@ class DaemonThread(threading.Thread, PrintError):
                 for job in jobs:
                     if job not in self.jobs: # ensure unique
                         self.jobs.append(job)
-                        self.print_error("Job added", job)
+                        self.print_error("add_jobs -- Job added", job)
                     else:
                         self.print_error("add_jobs: FIXME job already added", job)
         else:
@@ -214,7 +215,7 @@ class DaemonThread(threading.Thread, PrintError):
             for addjob in self._jobs2add:
                 if addjob not in self.jobs:
                     self.jobs.append(addjob)
-                    self.print_error("Job added", addjob)
+                    self.print_error("run_jobs -- Job added", addjob)
             self._jobs2add.clear()
             for rmjob in self._jobs2rm:
                 while rmjob in self.jobs:
@@ -245,7 +246,7 @@ verbose_timestamps = True
 verbose_thread_id = True
 def set_verbosity(b, *, timestamps=True, thread_id=True):
     global is_verbose, verbose_timestamps, verbose_thread_id
-    is_verbose = b
+    #is_verbose = b # wdy remove
     verbose_timestamps = timestamps
     verbose_thread_id = thread_id
 
