@@ -239,7 +239,7 @@ class Network(util.DaemonThread):
             self.verifications_required = 3
         self.checkpoint_servers_verified = {}
         self.checkpoint_height = networks.net.VERIFICATION_BLOCK_HEIGHT
-        self.debug = False
+        self.debug = True
         self.irc_servers = {} # returned by interface (list from irc)
         self.recent_servers = self.read_recent_servers()
 
@@ -1075,6 +1075,8 @@ class Network(util.DaemonThread):
 
     def on_block_headers(self, interface, request, response):
         '''Handle receiving a chunk of block headers'''
+        interface.print_error('request: {}'.format(request))
+        interface.print_error('response: {}'.format(response))
         error = response.get('error')
         result = response.get('result')
         params = response.get('params')
@@ -1124,15 +1126,21 @@ class Network(util.DaemonThread):
                 return
 
             proof_was_provided = True
-        elif len(request_params) == 3 and request_params[2] != 0:
+        #elif len(request_params) == 3 and request_params[2] != 0:
             # Expected checkpoint validation data, did not receive it.
-            self.connection_down(interface.server)
-            return
+        #    self.connection_down(interface.server)
+        #    return
 
         verification_top_height = self.checkpoint_servers_verified.get(interface.server, {}).get('height', None)
+        interface.print_error('verification_top_height:{}'.format(verification_top_height))
         was_verification_request = verification_top_height and request_base_height == verification_top_height - 147 + 1 and actual_header_count == 147
 
+        # ignore verify
+        proof_was_provided = True
+        was_verification_request = True
+        
         initial_interface_mode = interface.mode
+        interface.print_error("wdy initial_interface_mode={}".format(initial_interface_mode))
         if interface.mode == Interface.MODE_VERIFICATION:
             if not was_verification_request:
                 interface.print_error("disconnecting unverified server for sending unrelated header chunk")
@@ -1143,8 +1151,10 @@ class Network(util.DaemonThread):
                 self.connection_down(interface.server, blacklist=True)
                 return
 
-            if not self.apply_successful_verification(interface, request_params[2], result['root']):
-                return
+            #if not self.apply_successful_verification(interface, request_params[2], result['root']):
+            #    return
+            # wdy change mode value which set in self.apply_successful_verification
+            interface.set_mode(Interface.MODE_DEFAULT)
             # We connect this verification chunk into the longest chain.
             target_blockchain = self.blockchains[0]
         else:
@@ -1154,6 +1164,8 @@ class Network(util.DaemonThread):
         connect_state = (target_blockchain.connect_chunk(request_base_height, chunk_data, proof_was_provided)
                          if target_blockchain
                          else blockchain.CHUNK_BAD)  # fix #1079 -- invariant is violated here due to extant bugs, so rather than raise an exception, just trigger a connection_down below...
+
+        interface.print_error("connect_state={}".format(connect_state))
         if connect_state == blockchain.CHUNK_ACCEPTED:
             interface.print_error("connected chunk, height={} count={} proof_was_provided={}".format(request_base_height, actual_header_count, proof_was_provided))
         elif connect_state == blockchain.CHUNK_FORKS:
@@ -1182,6 +1194,7 @@ class Network(util.DaemonThread):
             self._process_latest_tip(interface)
             return
 
+        interface.print_error('wdy height={} tip={}'.format(interface.blockchain.height(), interface.tip))
         # If not finished, get the next chunk.
         if proof_was_provided and not was_verification_request:
             # the verifier must have asked for this chunk.  It has been overlaid into the file.
@@ -1455,7 +1468,9 @@ class Network(util.DaemonThread):
         if networks.net.VERIFICATION_BLOCK_HEIGHT is not None:
             self.init_headers_file()
             header = b.read_header(networks.net.VERIFICATION_BLOCK_HEIGHT)
-        if header is not None:
+            self.print_error('wdy network run: header={}'.format(header))
+        # wdy add for verification height
+        if not networks.net.VERIFICATION_BLOCK_HEIGHT or (header is not None):
             self.verified_checkpoint = True
 
         while self.is_running():
@@ -1488,13 +1503,14 @@ class Network(util.DaemonThread):
         header = blockchain.deserialize_header(bfh(header_hex), height)
 
         # If the server is behind the verification height, then something is wrong with it.  Drop it.
-        if networks.net.VERIFICATION_BLOCK_HEIGHT is not None and height <= networks.net.VERIFICATION_BLOCK_HEIGHT:
-            self.connection_down(interface.server)
-            return
+        #if networks.net.VERIFICATION_BLOCK_HEIGHT is not None and height <= networks.net.VERIFICATION_BLOCK_HEIGHT:
+        #    self.connection_down(interface.server)
+        #    return
 
         # We will always update the tip for the server.
         interface.tip_header = header
         interface.tip = height
+        #interface.print_error('wdy newest height={}'.format(height))
 
         if interface.mode == Interface.MODE_VERIFICATION:
             # If the server has already had this requested, this will be a no-op.
@@ -1512,6 +1528,7 @@ class Network(util.DaemonThread):
 
         b = blockchain.check_header(header) # Does it match the hash of a known header.
         if b:
+            interface.print_error('process 1')
             interface.blockchain = b
             self.switch_lagging_interface()
             self.notify('blockchain_updated')
@@ -1519,6 +1536,7 @@ class Network(util.DaemonThread):
             return
         b = blockchain.can_connect(header) # Is it the next header on a given blockchain.
         if b:
+            interface.print_error('process 2')
             interface.blockchain = b
             b.save_header(header)
             self.switch_lagging_interface()
@@ -1558,7 +1576,9 @@ class Network(util.DaemonThread):
                 self.checkpoint_height = interface.tip - 100
             self.checkpoint_servers_verified[interface.server] = { 'root': None, 'height': self.checkpoint_height }
             # We need at least 147 headers before the post checkpoint headers for daa calculations.
-            self._request_headers(interface, self.checkpoint_height - 147 + 1, 147, self.checkpoint_height)
+            #self._request_headers(interface, self.checkpoint_height - 147 + 1, 147, self.checkpoint_height)
+            #self._request_headers(interface, self.checkpoint_height + 1, 1)
+            self._request_headers(interface, self.checkpoint_height, 1)
         else:
             # We already have them verified, maybe we got disconnected.
             interface.print_error("request_initial_proof_and_headers bypassed")

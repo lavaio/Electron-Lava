@@ -571,7 +571,8 @@ class TxDialog(QDialog, MessageBoxMixin, PrintError):
         i_text.clear()
         cursor = i_text.textCursor()
         has_schnorr = False
-        for i, x in enumerate(self.tx.fetched_inputs() or self.tx.inputs()):
+        for i, x in enumerate(self.tx.fetched_inputs() or self.tx.inputs()): # wdy modified
+        #for i, x in enumerate(self.tx.inputs()):
             a_name = f"input {i}"
             for fmt in (ext, rec, chg, lnk):
                 fmt.setAnchorNames([a_name])  # anchor name for this line (remember input#); used by context menu creation
@@ -596,10 +597,10 @@ class TxDialog(QDialog, MessageBoxMixin, PrintError):
                 cursor.insertText(addr_text, text_format(addr))
                 if x.get('value'):
                     cursor.insertText(format_amount(x['value']), ext)
-                if self.tx.is_schnorr_signed(i):
+                #if self.tx.is_schnorr_signed(i):
                     # Schnorr
-                    cursor.insertText(' {}'.format(SCHNORR_SIGIL), ext)
-                    has_schnorr = True
+                #    cursor.insertText(' {}'.format(SCHNORR_SIGIL), ext)
+                #    has_schnorr = True
             cursor.insertBlock()
 
         self.schnorr_label.setVisible(has_schnorr)

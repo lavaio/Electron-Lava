@@ -771,13 +771,25 @@ def from_seed(seed, passphrase, is_p2sh):
     if t == 'old':
         keystore = Old_KeyStore({})
         keystore.add_seed(seed)
-    elif t in ['standard']:
+    #elif t in ['standard']:
+    #    keystore = BIP32_KeyStore({})
+    #    keystore.add_seed(seed)
+    #    keystore.passphrase = passphrase
+    #    bip32_seed = Mnemonic.mnemonic_to_seed(seed, passphrase)
+    #    der = "m/"
+    #    xtype = 'standard'
+    #    keystore.add_xprv_from_seed(bip32_seed, xtype, der)
+    elif t in ['standard', 'segwit']:
         keystore = BIP32_KeyStore({})
         keystore.add_seed(seed)
         keystore.passphrase = passphrase
         bip32_seed = Mnemonic.mnemonic_to_seed(seed, passphrase)
-        der = "m/"
-        xtype = 'standard'
+        if t == 'standard':
+            der = "m/"
+            xtype = 'standard'
+        else:
+            der = "m/1'/" if is_p2sh else "m/0'/"
+            xtype = 'p2wsh' if is_p2sh else 'p2wpkh'
         keystore.add_xprv_from_seed(bip32_seed, xtype, der)
     else:
         raise InvalidSeed()

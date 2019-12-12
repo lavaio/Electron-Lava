@@ -237,7 +237,7 @@ class Synchronizer(ThreadJob):
             return
 
         if not self._tick_ct:
-            self.print_error("started")
+            self.print_error(" Synchronizer started")
         self._tick_ct += 1
 
         try:
@@ -253,6 +253,7 @@ class Synchronizer(ThreadJob):
 
             # 3. Detect if situation has changed
             up_to_date = self.is_up_to_date()
+            #self.print_error('wdy up_to_date={}'.format(up_to_date))
             if up_to_date != self.wallet.is_up_to_date():
                 self.wallet.set_up_to_date(up_to_date)
                 self.network.trigger_callback('wallet_updated', self.wallet)

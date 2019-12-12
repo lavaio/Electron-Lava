@@ -140,7 +140,8 @@ class ElectrumGui(QObject, PrintError):
         self.tray.show()
         self.new_window_signal.connect(self.start_new_window)
         if self.has_auto_update_check():
-            self._start_auto_update_timer(first_run = True)
+            #self._start_auto_update_timer(first_run = True)
+            pass
         self.app.focusChanged.connect(self.on_focus_change)  # track last window the user interacted with
         run_hook('init_qt', self)
         # We did this once already in the set_dark_theme call, but we do this
@@ -557,9 +558,11 @@ class ElectrumGui(QObject, PrintError):
                     self.warn_if_no_secp(relaxed=True)
 
                 try:
+                    self.print_error('wdy path={}'.format(path))
                     wallet = self.daemon.load_wallet(path, None)
                 except BaseException as e:
                     self.print_error(repr(e))
+                    self.print_error('wdy e={}'.format(e))
                     if self.windows:
                         # *Not* starting up. Propagate exception out to present
                         # error message box to user.

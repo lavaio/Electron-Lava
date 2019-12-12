@@ -189,7 +189,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         add_optional_tab(tabs, self.addresses_tab, QIcon(":icons/tab_addresses.png"), _("&Addresses"), "addresses")
         add_optional_tab(tabs, self.utxo_tab, QIcon(":icons/tab_coins.png"), _("Co&ins"), "utxo")
         add_optional_tab(tabs, self.contacts_tab, QIcon(":icons/tab_contacts.png"), _("Con&tacts"), "contacts")
-        add_optional_tab(tabs, self.converter_tab, QIcon(":icons/tab_converter.svg"), _("Address Converter"), "converter", True)
+        #add_optional_tab(tabs, self.converter_tab, QIcon(":icons/tab_converter.svg"), _("Address Converter"), "converter", True)
         add_optional_tab(tabs, self.console_tab, QIcon(":icons/tab_console.png"), _("Con&sole"), "console")
 
         tabs.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
@@ -646,7 +646,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         add_toggle_action(view_menu, self.addresses_tab)
         add_toggle_action(view_menu, self.utxo_tab)
         add_toggle_action(view_menu, self.contacts_tab)
-        add_toggle_action(view_menu, self.converter_tab)
+        #add_toggle_action(view_menu, self.converter_tab)
         add_toggle_action(view_menu, self.console_tab)
 
         tools_menu = menubar.addMenu(_("&Tools"))
@@ -887,6 +887,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             # Server height can be 0 after switching to a new server
             # until we get a headers subscription request response.
             # Display the synchronizing message in that case.
+            #self.print_error('wdy up to date={} server_height={}'.format(self.wallet.up_to_date, server_height))
             if not self.wallet.up_to_date or server_height == 0:
                 text = _("Synchronizing...")
                 icon = icon_dict["status_waiting"]
@@ -2052,6 +2053,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         r = self.read_send_tab()
         if not r:
             return
+        self.print_error('wdy do_send r={}'.format(r))
         outputs, fee, tx_desc, coins = r
         try:
             tx = self.wallet.make_unsigned_transaction(coins, outputs, self.config, fee)
@@ -2119,6 +2121,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
                     self.show_transaction(tx, tx_desc)
                     self.do_clear()
                 else:
+                    #pass
                     self.broadcast_transaction(tx, tx_desc)
         self.sign_tx_with_password(tx, sign_done, password)
 
@@ -2547,6 +2550,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
 
     def get_coins(self, isInvoice = False):
         coins = []
+        self.print_error('wdy pay_from={}'.format(self.pay_from))
         if self.pay_from:
             coins = self.pay_from.copy()
         else:
@@ -2819,6 +2823,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         self.cashshuffle_status_button.setContextMenuPolicy(Qt.ActionsContextMenu)
 
         sb.addPermanentWidget(self.cashshuffle_status_button)
+        self.cashshuffle_status_button.setHidden(True)
 
         self.addr_converter_button = StatusBarButton(
             self.cashaddr_icon(),
@@ -2827,7 +2832,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         )
         self.update_cashaddr_icon()
         sb.addPermanentWidget(self.addr_converter_button)
-        self.addr_converter_button.setHidden(self.gui_object.is_cashaddr_status_button_hidden())
+        #self.addr_converter_button.setHidden(self.gui_object.is_cashaddr_status_button_hidden())
+        self.addr_converter_button.setHidden(True)
         self.gui_object.cashaddr_status_button_hidden_signal.connect(self.addr_converter_button.setHidden)
 
         sb.addPermanentWidget(StatusBarButton(QIcon(":icons/preferences.svg"), _("Preferences"), self.settings_dialog ) )

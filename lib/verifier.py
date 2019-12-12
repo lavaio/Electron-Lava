@@ -125,6 +125,7 @@ class SPV(ThreadJob):
         self._tick_ct += 1
 
         interface = self.network.interface
+        #self.print_error('wdy interface={}'.format(interface))
         if not interface:
             self.spam_error("v.no interface")
             return
