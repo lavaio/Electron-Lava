@@ -242,8 +242,8 @@ class UTXOList(MyTreeWidget):
                 if copy_text:
                     copy_text = copy_text.strip()  # make sure formatted amount is not whitespaced
                 menu.addAction(_("Copy {}").format(column_title), lambda: QApplication.instance().clipboard().setText(copy_text))
-                if alt_copy_text and alt_column_title:
-                    menu.addAction(_("Copy {}").format(alt_column_title), lambda: QApplication.instance().clipboard().setText(alt_copy_text))
+                #if alt_copy_text and alt_column_title:
+                #    menu.addAction(_("Copy {}").format(alt_column_title), lambda: QApplication.instance().clipboard().setText(alt_copy_text))
                 if ca_info:
                     self.wallet.cashacct.fmt_info(ca_info)  # paranoia: pre-cache minimal chash (may go out to network)
                     menu.addAction(_("Copy Cash Account"), lambda: self.wallet and QApplication.instance().clipboard().setText(self.wallet.cashacct.fmt_info(ca_info, emoji=True)))
@@ -297,12 +297,12 @@ class UTXOList(MyTreeWidget):
         run_hook('utxo_list_context_menu_setup', self, menu, selected)
 
         # add optional toggle actions
-        menu.addSeparator()
+        #menu.addSeparator()
         def toggle():
             self.show_cash_accounts = not self.show_cash_accounts
-        a = menu.addAction(_("Show Cash Accounts"), toggle)
-        a.setCheckable(True)
-        a.setChecked(self.show_cash_accounts)
+        #a = menu.addAction(_("Show Cash Accounts"), toggle)
+        #a.setCheckable(True)
+        #a.setChecked(self.show_cash_accounts)
 
         menu.exec_(self.viewport().mapToGlobal(position))
 
