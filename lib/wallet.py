@@ -1316,11 +1316,13 @@ class Abstract_Wallet(PrintError, SPVDelegate):
             sendable = sum(map(lambda x:x['value'], inputs))
             _type, data, value = outputs[i_max]
             outputs[i_max] = (_type, data, 0)
-            tx = Transaction.from_io(inputs, outputs, sign_schnorr=sign_schnorr)
+            #tx = Transaction.from_io(inputs, outputs, sign_schnorr=sign_schnorr)
+            tx = Transaction.from_io(inputs, outputs)
             fee = fee_estimator(tx.estimated_size())
             amount = max(0, sendable - tx.output_value() - fee)
             outputs[i_max] = (_type, data, amount)
-            tx = Transaction.from_io(inputs, outputs, sign_schnorr=sign_schnorr)
+            #tx = Transaction.from_io(inputs, outputs, sign_schnorr=sign_schnorr)
+            tx = Transaction.from_io(inputs, outputs)
 
         # If user tries to send too big of a fee (more than 50 sat/byte), stop them from shooting themselves in the foot
         tx_in_bytes=tx.estimated_size()

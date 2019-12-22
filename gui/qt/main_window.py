@@ -601,8 +601,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         file_menu.addAction(_("&Quit"), self.close)
 
         wallet_menu = menubar.addMenu(_("&Wallet"))
-        wallet_menu.addAction(_("&Information") + "...", self.show_master_public_keys, QKeySequence("Ctrl+I"))
-        wallet_menu.addSeparator()
+        #wallet_menu.addAction(_("&Information") + "...", self.show_master_public_keys, QKeySequence("Ctrl+I"))
+        #wallet_menu.addSeparator()
         self.password_menu = wallet_menu.addAction(_("&Password") + "...", self.change_password_dialog)
         self.seed_menu = wallet_menu.addAction(_("&Seed") + "...", self.show_seed_dialog)
         self.private_keys_menu = wallet_menu.addMenu(_("&Private keys"))
@@ -618,15 +618,15 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         self._scan_beyond_gap_action.setEnabled(bool(self.wallet.is_deterministic() and self.network))
         wallet_menu.addSeparator()
 
-        labels_menu = wallet_menu.addMenu(_("&Labels"))
-        labels_menu.addAction(_("&Import") + "...", self.do_import_labels)
-        labels_menu.addAction(_("&Export") + "...", self.do_export_labels)
-        contacts_menu = wallet_menu.addMenu(_("Contacts"))
-        contacts_menu.addAction(_("&New") + "...", self.new_contact_dialog)
-        contacts_menu.addAction(_("Import") + "...", lambda: self.contact_list.import_contacts())
-        contacts_menu.addAction(_("Export") + "...", lambda: self.contact_list.export_contacts())
-        invoices_menu = wallet_menu.addMenu(_("Invoices"))
-        invoices_menu.addAction(_("Import") + "...", lambda: self.invoice_list.import_invoices())
+        #labels_menu = wallet_menu.addMenu(_("&Labels"))
+        #labels_menu.addAction(_("&Import") + "...", self.do_import_labels)
+        #labels_menu.addAction(_("&Export") + "...", self.do_export_labels)
+        #contacts_menu = wallet_menu.addMenu(_("Contacts"))
+        #contacts_menu.addAction(_("&New") + "...", self.new_contact_dialog)
+        #contacts_menu.addAction(_("Import") + "...", lambda: self.contact_list.import_contacts())
+        #contacts_menu.addAction(_("Export") + "...", lambda: self.contact_list.export_contacts())
+        #invoices_menu = wallet_menu.addMenu(_("Invoices"))
+        #invoices_menu.addAction(_("Import") + "...", lambda: self.invoice_list.import_invoices())
         hist_menu = wallet_menu.addMenu(_("&History"))
         #hist_menu.addAction(_("Plot"), self.plot_history_dialog).setEnabled(plot_history is not None)
         hist_menu.addAction(_("Export") + "...", self.export_history_dialog)
@@ -645,9 +645,9 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         view_menu = menubar.addMenu(_("&View"))
         add_toggle_action(view_menu, self.addresses_tab)
         add_toggle_action(view_menu, self.utxo_tab)
-        add_toggle_action(view_menu, self.contacts_tab)
+        #add_toggle_action(view_menu, self.contacts_tab)
         #add_toggle_action(view_menu, self.converter_tab)
-        add_toggle_action(view_menu, self.console_tab)
+        #add_toggle_action(view_menu, self.console_tab)
 
         tools_menu = menubar.addMenu(_("&Tools"))
 
@@ -661,11 +661,11 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         gui_object = self.gui_object
         weakSelf = Weak.ref(self)
         tools_menu.addAction(_("&Network") + "...", lambda: gui_object.show_network_dialog(weakSelf()), QKeySequence("Ctrl+K"))
-        tools_menu.addAction(_("Optional &Features") + "...", self.internal_plugins_dialog, QKeySequence("Shift+Ctrl+P"))
-        tools_menu.addAction(_("Installed &Plugins") + "...", self.external_plugins_dialog, QKeySequence("Ctrl+P"))
-        if sys.platform.startswith('linux'):
-            tools_menu.addSeparator()
-            tools_menu.addAction(_("&Hardware wallet support..."), self.hardware_wallet_support)
+        #tools_menu.addAction(_("Optional &Features") + "...", self.internal_plugins_dialog, QKeySequence("Shift+Ctrl+P"))
+        #tools_menu.addAction(_("Installed &Plugins") + "...", self.external_plugins_dialog, QKeySequence("Ctrl+P"))
+        #if sys.platform.startswith('linux'):
+        #    tools_menu.addSeparator()
+        #    tools_menu.addAction(_("&Hardware wallet support..."), self.hardware_wallet_support)
         tools_menu.addSeparator()
         tools_menu.addAction(_("&Sign/verify message") + "...", self.sign_verify_message)
         tools_menu.addAction(_("&Encrypt/decrypt message") + "...", self.encrypt_message)
@@ -679,25 +679,25 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         raw_transaction_menu.addAction(_("From the &blockchain") + "...", self.do_process_from_txid, QKeySequence("Ctrl+B"))
         raw_transaction_menu.addAction(_("From &QR code") + "...", self.read_tx_from_qrcode)
         self.raw_transaction_menu = raw_transaction_menu
-        tools_menu.addSeparator()
-        if ColorScheme.dark_scheme and sys.platform != 'darwin':  # use dark icon in menu except for on macOS where we can't be sure it will look right due to the way menus work on macOS
-            icon = QIcon(":icons/cashacct-button-darkmode.png")
-        else:
-            icon = QIcon(":icons/cashacct-logo.png")
-        tools_menu.addAction(icon, _("Lookup &Cash Account..."), self.lookup_cash_account_dialog, QKeySequence("Ctrl+L"))
-        tools_menu.addAction(icon, _("&Register Cash Account..."), lambda: self.register_new_cash_account(addr='pick'), QKeySequence("Ctrl+G"))
+        #tools_menu.addSeparator()
+        #if ColorScheme.dark_scheme and sys.platform != 'darwin':  # use dark icon in menu except for on macOS where we can't be sure it will look right due to the way menus work on macOS
+        #    icon = QIcon(":icons/cashacct-button-darkmode.png")
+        #else:
+        #    icon = QIcon(":icons/cashacct-logo.png")
+        #tools_menu.addAction(icon, _("Lookup &Cash Account..."), self.lookup_cash_account_dialog, QKeySequence("Ctrl+L"))
+        #tools_menu.addAction(icon, _("&Register Cash Account..."), lambda: self.register_new_cash_account(addr='pick'), QKeySequence("Ctrl+G"))
         run_hook('init_menubar_tools', self, tools_menu)
 
         help_menu = menubar.addMenu(_("&Help"))
         help_menu.addAction(_("&About"), self.show_about)
         help_menu.addAction(_("About Qt"), self.app.aboutQt)
-        help_menu.addAction(_("&Check for updates..."), lambda: self.gui_object.show_update_checker(self))
-        help_menu.addAction(_("&Official website"), lambda: webopen("https://electroncash.org"))
-        help_menu.addSeparator()
-        help_menu.addAction(_("Documentation"), lambda: webopen("http://electroncash.readthedocs.io/")).setShortcut(QKeySequence.HelpContents)
-        help_menu.addAction(_("&Report Bug"), self.show_report_bug)
-        help_menu.addSeparator()
-        help_menu.addAction(_("&Donate to server"), self.donate_to_server)
+        #help_menu.addAction(_("&Check for updates..."), lambda: self.gui_object.show_update_checker(self))
+        help_menu.addAction(_("&Official website"), lambda: webopen("https://www.lavatech.org/"))
+        #help_menu.addSeparator()
+        #help_menu.addAction(_("Documentation"), lambda: webopen("http://electroncash.readthedocs.io/")).setShortcut(QKeySequence.HelpContents)
+        #help_menu.addAction(_("&Report Bug"), self.show_report_bug)
+        #help_menu.addSeparator()
+        #help_menu.addAction(_("&Donate to server"), self.donate_to_server)
 
 
     def donate_to_server(self):
@@ -1095,8 +1095,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
                     slf.set_cash_acct()
         self.cash_account_e = CashAcctE()
         label.setBuddy(self.cash_account_e)
-        grid.addWidget(label, 1, 0)
-        grid.addWidget(self.cash_account_e, 1, 1, 1, -1)
+        #grid.addWidget(label, 1, 0)
+        #grid.addWidget(self.cash_account_e, 1, 1, 1, -1)
 
 
         self.receive_message_e = QLineEdit()
@@ -1769,7 +1769,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             except OPReturnError as e:
                 self.statusBar().showMessage(str(e))
                 return
-            except BaseException:
+            except BaseException as ex:
+                self.print_error('wdy ex={}', ex)
                 return
 
             if not freeze_fee:
@@ -4160,7 +4161,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
 
         units = util.base_unit_labels  # ( 'BCH', 'mBCH', 'bits' )
         msg = _('Base unit of your wallet.')\
-              + '\n1 BCH = 1,000 mBCH = 1,000,000 bits.\n' \
+              + '\n1 LV = 1,000 mLV = 1,000,000 bits.\n' \
               + _(' These settings affects the fields in the Send tab')+' '
         unit_label = HelpLabel(_('Base unit') + ':', msg)
         unit_combo = QComboBox()
@@ -4245,7 +4246,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
 
         d.shown_signal.connect(scan_cameras, Qt.QueuedConnection)  # do the camera scan once dialog is shown, using QueuedConnection so it's called from top level event loop and not from the showEvent handler
         qr_combo.currentIndexChanged.connect(on_video_device)
-        gui_widgets.append((qr_label, qr_combo))
+        #gui_widgets.append((qr_label, qr_combo))
 
         colortheme_combo = QComboBox()
         colortheme_combo.addItem(_('Light'), 'default')
@@ -4291,7 +4292,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
                 self.config.set_key('qt_enable_highdpi', hidpi_chk.isChecked())
                 self.need_restart = True
             hidpi_chk.stateChanged.connect(on_hi_dpi_toggle)
-            gui_widgets.append((hidpi_chk, None))
+            #gui_widgets.append((hidpi_chk, None))
 
             if sys.platform in ('win32', 'cygwin'):
                 # Enable/Disable the use of the FreeType library on Qt
@@ -4304,7 +4305,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
                     self.gui_object.windows_qt_use_freetype = freetype_chk.isChecked()  # property has a method backing it
                     self.need_restart = True
                 freetype_chk.stateChanged.connect(on_freetype_chk)
-                gui_widgets.append((freetype_chk, None))
+                #gui_widgets.append((freetype_chk, None))
             elif sys.platform in ('linux',):
                 # Enable/Disable the use of the fonts.xml FontConfig override
                 # (Linux only)
@@ -4316,11 +4317,11 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
                     self.gui_object.linux_qt_use_custom_fontconfig = fontconfig_chk.isChecked()  # property has a method backing it
                     self.need_restart = True
                 fontconfig_chk.stateChanged.connect(on_fontconfig_chk)
-                gui_widgets.append((fontconfig_chk, None))
+                #gui_widgets.append((fontconfig_chk, None))
 
 
         # CashAddr control
-        gui_widgets.append((None, None)) # spacer
+        #gui_widgets.append((None, None)) # spacer
         address_w = QGroupBox(_('Address Format'))
         address_w.setToolTip(_('Select between Cash Address and Legacy formats for addresses'))
         hbox = QHBoxLayout(address_w)
@@ -4338,16 +4339,16 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         toggle_cashaddr_control.setChecked(self.gui_object.is_cashaddr_status_button_hidden())
         toggle_cashaddr_control.toggled.connect(self.gui_object.set_cashaddr_status_button_hidden)
         hbox.addWidget(toggle_cashaddr_control)
-        gui_widgets.append((address_w, None))
+        #gui_widgets.append((address_w, None))
 
-        gui_widgets.append((None, None)) # spacer
+        #gui_widgets.append((None, None)) # spacer
         updatecheck_cb = QCheckBox(_("Automatically check for updates"))
         updatecheck_cb.setChecked(self.gui_object.has_auto_update_check())
         updatecheck_cb.setToolTip(_("Enable this option if you wish to be notified as soon as a new version of Electron Cash becomes available"))
         def on_set_updatecheck(v):
             self.gui_object.set_auto_update_check(v == Qt.Checked)
         updatecheck_cb.stateChanged.connect(on_set_updatecheck)
-        gui_widgets.append((updatecheck_cb, None))
+        #gui_widgets.append((updatecheck_cb, None))
 
 
         notify_tx_cb = QCheckBox(_('Notify when receiving funds'))
@@ -4438,7 +4439,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             # not possible (wallet type not supported); show reason in tooltip
             use_schnorr_cb.setEnabled(False)
             use_schnorr_cb.setToolTip(no_schnorr_reason[0])
-        per_wallet_tx_widgets.append((use_schnorr_cb, None))
+        #per_wallet_tx_widgets.append((use_schnorr_cb, None))
 
 
         def update_currencies():
@@ -4536,8 +4537,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
                 ( _("App-Global Options") , global_tx_widgets ),
                 ( _("Per-Wallet Options") , per_wallet_tx_widgets),
              ]), _('Transactions')),
-            (fiat_widgets, _('Fiat')),
-            (id_widgets, _('Identity')),
+            #(fiat_widgets, _('Fiat')),
+            #(id_widgets, _('Identity')),
         ]
         def add_tabs_info_to_tabs(tabs, tabs_info):
             def add_widget_pair(a,b,grid):

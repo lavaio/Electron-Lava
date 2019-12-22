@@ -440,9 +440,9 @@ class ElectrumGui(QObject, PrintError):
             submenu.addAction(_("Close"), window.close)
         m.addAction(_("Dark/Light"), self.toggle_tray_icon)
         m.addSeparator()
-        m.addAction(_("&Check for updates..."), lambda: self.show_update_checker(None))
-        m.addSeparator()
-        m.addAction(_("Exit Electron Cash"), self.close)
+        #m.addAction(_("&Check for updates..."), lambda: self.show_update_checker(None))
+        #m.addSeparator()
+        m.addAction(_("Exit Electron Lava"), self.close)
         self.tray.setContextMenu(m)
 
     def tray_icon(self):
