@@ -277,7 +277,8 @@ def parse_scriptSig(d, _bytes):
         if item[0] == 0:
             # segwit embedded into p2sh
             # witness version 0
-            d['address'] = bitcoin.hash160_to_p2sh(hash_160(item))
+            #d['address'] = bitcoin.hash160_to_p2sh(hash_160(item))
+            d['address'] = Address.from_P2SH_hash(hash_160(item))
             if len(item) == 22:
                 d['type'] = 'p2wpkh-p2sh'
             elif len(item) == 34:
@@ -287,7 +288,7 @@ def parse_scriptSig(d, _bytes):
         elif opcodes.OP_1 <= item[0] <= opcodes.OP_16:
             # segwit embedded into p2sh
             # witness version 1-16
-            pass
+            print_error("wdy error not support segwit version=", item[0])
         else:
             # assert item[0] == 0x30
             # pay-to-pubkey

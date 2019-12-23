@@ -184,6 +184,7 @@ class OpCodes(IntEnum):
     OP_CHECKDATASIG = 0xba
     OP_CHECKDATASIGVERIFY = 0xbb
 
+    OP_INVALIDOPCODE = 0xff # wdy add
 
 P2PKH_prefix = bytes([OpCodes.OP_DUP, OpCodes.OP_HASH160, 20])
 P2PKH_suffix = bytes([OpCodes.OP_EQUALVERIFY, OpCodes.OP_CHECKSIG])
