@@ -51,6 +51,10 @@ class MainNet(AbstractNet):
     DEFAULT_SERVERS = _read_json_dict('servers.json')  # DO NOT MODIFY IN CLIENT CODE
     #TITLE = 'Electron Cash'
     TITLE = 'Electron Lava'
+    # block header add 20 bytes
+    HDR_V4_SIZE = 156
+    HDR_V4_HEIGHT = 67584
+    HDR_V4_OLD_LENGTH = HDR_V4_HEIGHT * 136
 
     # Bitcoin Cash fork block specification
     #BITCOIN_CASH_FORK_BLOCK_HEIGHT = 478559
@@ -100,6 +104,10 @@ class TestNet(AbstractNet):
     DEFAULT_PORTS = {'t':'20998', 's':'20999'}
     DEFAULT_SERVERS = _read_json_dict('servers_testnet.json')  # DO NOT MODIFY IN CLIENT CODE
     TITLE = 'Electron Lava Testnet'
+    # block header add 20 bytes
+    HDR_V4_SIZE = 156
+    HDR_V4_HEIGHT = 13115
+    HDR_V4_OLD_LENGTH = HDR_V4_HEIGHT * 136
 
     # Bitcoin Cash fork block specification
     #BITCOIN_CASH_FORK_BLOCK_HEIGHT = 1155876

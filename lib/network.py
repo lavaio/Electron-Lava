@@ -1098,9 +1098,10 @@ class Network(util.DaemonThread):
         if index in self.requested_chunks:
             self.requested_chunks.remove(index)
 
-        header_hexsize = blockchain.HEADER_SIZE * 2
+        #header_hexsize = blockchain.HEADER_SIZE * 2
         hexdata = result['hex']
-        actual_header_count = len(hexdata) // header_hexsize
+        #actual_header_count = len(hexdata) // header_hexsize
+        actual_header_count = result['count']
         # We accept less headers than we asked for, to cover the case where the distance to the tip was unknown.
         if actual_header_count > expected_header_count:
             interface.print_error("chunk data size incorrect expected_size={} actual_size={}".format(expected_header_count * header_hexsize, len(hexdata)))
@@ -1119,7 +1120,7 @@ class Network(util.DaemonThread):
 
             data = bfh(hexdata)
             try:
-                blockchain.verify_proven_chunk(request_base_height, data)
+                blockchain.verify_proven_chunk(request_base_height, data, expected_header_count)
             except blockchain.VerifyError as e:
                 interface.print_error('disconnecting server for failed verify_proven_chunk: {}'.format(e))
                 self.connection_down(interface.server, blacklist=True)
@@ -1161,7 +1162,7 @@ class Network(util.DaemonThread):
             target_blockchain = interface.blockchain
 
         chunk_data = bfh(hexdata)
-        connect_state = (target_blockchain.connect_chunk(request_base_height, chunk_data, proof_was_provided)
+        connect_state = (target_blockchain.connect_chunk(request_base_height, chunk_data, proof_was_provided, expected_header_count)
                          if target_blockchain
                          else blockchain.CHUNK_BAD)  # fix #1079 -- invariant is violated here due to extant bugs, so rather than raise an exception, just trigger a connection_down below...
 
@@ -1181,7 +1182,7 @@ class Network(util.DaemonThread):
                 interface.blockchain = None
                 interface.set_mode(Interface.MODE_BACKWARD)
                 interface.bad = request_base_height + actual_header_count - 1
-                interface.bad_header = blockchain.HeaderChunk(request_base_height, chunk_data).get_header_at_height(interface.bad)
+                interface.bad_header = blockchain.HeaderChunk(request_base_height, chunk_data, actual_header_count).get_header_at_height(interface.bad)
                 self.request_header(interface, min(interface.tip, interface.bad - 1))
             return
         else:
@@ -1452,7 +1453,8 @@ class Network(util.DaemonThread):
         b = self.blockchains[0]
         filename = b.path()
         # NB: HEADER_SIZE = 80 bytes
-        length = blockchain.HEADER_SIZE * (networks.net.VERIFICATION_BLOCK_HEIGHT + 1)
+        #length = blockchain.HEADER_SIZE * (networks.net.VERIFICATION_BLOCK_HEIGHT + 1)
+        length = 0
         if not os.path.exists(filename) or os.path.getsize(filename) < length:
             with open(filename, 'wb') as f:
                 if length>0:
