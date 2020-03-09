@@ -212,6 +212,7 @@ def script_GetOp(_bytes : bytes):
                 i += 4
             vch = _bytes[i:i + nSize]
             i += nSize
+            #print_error('wdy decoded={} {}'.format(opcode, bh2u(vch)))
 
         yield opcode, vch, i
 

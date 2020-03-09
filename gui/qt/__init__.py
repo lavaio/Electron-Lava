@@ -84,7 +84,8 @@ class ElectrumGui(QObject, PrintError):
         super(__class__, self).__init__() # QObject init
         assert __class__.instance is None, "ElectrumGui is a singleton, yet an instance appears to already exist! FIXME!"
         __class__.instance = self
-        set_language(config.get('language'))
+        #set_language(config.get('language'))
+        set_language('zh_CN')
 
         self.config = config
         self.daemon = daemon

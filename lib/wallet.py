@@ -955,6 +955,20 @@ class Abstract_Wallet(PrintError, SPVDelegate):
                     prevout_hash = txi['prevout_hash']
                     prevout_n = txi['prevout_n']
                     ser = prevout_hash + ':%d'%prevout_n
+                # get addr from txo if addr is not parsed
+                if addr is None:
+                    self.print_error("wdy addr is none")
+                    tx_dd = self.txo.get(prevout_hash, {})
+                    self.print_error("wdy tx_dd=", tx_dd)
+                    for key, value in tx_dd.items():
+                        for n, v, is_cb in value:
+                            if n == prevout_n:
+                                addr = key
+                                self.print_error("wdy 1 find addr=", addr)
+                                break
+                        if addr: # find addr in txo
+                            self.print_error("wdy 2 find addr=", addr)
+                            break
                 # find value from prev output
                 if self.is_mine(addr):
                     dd = self.txo.get(prevout_hash, {})
