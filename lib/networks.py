@@ -136,8 +136,8 @@ class TestNet(AbstractNet):
 
 
 # All new code should access this to get the current network config.
-#net = MainNet
-net = TestNet
+net = MainNet
+#net = TestNet
 
 def set_mainnet():
     global net
