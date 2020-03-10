@@ -44,10 +44,10 @@ mainnet_block_explorers = {
                     {'tx': 'tx', 'addr': 'address', 'block' : 'block'}),
 }
 
-DEFAULT_EXPLORER_TESTNET = 'Bitcoin.com'
+DEFAULT_EXPLORER_TESTNET = 'lavatech.org'
 
 testnet_block_explorers = {
-    'Bitcoin.com'   : ('https://explorer.bitcoin.com/tbch',
+    'lavatech.org'   : ('http://testnet-explorer.lavatech.org/',
                        Address.FMT_LEGACY,  # For some reason testnet expects legacy and fails on bchtest: addresses.
                        {'tx': 'tx', 'addr': 'address', 'block' : 'block'}),
 }

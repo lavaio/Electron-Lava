@@ -1799,11 +1799,12 @@ class Network(util.DaemonThread):
             self.print_error("Server error response was:", str(e.server_msg))
             raise util.ServerErrorResponse(Network.transmogrify_broadcast_response_for_gui(e.server_msg), e.server_msg)
 
-        if out != transaction.txid():
+        self.print_error("wdy server out:", out, transaction.txid())
+        if out.get('tx_hash') != transaction.txid():
             self.print_error("Server replied with a mismatching txid:", str(out))
             raise util.TxHashMismatch(_("Server response does not match signed transaction ID."), str(out))
 
-        return out
+        return out.get('tx_hash')
 
     @staticmethod
     def transmogrify_broadcast_response_for_gui(server_msg):
