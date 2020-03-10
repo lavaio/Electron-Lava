@@ -472,8 +472,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         if self.wallet.is_watching_only():
             msg = ' '.join([
                 _("This wallet is watching-only."),
-                _("This means you will not be able to spend Bitcoin Cash with it."),
-                _("Make sure you own the seed phrase or the private keys, before you request Bitcoin Cash to be sent to this wallet.")
+                _("This means you will not be able to spend Lava with it."),
+                _("Make sure you own the seed phrase or the private keys, before you request Lava to be sent to this wallet.")
             ])
             self.show_warning(msg, title=_('Information'))
 
@@ -549,7 +549,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
 
                 self.show_message(_("A copy of your wallet file was created in")+" '%s'" % str(new_path), title=_("Wallet backup created"))
             except (IOError, os.error) as reason:
-                self.show_critical(_("Electron Cash was unable to copy your wallet file to the specified location.") + "\n" + str(reason), title=_("Unable to create backup"))
+                self.show_critical(_("Electron Lava was unable to copy your wallet file to the specified location.") + "\n" + str(reason), title=_("Unable to create backup"))
 
     def update_recently_visited(self, filename):
         recent = self.config.get('recently_open', [])
@@ -711,11 +711,11 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             self.show_error(_('No donation address for this server'))
 
     def show_about(self):
-        QMessageBox.about(self, "Electron Cash",
-            "<p><font size=+3><b>Electron Cash</b></font></p><p>" + _("Version") + f" {self.wallet.electrum_version}" + "</p>" +
-            '<p><span style="font-size:11pt; font-weight:500;">' + "Copyright © 2017-2019<br>Electron Cash LLC &amp; The Electron Cash Developers" + "</span></p>" +
+        QMessageBox.about(self, "Electron Lava",
+            "<p><font size=+3><b>Electron Lava</b></font></p><p>" + _("Version") + f" {self.wallet.electrum_version}" + "</p>" +
+            '<p><span style="font-size:11pt; font-weight:500;">' + "Copyright © 2019-2021<br>Electron Lava &amp; The Electron Lava Developers" + "</span></p>" +
             '<p><span style="font-weight:200;">' +
-            _("Electron Cash's focus is speed, with low resource usage and simplifying Bitcoin Cash. You do not need to perform regular backups, because your wallet can be recovered from a secret phrase that you can memorize or write on paper. Startup times are instant because it operates in conjunction with high-performance servers that handle the most complicated parts of the Bitcoin Cash system.") +
+            _("Electron Lava's focus is speed, with low resource usage and simplifying Lava. You do not need to perform regular backups, because your wallet can be recovered from a secret phrase that you can memorize or write on paper. Startup times are instant because it operates in conjunction with high-performance servers that handle the most complicated parts of the Lava system.") +
             "</span></p>"
         )
 
@@ -1022,7 +1022,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         self.receive_address_e = ButtonsLineEdit()
         self.receive_address_e.addCopyButton()
         self.receive_address_e.setReadOnly(True)
-        msg = _('Bitcoin Cash address where the payment should be received. Note that each payment request uses a different Bitcoin Cash address.')
+        msg = _('Lava address where the payment should be received. Note that each payment request uses a different Lava address.')
         label = HelpLabel(_('&Receiving address'), msg)
         label.setBuddy(self.receive_address_e)
         self.receive_address_e.textChanged.connect(self.update_receive_qr)
@@ -1144,8 +1144,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         msg = ' '.join([
             _('Expiration date of your request.'),
             _('This information is seen by the recipient if you send them a signed payment request.'),
-            _('Expired requests have to be deleted manually from your list, in order to free the corresponding Bitcoin Cash addresses.'),
-            _('The Bitcoin Cash address never expires and will always be part of this Electron Cash wallet.'),
+            _('Expired requests have to be deleted manually from your list, in order to free the corresponding Lava addresses.'),
+            _('The Lava address never expires and will always be part of this Lava wallet.'),
         ])
         label = HelpLabel(_('Request &expires'), msg)
         label.setBuddy(self.expires_combo)
@@ -1467,12 +1467,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         msg = "<span style=\"font-weight:400;\">" + _('Recipient of the funds.') + " " + \
               _("You may enter:"
                 "<ul>"
-                "<li> Bitcoin Cash <b>Address</b> <b>★</b>"
-                "<li> Bitcoin Legacy <b>Address</b> <b>★</b>"
-                "<li> <b>Cash Account</b> <b>★</b> e.g. <i>satoshi#123</i>"
-                "<li> <b>Contact name</b> <b>★</b> from the Contacts tab"
+                "<li> Lava <b>Address</b> <b>★</b>"
                 "<li> <b>CoinText</b> e.g. <i>cointext:+1234567</i>"
-                "<li> <b>OpenAlias</b> e.g. <i>satoshi@domain.com</i>"
                 "</ul><br>"
                 "&nbsp;&nbsp;&nbsp;<b>★</b> = Supports <b>pay-to-many</b>, where"
                 " you may optionally enter multiple lines of the form:"
@@ -1555,7 +1551,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         hbox.addStretch(1)
         grid.addLayout(hbox, 5, 4)
 
-        msg = _('Bitcoin Cash transactions are in general not free. A transaction fee is paid by the sender of the funds.') + '\n\n'\
+        msg = _('Lava transactions are in general not free. A transaction fee is paid by the sender of the funds.') + '\n\n'\
               + _('The amount of fee can be decided freely by the sender. However, transactions with low fees take more time to be processed.') + '\n\n'\
               + _('A suggested fee is automatically added to this field. You may override it. The suggested fee increases with the size of the transaction.')
         self.fee_e_label = HelpLabel(_('F&ee'), msg)
@@ -2796,7 +2792,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         sb.addPermanentWidget(self.search_box, 1)
 
         self.update_available_button = StatusBarButton(QIcon(":icons/electron-cash-update.svg"), _("Update available, click for details"), lambda: self.gui_object.show_update_checker(self, skip_check=True))
-        self.update_available_button.setStatusTip(_("An Electron Cash update is available"))
+        self.update_available_button.setStatusTip(_("An Electron Lava update is available"))
         sb.addPermanentWidget(self.update_available_button)
         self.update_available_button.setVisible(bool(self.gui_object.new_version_available))  # if hidden now gets unhidden by on_update_available when a new version comes in
 
@@ -3124,14 +3120,14 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         try:
             addr = Address.from_string(address)
         except:
-            self.show_message(_('Invalid Bitcoin Cash address.'))
+            self.show_message(_('Invalid Lava address.'))
             return
         if addr.kind != addr.ADDR_P2PKH:
             msg_sign = ( _("Signing with an address actually means signing with the corresponding "
                            "private key, and verifying with the corresponding public key. The "
                            "address you have entered does not have a unique public key, so these "
                            "operations cannot be performed.") + '\n\n' +
-                         _('The operation is undefined. Not just in Electron Cash, but in general.') )
+                         _('The operation is undefined. Not just in Electron Lava, but in general.') )
             self.show_message(_('Cannot sign messages with this type of address.') + '\n\n' + msg_sign)
             return
         if self.wallet.is_watching_only():
@@ -3150,7 +3146,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         try:
             address = Address.from_string(address.text().strip())
         except:
-            self.show_message(_('Invalid Bitcoin Cash address.'))
+            self.show_message(_('Invalid Lava address.'))
             return
         message = message.toPlainText().strip().encode('utf-8')
         try:
@@ -3290,7 +3286,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         except:
             if util.is_verbose:
                 traceback.print_exc(file=sys.stderr)
-            self.show_critical(_("Electron Cash was unable to parse your transaction"))
+            self.show_critical(_("Electron Lava was unable to parse your transaction"))
             return
 
     # Due to the asynchronous nature of the qr reader we need to keep the
@@ -3357,7 +3353,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             file_content = file_content.strip()
             tx_file_dict = json.loads(str(file_content))
         except (ValueError, IOError, OSError, json.decoder.JSONDecodeError) as reason:
-            self.show_critical(_("Electron Cash was unable to open your transaction file") + "\n" + str(reason), title=_("Unable to read file or no transaction found"))
+            self.show_critical(_("Electron Lava was unable to open your transaction file") + "\n" + str(reason), title=_("Unable to read file or no transaction found"))
             return
         tx = self.tx_from_text(file_content)
         return tx
@@ -3372,7 +3368,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             if tx:
                 self.show_transaction(tx)
         except SerializationError as e:
-            self.show_critical(_("Electron Cash was unable to deserialize the transaction:") + "\n" + str(e))
+            self.show_critical(_("Electron Lava was unable to deserialize the transaction:") + "\n" + str(e))
 
     def do_process_from_file(self, *, fileName = None):
         from electroncash.transaction import SerializationError
@@ -3381,7 +3377,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             if tx:
                 self.show_transaction(tx)
         except SerializationError as e:
-            self.show_critical(_("Electron Cash was unable to deserialize the transaction:") + "\n" + str(e))
+            self.show_critical(_("Electron Lava was unable to deserialize the transaction:") + "\n" + str(e))
 
     def do_process_from_txid(self, *, txid=None, parent=None, tx_desc=None):
         parent = parent or self
@@ -3571,7 +3567,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             self.do_export_privkeys(filename, private_keys, csv_button.isChecked())
         except (IOError, os.error) as reason:
             txt = "\n".join([
-                _("Electron Cash was unable to produce a private key-export."),
+                _("Electron Lava was unable to produce a private key-export."),
                 str(reason)
             ])
             self.show_critical(txt, title=_("Unable to create csv"))
@@ -3606,7 +3602,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
                 self.wallet.set_label(key, value)
             self.show_message(_("Your labels were imported from") + " '%s'" % str(labelsFile))
         except (IOError, OSError, json.decoder.JSONDecodeError) as reason:
-            self.show_critical(_("Electron Cash was unable to import your labels.") + "\n" + str(reason))
+            self.show_critical(_("Electron Lava was unable to import your labels.") + "\n" + str(reason))
         self.address_list.update()
         self.history_list.update()
         self.utxo_list.update()
@@ -3621,7 +3617,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
                     json.dump(labels, f, indent=4, sort_keys=True)
                 self.show_message(_("Your labels were exported to") + " '%s'" % str(fileName))
         except (IOError, os.error) as reason:
-            self.show_critical(_("Electron Cash was unable to export your labels.") + "\n" + str(reason))
+            self.show_critical(_("Electron Lava was unable to export your labels.") + "\n" + str(reason))
 
     def export_history_dialog(self):
         d = WindowModalDialog(self.top_level_window(), _('Export History'))
@@ -3646,7 +3642,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         try:
             self.do_export_history(self.wallet, filename, csv_button.isChecked())
         except (IOError, os.error) as reason:
-            export_error_label = _("Electron Cash was unable to produce a transaction export.")
+            export_error_label = _("Electron Lava was unable to produce a transaction export.")
             self.show_critical(export_error_label + "\n" + str(reason), title=_("Unable to export history"))
             return
         self.show_message(_("Your wallet history has been successfully exported."))
@@ -4344,7 +4340,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         #gui_widgets.append((None, None)) # spacer
         updatecheck_cb = QCheckBox(_("Automatically check for updates"))
         updatecheck_cb.setChecked(self.gui_object.has_auto_update_check())
-        updatecheck_cb.setToolTip(_("Enable this option if you wish to be notified as soon as a new version of Electron Cash becomes available"))
+        updatecheck_cb.setToolTip(_("Enable this option if you wish to be notified as soon as a new version of Electron Lava becomes available"))
         def on_set_updatecheck(v):
             self.gui_object.set_auto_update_check(v == Qt.Checked)
         updatecheck_cb.stateChanged.connect(on_set_updatecheck)
@@ -4595,7 +4591,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
 
         run_hook('close_settings_dialog')
         if self.need_restart:
-            self.show_message(_('Please restart Electron Cash to activate the new GUI settings'), title=_('Success'))
+            self.show_message(_('Please restart Electron Lava to activate the new GUI settings'), title=_('Success'))
 
     def closeEvent(self, event):
         # It seems in some rare cases this closeEvent() is called twice.
@@ -4932,7 +4928,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
                 <p>{}</p>
                 '''.format(_("CashShuffle is disabled for this wallet.") if not cashshuffle_flag else _("CashShuffle is disabled."),
                            _("Would you like to enable CashShuffle for this wallet?"))
-                info = ' '.join([_("If you enable it, Electron Cash will shuffle your coins for greater <b>privacy</b>. However, you will pay fractions of a penny per shuffle in transaction fees."),
+                info = ' '.join([_("If you enable it, Electron Lava will shuffle your coins for greater <b>privacy</b>. However, you will pay fractions of a penny per shuffle in transaction fees."),
                                  _("(You can always toggle it later using the CashShuffle button.)")])
                 res, chkd = self.msg_box(icon=icon,
                                          parent=self.top_level_window(),

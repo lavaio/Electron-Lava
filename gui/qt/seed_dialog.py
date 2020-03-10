@@ -69,7 +69,7 @@ class SeedLayout(QVBoxLayout):
                 if b:
                     msg = ' '.join([
                         '<b>' + _('About BIP39') + ':</b>  ',
-                        _('BIP39 seeds can be imported into Electron Cash so that users can access funds from other wallets.'),
+                        _('BIP39 seeds can be imported into Electron Lava so that users can access funds from other wallets.'),
                         _('However, we do not generate BIP39 seeds because our seed format is better at preserving future compatibility.'),
                         _('BIP39 seeds do not include a version number, which makes compatibility with future software more difficult.')
                     ])
@@ -96,11 +96,11 @@ class SeedLayout(QVBoxLayout):
                 if b:
                     msg = ' '.join([
                         '<b>' + _('Warning') + ': BIP39 seeds are dangerous!' + '</b><br/><br/>',
-                        _('BIP39 seeds can be imported in Electron Cash so that users can access funds locked in other wallets.'),
+                        _('BIP39 seeds can be imported in Electron Lava so that users can access funds locked in other wallets.'),
                         _('However, BIP39 seeds do not include a version number, which compromises compatibility with future wallet software.'),
                         '<br/><br/>',
-                        _('We do not guarantee that BIP39 imports will always be supported in Electron Cash.'),
-                        _('In addition, Electron Cash does not verify the checksum of BIP39 seeds; make sure you type your seed correctly.'),
+                        _('We do not guarantee that BIP39 imports will always be supported in Electron Lava.'),
+                        _('In addition, Electron Lava does not verify the checksum of BIP39 seeds; make sure you type your seed correctly.'),
                     ])
                 else:
                     msg = ''
@@ -205,7 +205,7 @@ class KeysLayout(QVBoxLayout):
 class SeedDialog(WindowModalDialog):
 
     def __init__(self, parent, seed, passphrase):
-        WindowModalDialog.__init__(self, parent, ('Electron Cash - ' + _('Seed')))
+        WindowModalDialog.__init__(self, parent, ('Electron Lava - ' + _('Seed')))
         self.setMinimumWidth(400)
         vbox = QVBoxLayout(self)
         title =  _("Your wallet generation seed is:")
