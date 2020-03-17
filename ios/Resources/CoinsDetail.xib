@@ -115,7 +115,7 @@
                                 <constraint firstItem="MEF-4M-7L4" firstAttribute="leading" secondItem="csh-vh-Lpe" secondAttribute="leading" id="tv0-4o-DaJ"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="0.00118 mBCH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="7I8-RE-Aqg">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="0.00118 mLV" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="7I8-RE-Aqg">
                             <rect key="frame" x="15" y="282" width="172.5" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="a75-kt-GqW"/>
@@ -187,7 +187,7 @@
                         </button>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8A-SG-RzJ">
                             <rect key="frame" x="210" y="452" width="128" height="40"/>
-                            <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="128" id="4dt-Lg-4Kj"/>
                                 <constraint firstAttribute="height" constant="40" id="h4Y-O4-GuP"/>
