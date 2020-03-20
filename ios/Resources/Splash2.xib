@@ -21,13 +21,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2xI-m4-L5H">
-                        <rect key="frame" x="62" y="172.5" width="251" height="283"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="251" id="A2K-qO-YPL"/>
-                            <constraint firstAttribute="height" constant="283" id="Svz-Gr-vQB"/>
-                        </constraints>
-                    </imageView>
                     <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Lava.png" translatesAutoresizingMaskIntoConstraints="NO" id="dNk-Ct-yXb">
                         <rect key="frame" x="17" y="277.5" width="341" height="112"/>
                         <constraints>
@@ -36,7 +29,7 @@
                         </constraints>
                     </imageView>
                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gfd-cp-cff" userLabel="CCActivityIndicator" customClass="CCActivityIndicator">
-                        <rect key="frame" x="260.5" y="278.5" width="50" height="50"/>
+                        <rect key="frame" x="162" y="421" width="50" height="50"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="0hP-jW-K5M"/>
@@ -53,11 +46,9 @@
                 <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="dNk-Ct-yXb" firstAttribute="centerX" secondItem="lHU-qS-a6s" secondAttribute="centerX" id="73m-xC-BbQ"/>
-                    <constraint firstItem="Gfd-cp-cff" firstAttribute="centerY" secondItem="Zx0-e1-7tr" secondAttribute="centerY" constant="-30" id="Iyf-UB-8Hq"/>
-                    <constraint firstItem="2xI-m4-L5H" firstAttribute="centerX" secondItem="lHU-qS-a6s" secondAttribute="centerX" id="J3v-5L-S8S"/>
-                    <constraint firstItem="Gfd-cp-cff" firstAttribute="centerX" secondItem="lHU-qS-a6s" secondAttribute="centerX" constant="98" id="XRs-RM-oSh"/>
+                    <constraint firstItem="Gfd-cp-cff" firstAttribute="centerY" secondItem="Zx0-e1-7tr" secondAttribute="centerY" constant="112.5" id="Iyf-UB-8Hq"/>
+                    <constraint firstItem="Gfd-cp-cff" firstAttribute="centerX" secondItem="lHU-qS-a6s" secondAttribute="centerX" constant="-0.5" id="XRs-RM-oSh"/>
                     <constraint firstItem="dNk-Ct-yXb" firstAttribute="centerY" secondItem="Zx0-e1-7tr" secondAttribute="centerY" id="ZfN-oe-9Iv"/>
-                    <constraint firstItem="dNk-Ct-yXb" firstAttribute="centerY" secondItem="2xI-m4-L5H" secondAttribute="centerY" constant="19.5" id="hpn-tg-WMi"/>
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="lHU-qS-a6s"/>
             </view>

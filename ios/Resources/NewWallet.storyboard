@@ -18,13 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AsC-5H-u1V">
-                                <rect key="frame" x="36" y="37" width="283" height="251"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="251" id="2bK-C5-us3"/>
-                                    <constraint firstAttribute="width" constant="283" id="6at-Bd-mIB"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdD-Il-q4t">
                                 <rect key="frame" x="187.5" y="15" width="0.0" height="22"/>
                                 <constraints>
@@ -34,14 +27,14 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lavawallet2.png" translatesAutoresizingMaskIntoConstraints="NO" id="0n9-4X-dOt">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="lavawallet2.png" translatesAutoresizingMaskIntoConstraints="NO" id="0n9-4X-dOt">
                                 <rect key="frame" x="110.5" y="93.5" width="154" height="138"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="138" id="LNP-29-qmX"/>
                                     <constraint firstAttribute="width" constant="154" id="zyR-77-Iqk"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTC-sW-VqT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTC-sW-VqT">
                                 <rect key="frame" x="32.5" y="288" width="310" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="310" id="sWX-aJ-JEi"/>
@@ -171,17 +164,13 @@
                             <constraint firstItem="prl-ty-mNN" firstAttribute="top" secondItem="NAb-h2-ClK" secondAttribute="bottom" constant="10" id="MbM-aj-SNk"/>
                             <constraint firstItem="MTC-sW-VqT" firstAttribute="centerX" secondItem="Rin-nu-Thi" secondAttribute="centerX" id="OiM-y4-XYA"/>
                             <constraint firstItem="YRR-zv-4P9" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="prl-ty-mNN" secondAttribute="trailing" constant="15" id="P3m-pn-oN2"/>
-                            <constraint firstItem="AsC-5H-u1V" firstAttribute="centerX" secondItem="Rin-nu-Thi" secondAttribute="centerX" constant="-10" id="STh-w1-Lzh"/>
                             <constraint firstItem="YP3-1J-JYx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YRR-zv-4P9" secondAttribute="leading" constant="15" id="VDG-LL-lCg"/>
-                            <constraint firstItem="AsC-5H-u1V" firstAttribute="top" secondItem="sdD-Il-q4t" secondAttribute="bottom" id="WX9-5a-tgi"/>
                             <constraint firstItem="YRR-zv-4P9" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NAb-h2-ClK" secondAttribute="trailing" constant="15" id="d08-Dt-ilR"/>
                             <constraint firstItem="YP3-1J-JYx" firstAttribute="top" secondItem="prl-ty-mNN" secondAttribute="bottom" constant="10" id="dE8-ok-DpK"/>
                             <constraint firstItem="3OG-wA-wB8" firstAttribute="centerX" secondItem="Rin-nu-Thi" secondAttribute="centerX" id="eKj-E2-SFx"/>
-                            <constraint firstItem="0n9-4X-dOt" firstAttribute="centerY" secondItem="AsC-5H-u1V" secondAttribute="centerY" id="eOM-j3-vxQ"/>
                             <constraint firstItem="YRR-zv-4P9" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3OG-wA-wB8" secondAttribute="trailing" constant="15" id="g7t-w9-wg4"/>
                             <constraint firstItem="YP3-1J-JYx" firstAttribute="centerX" secondItem="Rin-nu-Thi" secondAttribute="centerX" id="hwr-k5-8ut"/>
                             <constraint firstItem="NAb-h2-ClK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YRR-zv-4P9" secondAttribute="leading" constant="15" id="ifw-g1-XUd"/>
-                            <constraint firstItem="MTC-sW-VqT" firstAttribute="top" secondItem="AsC-5H-u1V" secondAttribute="bottom" id="kCU-Du-jwZ"/>
                             <constraint firstItem="sdD-Il-q4t" firstAttribute="top" secondItem="Rin-nu-Thi" secondAttribute="top" constant="15" id="kJJ-Ms-eOw"/>
                             <constraint firstItem="YRR-zv-4P9" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YP3-1J-JYx" secondAttribute="trailing" constant="15" id="rto-Mr-bWi"/>
                             <constraint firstItem="3OG-wA-wB8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YRR-zv-4P9" secondAttribute="leading" constant="15" id="veD-oP-P4E"/>
@@ -863,13 +852,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="20E-wH-rET">
-                                <rect key="frame" x="36" y="66" width="283" height="251"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="251" id="5jk-er-QaO"/>
-                                    <constraint firstAttribute="width" constant="283" id="lZe-K1-O5x"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get started with your Lava Pocket" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jd-51-cat">
                                 <rect key="frame" x="15" y="41" width="345" height="25"/>
                                 <constraints>
@@ -879,13 +861,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lavawallet2.png" translatesAutoresizingMaskIntoConstraints="NO" id="XNX-V0-Wvd">
-                                <rect key="frame" x="110.5" y="122.5" width="154" height="138"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="138" id="CtN-Ty-XWN"/>
-                                    <constraint firstAttribute="width" constant="154" id="EUU-Tc-8Lu"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NOe-Oa-APY">
                                 <rect key="frame" x="15" y="482" width="345" height="50"/>
                                 <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -980,18 +955,18 @@
                                 </connections>
                             </button>
                             <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Ge7-ix-gDM" userLabel="VCenterer">
-                                <rect key="frame" x="0.0" y="260.5" width="375" height="161.5"/>
+                                <rect key="frame" x="0.0" y="261" width="375" height="161"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IK0-Xv-mIB">
-                                        <rect key="frame" x="32.5" y="70.5" width="310" height="21"/>
+                                        <rect key="frame" x="17" y="81" width="340" height="22"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="310" id="uub-dP-sY1"/>
+                                            <constraint firstAttribute="width" constant="340" id="uub-dP-sY1"/>
                                         </constraints>
                                         <attributedString key="attributedText">
                                             <fragment content="Pocket is a mobile phone SPV wallet for Lava">
                                                 <attributes>
                                                     <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <font key="NSFont" metaFont="system" size="15"/>
+                                                    <font key="NSFont" size="16" name="PingFangSC-Regular"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="21" maximumLineHeight="21" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -1002,9 +977,17 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="IK0-Xv-mIB" firstAttribute="centerX" secondItem="Ge7-ix-gDM" secondAttribute="centerX" id="ON3-Bd-QOP"/>
-                                    <constraint firstItem="IK0-Xv-mIB" firstAttribute="centerY" secondItem="Ge7-ix-gDM" secondAttribute="centerY" id="hSN-kn-vDP"/>
+                                    <constraint firstItem="IK0-Xv-mIB" firstAttribute="centerY" secondItem="Ge7-ix-gDM" secondAttribute="centerY" constant="11.5" id="hSN-kn-vDP"/>
+                                    <constraint firstItem="IK0-Xv-mIB" firstAttribute="top" secondItem="Ge7-ix-gDM" secondAttribute="top" constant="81" id="zDJ-xK-gL7"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lavawallet2.png" translatesAutoresizingMaskIntoConstraints="NO" id="XNX-V0-Wvd">
+                                <rect key="frame" x="80" y="132" width="231" height="161"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="161" id="CtN-Ty-XWN"/>
+                                    <constraint firstAttribute="width" constant="231" id="EUU-Tc-8Lu"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1012,14 +995,15 @@
                             <constraint firstItem="WSp-u0-SRs" firstAttribute="trailing" secondItem="6jd-51-cat" secondAttribute="trailing" constant="15" id="0eS-Wg-65E"/>
                             <constraint firstItem="WSp-u0-SRs" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CqO-T0-XSe" secondAttribute="trailing" constant="15" id="0xW-rb-k85"/>
                             <constraint firstItem="WSp-u0-SRs" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NOe-Oa-APY" secondAttribute="trailing" constant="15" id="1cw-Ib-C1a"/>
-                            <constraint firstItem="XNX-V0-Wvd" firstAttribute="centerX" secondItem="Znl-xm-od2" secondAttribute="centerX" id="2CS-gb-i7D"/>
                             <constraint firstItem="3ev-e7-jHU" firstAttribute="top" secondItem="NOe-Oa-APY" secondAttribute="bottom" constant="10" id="2PG-DX-wsB"/>
                             <constraint firstItem="6jd-51-cat" firstAttribute="leading" secondItem="WSp-u0-SRs" secondAttribute="leading" constant="15" id="2pg-ac-Chw"/>
                             <constraint firstItem="6jd-51-cat" firstAttribute="top" secondItem="WSp-u0-SRs" secondAttribute="top" constant="21" id="3BV-A8-lTK"/>
                             <constraint firstItem="NOe-Oa-APY" firstAttribute="centerX" secondItem="Znl-xm-od2" secondAttribute="centerX" id="4kQ-ig-3cr"/>
                             <constraint firstItem="NOe-Oa-APY" firstAttribute="top" secondItem="CqO-T0-XSe" secondAttribute="bottom" constant="10" id="5hI-KJ-4Bq"/>
-                            <constraint firstItem="Ge7-ix-gDM" firstAttribute="top" secondItem="XNX-V0-Wvd" secondAttribute="bottom" id="78c-mA-d9m"/>
+                            <constraint firstItem="Ge7-ix-gDM" firstAttribute="top" secondItem="XNX-V0-Wvd" secondAttribute="bottom" constant="-32" id="78c-mA-d9m"/>
                             <constraint firstItem="WSp-u0-SRs" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VoH-8m-5KP" secondAttribute="trailing" constant="15" id="837-SV-o8S"/>
+                            <constraint firstItem="WSp-u0-SRs" firstAttribute="trailing" secondItem="XNX-V0-Wvd" secondAttribute="trailing" constant="64" id="D69-BG-D3l"/>
+                            <constraint firstItem="XNX-V0-Wvd" firstAttribute="leading" secondItem="WSp-u0-SRs" secondAttribute="leading" constant="80" id="IGe-VY-bUf"/>
                             <constraint firstItem="VoH-8m-5KP" firstAttribute="centerX" secondItem="Znl-xm-od2" secondAttribute="centerX" id="JHO-vc-hFu"/>
                             <constraint firstItem="WSp-u0-SRs" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3ev-e7-jHU" secondAttribute="trailing" constant="15" id="KQ7-SX-lPG"/>
                             <constraint firstItem="6jd-51-cat" firstAttribute="centerX" secondItem="Znl-xm-od2" secondAttribute="centerX" id="Krt-8i-Pkf"/>
@@ -1027,7 +1011,6 @@
                             <constraint firstItem="NOe-Oa-APY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WSp-u0-SRs" secondAttribute="leading" constant="15" id="UGe-jz-lCj"/>
                             <constraint firstItem="Ge7-ix-gDM" firstAttribute="leading" secondItem="WSp-u0-SRs" secondAttribute="leading" id="VLp-70-WCW"/>
                             <constraint firstItem="CqO-T0-XSe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WSp-u0-SRs" secondAttribute="leading" constant="15" id="Vq3-E2-KUl"/>
-                            <constraint firstItem="20E-wH-rET" firstAttribute="top" secondItem="6jd-51-cat" secondAttribute="bottom" id="Wcj-p8-4dE"/>
                             <constraint firstItem="CqO-T0-XSe" firstAttribute="top" secondItem="Ge7-ix-gDM" secondAttribute="bottom" id="YxP-KM-JG3"/>
                             <constraint firstItem="3ev-e7-jHU" firstAttribute="centerX" secondItem="Znl-xm-od2" secondAttribute="centerX" id="e1n-1t-CRu"/>
                             <constraint firstAttribute="bottom" secondItem="VoH-8m-5KP" secondAttribute="bottom" constant="15" id="kXd-8O-Pij"/>
@@ -1035,8 +1018,7 @@
                             <constraint firstItem="VoH-8m-5KP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WSp-u0-SRs" secondAttribute="leading" constant="15" id="oRM-yv-zp0"/>
                             <constraint firstItem="VoH-8m-5KP" firstAttribute="top" secondItem="3ev-e7-jHU" secondAttribute="bottom" constant="10" id="pnF-GF-DXV"/>
                             <constraint firstItem="CqO-T0-XSe" firstAttribute="centerX" secondItem="Znl-xm-od2" secondAttribute="centerX" id="tdJ-Wq-J1y"/>
-                            <constraint firstItem="20E-wH-rET" firstAttribute="centerX" secondItem="Znl-xm-od2" secondAttribute="centerX" constant="-10" id="z0y-vL-oJE"/>
-                            <constraint firstItem="XNX-V0-Wvd" firstAttribute="centerY" secondItem="20E-wH-rET" secondAttribute="centerY" id="z3d-GX-pWI"/>
+                            <constraint firstItem="XNX-V0-Wvd" firstAttribute="top" secondItem="6jd-51-cat" secondAttribute="bottom" constant="66" id="yWa-ER-pbA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WSp-u0-SRs"/>
                     </view>
@@ -1105,14 +1087,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yud-pJ-xw6">
-                                <rect key="frame" x="64" y="129" width="251" height="283"/>
-                            </imageView>
                             <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Lava.png" translatesAutoresizingMaskIntoConstraints="NO" id="5p7-9Z-k5r">
-                                <rect key="frame" x="17" y="236" width="341" height="148"/>
+                                <rect key="frame" x="102" y="258" width="170" height="148"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Lava Pocket" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omj-Bk-8vK">
-                                <rect key="frame" x="17" y="107" width="341" height="25"/>
+                                <rect key="frame" x="17" y="120" width="341" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="oJc-i4-3Fd"/>
                                 </constraints>
@@ -1121,14 +1100,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="msS-3n-0EQ" userLabel="VCenterer">
-                                <rect key="frame" x="0.0" y="384" width="375" height="218"/>
+                                <rect key="frame" x="0.0" y="406" width="375" height="196"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="t1Y-o1-Z3K">
-                                        <rect key="frame" x="17" y="88" width="340" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="t1Y-o1-Z3K">
+                                        <rect key="frame" x="17.5" y="88" width="340" height="22"/>
                                         <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="42" id="j6X-Mc-R72"/>
-                                            <constraint firstAttribute="width" constant="208" id="lxK-8b-E6P"/>
+                                            <constraint firstAttribute="height" constant="22" id="j6X-Mc-R72"/>
+                                            <constraint firstAttribute="width" constant="340" id="lxK-8b-E6P"/>
                                         </constraints>
                                         <attributedString key="attributedText">
                                             <fragment content="Pocket is a mobile phone SPV wallet for Lava">
@@ -1144,7 +1123,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="t1Y-o1-Z3K" firstAttribute="centerY" secondItem="msS-3n-0EQ" secondAttribute="centerY" id="WPI-B6-tlW"/>
+                                    <constraint firstItem="t1Y-o1-Z3K" firstAttribute="centerY" secondItem="msS-3n-0EQ" secondAttribute="centerY" constant="1" id="WPI-B6-tlW"/>
                                     <constraint firstItem="t1Y-o1-Z3K" firstAttribute="centerX" secondItem="msS-3n-0EQ" secondAttribute="centerX" id="b2q-PF-jJk"/>
                                 </constraints>
                             </view>
@@ -1175,22 +1154,19 @@
                         <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="yud-pJ-xw6" firstAttribute="leading" secondItem="IiT-1r-Rlw" secondAttribute="leading" constant="64" id="0P0-Lc-DXE"/>
                             <constraint firstItem="AuA-tQ-rO8" firstAttribute="top" secondItem="msS-3n-0EQ" secondAttribute="bottom" id="AVC-Og-4ep"/>
-                            <constraint firstItem="yud-pJ-xw6" firstAttribute="top" secondItem="omj-Bk-8vK" secondAttribute="bottom" constant="-3" id="BFv-jw-ohJ"/>
-                            <constraint firstItem="IiT-1r-Rlw" firstAttribute="trailing" secondItem="5p7-9Z-k5r" secondAttribute="trailing" constant="17" id="HvI-O7-f1Q"/>
+                            <constraint firstItem="IiT-1r-Rlw" firstAttribute="trailing" secondItem="5p7-9Z-k5r" secondAttribute="trailing" constant="103" id="HvI-O7-f1Q"/>
                             <constraint firstItem="msS-3n-0EQ" firstAttribute="top" secondItem="5p7-9Z-k5r" secondAttribute="bottom" id="IX8-9S-Mr5"/>
-                            <constraint firstItem="yud-pJ-xw6" firstAttribute="top" secondItem="JBd-Cg-qV5" secondAttribute="top" constant="129" id="VAS-e3-840"/>
                             <constraint firstItem="IiT-1r-Rlw" firstAttribute="bottom" secondItem="AuA-tQ-rO8" secondAttribute="bottom" constant="15" id="VZM-qh-eul"/>
+                            <constraint firstItem="omj-Bk-8vK" firstAttribute="top" secondItem="IiT-1r-Rlw" secondAttribute="top" constant="100" id="WDO-6u-Jev"/>
                             <constraint firstItem="IiT-1r-Rlw" firstAttribute="trailing" secondItem="omj-Bk-8vK" secondAttribute="trailing" constant="17" id="ac4-30-HJ7"/>
                             <constraint firstItem="msS-3n-0EQ" firstAttribute="leading" secondItem="IiT-1r-Rlw" secondAttribute="leading" id="dwf-5k-9Bc"/>
                             <constraint firstItem="IiT-1r-Rlw" firstAttribute="trailing" secondItem="AuA-tQ-rO8" secondAttribute="trailing" constant="15" id="eVP-o6-n24"/>
                             <constraint firstItem="IiT-1r-Rlw" firstAttribute="trailing" secondItem="msS-3n-0EQ" secondAttribute="trailing" id="gm2-GX-ZJW"/>
-                            <constraint firstItem="5p7-9Z-k5r" firstAttribute="top" secondItem="JBd-Cg-qV5" secondAttribute="top" constant="236" id="i8E-7v-4q1"/>
-                            <constraint firstItem="IiT-1r-Rlw" firstAttribute="trailing" secondItem="yud-pJ-xw6" secondAttribute="trailing" constant="60" id="jaK-6r-x2V"/>
+                            <constraint firstItem="5p7-9Z-k5r" firstAttribute="top" secondItem="JBd-Cg-qV5" secondAttribute="top" constant="258" id="i8E-7v-4q1"/>
                             <constraint firstItem="omj-Bk-8vK" firstAttribute="leading" secondItem="IiT-1r-Rlw" secondAttribute="leading" constant="17" id="lUa-1b-SiH"/>
                             <constraint firstItem="AuA-tQ-rO8" firstAttribute="leading" secondItem="IiT-1r-Rlw" secondAttribute="leading" constant="15" id="tJz-X1-pE9"/>
-                            <constraint firstItem="5p7-9Z-k5r" firstAttribute="leading" secondItem="IiT-1r-Rlw" secondAttribute="leading" constant="17" id="xKa-ic-hdq"/>
+                            <constraint firstItem="5p7-9Z-k5r" firstAttribute="leading" secondItem="IiT-1r-Rlw" secondAttribute="leading" constant="102" id="xKa-ic-hdq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IiT-1r-Rlw"/>
                     </view>
@@ -2999,14 +2975,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mvt-WK-d9u">
-                                <rect key="frame" x="28" y="115" width="306" height="316"/>
-                            </imageView>
-                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="lavawallet.png" translatesAutoresizingMaskIntoConstraints="NO" id="Dob-Qg-7wJ">
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lavawallet.png" translatesAutoresizingMaskIntoConstraints="NO" id="Dob-Qg-7wJ">
                                 <rect key="frame" x="53" y="241" width="280" height="183"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Control your own private keys" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="c6o-vS-XDJ">
-                                <rect key="frame" x="15" y="100" width="345" height="25"/>
+                                <rect key="frame" x="15" y="120" width="345" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="g9E-KH-sto"/>
                                 </constraints>
@@ -3014,14 +2987,14 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vSp-io-f6D" userLabel="VCenterer">
-                                <rect key="frame" x="0.0" y="384" width="375" height="218"/>
+                            <view opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="vSp-io-f6D" userLabel="VCenterer">
+                                <rect key="frame" x="0.0" y="424" width="375" height="178"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEs-iU-tfk">
-                                        <rect key="frame" x="17" y="88" width="340" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEs-iU-tfk">
+                                        <rect key="frame" x="17" y="68" width="340" height="22"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="42" id="W9G-Ak-ZXa"/>
-                                            <constraint firstAttribute="width" constant="220" id="sA2-Cy-RDd"/>
+                                            <constraint firstAttribute="height" constant="22" id="W9G-Ak-ZXa"/>
+                                            <constraint firstAttribute="width" constant="340" id="sA2-Cy-RDd"/>
                                         </constraints>
                                         <attributedString key="attributedText">
                                             <fragment content="Pocket is a mobile phone SPV wallet for Lava">
@@ -3037,7 +3010,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="KEs-iU-tfk" firstAttribute="centerY" secondItem="vSp-io-f6D" secondAttribute="centerY" id="GdC-hg-39V"/>
+                                    <constraint firstItem="KEs-iU-tfk" firstAttribute="centerY" secondItem="vSp-io-f6D" secondAttribute="centerY" constant="-10" id="GdC-hg-39V"/>
                                     <constraint firstItem="KEs-iU-tfk" firstAttribute="centerX" secondItem="vSp-io-f6D" secondAttribute="centerX" id="paV-D2-buL"/>
                                 </constraints>
                             </view>
@@ -3068,21 +3041,18 @@
                         <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="mvt-WK-d9u" firstAttribute="top" secondItem="8Q0-2y-pgz" secondAttribute="top" constant="95" id="6bo-Py-1F8"/>
                             <constraint firstItem="vSp-io-f6D" firstAttribute="top" secondItem="Dob-Qg-7wJ" secondAttribute="bottom" id="9HO-L3-9Rd"/>
-                            <constraint firstItem="8Q0-2y-pgz" firstAttribute="trailing" secondItem="mvt-WK-d9u" secondAttribute="trailing" constant="41" id="DHR-iO-NiK"/>
-                            <constraint firstItem="Dob-Qg-7wJ" firstAttribute="top" secondItem="Nj5-Vc-hwa" secondAttribute="top" constant="180" id="DbG-71-2wJ"/>
+                            <constraint firstItem="Dob-Qg-7wJ" firstAttribute="top" secondItem="Nj5-Vc-hwa" secondAttribute="top" constant="241" id="DbG-71-2wJ"/>
                             <constraint firstItem="Hz6-iI-sFf" firstAttribute="leading" secondItem="8Q0-2y-pgz" secondAttribute="leading" constant="15" id="EPF-c4-wD6"/>
                             <constraint firstItem="vSp-io-f6D" firstAttribute="leading" secondItem="8Q0-2y-pgz" secondAttribute="leading" id="GWt-uP-23c"/>
-                            <constraint firstAttribute="trailing" secondItem="Dob-Qg-7wJ" secondAttribute="trailing" constant="47.5" id="K3A-oq-2Qd"/>
+                            <constraint firstAttribute="trailing" secondItem="Dob-Qg-7wJ" secondAttribute="trailing" constant="42" id="K3A-oq-2Qd"/>
                             <constraint firstItem="8Q0-2y-pgz" firstAttribute="bottom" secondItem="Hz6-iI-sFf" secondAttribute="bottom" constant="15" id="LtX-pV-gCR"/>
-                            <constraint firstItem="mvt-WK-d9u" firstAttribute="leading" secondItem="8Q0-2y-pgz" secondAttribute="leading" constant="28" id="Tzk-pj-SNo"/>
                             <constraint firstItem="8Q0-2y-pgz" firstAttribute="trailing" secondItem="Hz6-iI-sFf" secondAttribute="trailing" constant="15" id="Vbi-K2-9ie"/>
                             <constraint firstItem="8Q0-2y-pgz" firstAttribute="trailing" secondItem="vSp-io-f6D" secondAttribute="trailing" id="WNk-UH-zh3"/>
-                            <constraint firstItem="Dob-Qg-7wJ" firstAttribute="leading" secondItem="Nj5-Vc-hwa" secondAttribute="leading" constant="47.5" id="c7o-aE-Ezw"/>
+                            <constraint firstItem="Dob-Qg-7wJ" firstAttribute="leading" secondItem="Nj5-Vc-hwa" secondAttribute="leading" constant="53" id="c7o-aE-Ezw"/>
                             <constraint firstItem="Hz6-iI-sFf" firstAttribute="top" secondItem="vSp-io-f6D" secondAttribute="bottom" id="chn-Ce-qP6"/>
-                            <constraint firstItem="mvt-WK-d9u" firstAttribute="top" secondItem="c6o-vS-XDJ" secondAttribute="bottom" constant="-10" id="dFy-wS-dyi"/>
                             <constraint firstItem="8Q0-2y-pgz" firstAttribute="trailing" secondItem="c6o-vS-XDJ" secondAttribute="trailing" constant="15" id="kxR-b8-LiB"/>
+                            <constraint firstItem="c6o-vS-XDJ" firstAttribute="top" secondItem="8Q0-2y-pgz" secondAttribute="top" constant="100" id="xcp-bF-EXZ"/>
                             <constraint firstItem="c6o-vS-XDJ" firstAttribute="leading" secondItem="8Q0-2y-pgz" secondAttribute="leading" constant="15" id="yNw-F4-CKb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8Q0-2y-pgz"/>
@@ -3105,16 +3075,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h8k-qc-p09">
-                                <rect key="frame" x="38" y="115" width="300" height="297"/>
-                            </imageView>
                             <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="undraw_Security_on_ff2u.png" translatesAutoresizingMaskIntoConstraints="NO" id="PbD-G1-Frg">
-                                <rect key="frame" x="45.5" y="180" width="284" height="176"/>
+                                <rect key="frame" x="84" y="241" width="198" height="176"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zel-6V-tEV">
-                                <rect key="frame" x="85" y="86" width="204" height="56"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zel-6V-tEV">
+                                <rect key="frame" x="85" y="120" width="204" height="56"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="oLW-MK-4SG"/>
+                                    <constraint firstAttribute="height" constant="56" id="oLW-MK-4SG"/>
                                 </constraints>
                                 <string key="text">Safely storing and 
 transfering your Lava</string>
@@ -3123,13 +3090,13 @@ transfering your Lava</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="IVB-l2-qMd" userLabel="VCenterer">
-                                <rect key="frame" x="0.0" y="356" width="375" height="246"/>
+                                <rect key="frame" x="0.0" y="425" width="375" height="177"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipm-y1-nXa">
-                                        <rect key="frame" x="52.5" y="102" width="270" height="42"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipm-y1-nXa">
+                                        <rect key="frame" x="17.5" y="67.5" width="340" height="22"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="270" id="A9d-et-tSL"/>
-                                            <constraint firstAttribute="height" constant="42" id="x5w-25-IDM"/>
+                                            <constraint firstAttribute="width" constant="340" id="A9d-et-tSL"/>
+                                            <constraint firstAttribute="height" constant="22" id="x5w-25-IDM"/>
                                         </constraints>
                                         <attributedString key="attributedText">
                                             <fragment content="Pocket is a mobile phone SPV wallet for Lava">
@@ -3145,7 +3112,7 @@ transfering your Lava</string>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="ipm-y1-nXa" firstAttribute="centerY" secondItem="IVB-l2-qMd" secondAttribute="centerY" id="2GW-YN-3ZG"/>
+                                    <constraint firstItem="ipm-y1-nXa" firstAttribute="centerY" secondItem="IVB-l2-qMd" secondAttribute="centerY" constant="-10" id="2GW-YN-3ZG"/>
                                     <constraint firstItem="ipm-y1-nXa" firstAttribute="centerX" secondItem="IVB-l2-qMd" secondAttribute="centerX" id="aje-mW-mCe"/>
                                 </constraints>
                             </view>
@@ -3176,22 +3143,19 @@ transfering your Lava</string>
                         <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="KWv-be-VJJ" firstAttribute="trailing" secondItem="Zel-6V-tEV" secondAttribute="trailing" constant="15" id="2II-MB-8CR"/>
-                            <constraint firstItem="h8k-qc-p09" firstAttribute="top" secondItem="Zel-6V-tEV" secondAttribute="bottom" constant="-10" id="2J1-2o-mvR"/>
-                            <constraint firstItem="PbD-G1-Frg" firstAttribute="top" secondItem="kKm-5v-Cl6" secondAttribute="top" constant="180" id="4iJ-6n-Zt6"/>
-                            <constraint firstItem="IVB-l2-qMd" firstAttribute="top" secondItem="PbD-G1-Frg" secondAttribute="bottom" id="DBu-KZ-eZW"/>
+                            <constraint firstItem="KWv-be-VJJ" firstAttribute="trailing" secondItem="Zel-6V-tEV" secondAttribute="trailing" constant="86" id="2II-MB-8CR"/>
+                            <constraint firstItem="PbD-G1-Frg" firstAttribute="top" secondItem="kKm-5v-Cl6" secondAttribute="top" constant="241" id="4iJ-6n-Zt6"/>
                             <constraint firstItem="KWv-be-VJJ" firstAttribute="bottom" secondItem="EKK-y8-ktC" secondAttribute="bottom" constant="15" id="Gy1-Zg-qEY"/>
-                            <constraint firstItem="Zel-6V-tEV" firstAttribute="leading" secondItem="KWv-be-VJJ" secondAttribute="leading" constant="15" id="H7n-vE-We9"/>
+                            <constraint firstItem="Zel-6V-tEV" firstAttribute="leading" secondItem="KWv-be-VJJ" secondAttribute="leading" constant="85" id="H7n-vE-We9"/>
                             <constraint firstItem="EKK-y8-ktC" firstAttribute="leading" secondItem="KWv-be-VJJ" secondAttribute="leading" constant="15" id="O01-cM-XiT"/>
                             <constraint firstItem="KWv-be-VJJ" firstAttribute="trailing" secondItem="EKK-y8-ktC" secondAttribute="trailing" constant="15" id="R9G-p3-3jM"/>
                             <constraint firstItem="KWv-be-VJJ" firstAttribute="trailing" secondItem="IVB-l2-qMd" secondAttribute="trailing" id="Se8-cJ-HaF"/>
-                            <constraint firstItem="KWv-be-VJJ" firstAttribute="trailing" secondItem="h8k-qc-p09" secondAttribute="trailing" constant="37" id="UMB-W5-05C"/>
+                            <constraint firstItem="IVB-l2-qMd" firstAttribute="firstBaseline" secondItem="PbD-G1-Frg" secondAttribute="baseline" constant="8" symbolType="layoutAnchor" id="XNx-ci-5xu"/>
                             <constraint firstItem="IVB-l2-qMd" firstAttribute="leading" secondItem="KWv-be-VJJ" secondAttribute="leading" id="fYI-Py-XNA"/>
-                            <constraint firstItem="PbD-G1-Frg" firstAttribute="leading" secondItem="KWv-be-VJJ" secondAttribute="leading" constant="45.5" id="iAb-Ji-fCL"/>
+                            <constraint firstItem="PbD-G1-Frg" firstAttribute="leading" secondItem="KWv-be-VJJ" secondAttribute="leading" constant="84" id="iAb-Ji-fCL"/>
                             <constraint firstItem="EKK-y8-ktC" firstAttribute="top" secondItem="IVB-l2-qMd" secondAttribute="bottom" id="jaD-a0-pHE"/>
-                            <constraint firstItem="KWv-be-VJJ" firstAttribute="trailing" secondItem="PbD-G1-Frg" secondAttribute="trailing" constant="45.5" id="skP-Pk-MIN"/>
-                            <constraint firstItem="h8k-qc-p09" firstAttribute="leading" secondItem="KWv-be-VJJ" secondAttribute="leading" constant="38" id="vni-PD-5ti"/>
-                            <constraint firstItem="h8k-qc-p09" firstAttribute="top" secondItem="KWv-be-VJJ" secondAttribute="top" constant="95" id="zRB-r3-jKs"/>
+                            <constraint firstItem="Zel-6V-tEV" firstAttribute="top" secondItem="KWv-be-VJJ" secondAttribute="top" constant="100" id="o3e-08-8XX"/>
+                            <constraint firstItem="KWv-be-VJJ" firstAttribute="trailing" secondItem="PbD-G1-Frg" secondAttribute="trailing" constant="93" id="skP-Pk-MIN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KWv-be-VJJ"/>
                     </view>
