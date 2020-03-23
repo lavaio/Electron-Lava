@@ -808,7 +808,7 @@ class NewWalletMenu(NewWalletMenuBase):
         # translate UI
         self.navigationItem.title = _("New Wallet")
         utils.uilabel_replace_attributed_text(lbl = self.blurb,
-                                              text = _("You can have as many wallets as you like! Choose from one of the options below:"),
+                                              text = _("Pocket is a mobile phone SPV wallet for Lava"),
                                               template = self.blurb.attributedText)
         for state in UIControlState_ALL_RELEVANT_TUPLE:
             self.std.setTitle_forState_(_("Create New Standard Wallet"), state)

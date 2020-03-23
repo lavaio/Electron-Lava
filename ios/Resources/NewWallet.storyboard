@@ -27,24 +27,17 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="lavawallet2.png" translatesAutoresizingMaskIntoConstraints="NO" id="0n9-4X-dOt">
-                                <rect key="frame" x="110.5" y="93.5" width="154" height="138"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTC-sW-VqT">
+                                <rect key="frame" x="17" y="310" width="340" height="37"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="138" id="LNP-29-qmX"/>
-                                    <constraint firstAttribute="width" constant="154" id="zyR-77-Iqk"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTC-sW-VqT">
-                                <rect key="frame" x="32.5" y="288" width="310" height="42"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="310" id="sWX-aJ-JEi"/>
+                                    <constraint firstAttribute="width" constant="340" id="sWX-aJ-JEi"/>
                                 </constraints>
                                 <attributedString key="attributedText">
-                                    <fragment content="You can have as many wallets as you like! Choose from one of the options below:">
+                                    <fragment content="Pocket is a mobile phone SPV wallet for Lava">
                                         <attributes>
                                             <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <font key="NSFont" metaFont="system" size="15"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="21" maximumLineHeight="21" tighteningFactorForTruncation="0.0"/>
+                                            <font key="NSFont" size="16" name="PingFangSC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="21" maximumLineHeight="21" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
@@ -151,12 +144,19 @@
                                     <segue destination="FsD-Wr-KwH" kind="show" identifier="NewStandardWallet" id="L1q-Z6-3vA"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lavawallet2.png" translatesAutoresizingMaskIntoConstraints="NO" id="0n9-4X-dOt">
+                                <rect key="frame" x="80" y="132" width="231" height="161"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="161" id="LNP-29-qmX"/>
+                                    <constraint firstAttribute="width" constant="231" id="zyR-77-Iqk"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="0n9-4X-dOt" firstAttribute="centerX" secondItem="Rin-nu-Thi" secondAttribute="centerX" id="4c2-4q-Wy7"/>
                             <constraint firstAttribute="bottom" secondItem="YP3-1J-JYx" secondAttribute="bottom" priority="999" constant="15" id="7Bp-jD-8SF"/>
+                            <constraint firstItem="0n9-4X-dOt" firstAttribute="top" secondItem="YRR-zv-4P9" secondAttribute="top" constant="132" id="F1z-pb-WSE"/>
                             <constraint firstItem="NAb-h2-ClK" firstAttribute="centerX" secondItem="Rin-nu-Thi" secondAttribute="centerX" id="Ggb-ge-dWp"/>
                             <constraint firstItem="NAb-h2-ClK" firstAttribute="top" secondItem="3OG-wA-wB8" secondAttribute="bottom" constant="10" id="Jka-bT-PyI"/>
                             <constraint firstItem="prl-ty-mNN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YRR-zv-4P9" secondAttribute="leading" constant="15" id="JyT-7C-Am0"/>
@@ -164,7 +164,9 @@
                             <constraint firstItem="prl-ty-mNN" firstAttribute="top" secondItem="NAb-h2-ClK" secondAttribute="bottom" constant="10" id="MbM-aj-SNk"/>
                             <constraint firstItem="MTC-sW-VqT" firstAttribute="centerX" secondItem="Rin-nu-Thi" secondAttribute="centerX" id="OiM-y4-XYA"/>
                             <constraint firstItem="YRR-zv-4P9" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="prl-ty-mNN" secondAttribute="trailing" constant="15" id="P3m-pn-oN2"/>
+                            <constraint firstItem="MTC-sW-VqT" firstAttribute="top" secondItem="0n9-4X-dOt" secondAttribute="bottom" constant="17" id="Rwu-vk-4gB"/>
                             <constraint firstItem="YP3-1J-JYx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YRR-zv-4P9" secondAttribute="leading" constant="15" id="VDG-LL-lCg"/>
+                            <constraint firstItem="0n9-4X-dOt" firstAttribute="leading" secondItem="YRR-zv-4P9" secondAttribute="leading" constant="80" id="b5I-P0-32m"/>
                             <constraint firstItem="YRR-zv-4P9" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NAb-h2-ClK" secondAttribute="trailing" constant="15" id="d08-Dt-ilR"/>
                             <constraint firstItem="YP3-1J-JYx" firstAttribute="top" secondItem="prl-ty-mNN" secondAttribute="bottom" constant="10" id="dE8-ok-DpK"/>
                             <constraint firstItem="3OG-wA-wB8" firstAttribute="centerX" secondItem="Rin-nu-Thi" secondAttribute="centerX" id="eKj-E2-SFx"/>
@@ -173,8 +175,10 @@
                             <constraint firstItem="NAb-h2-ClK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YRR-zv-4P9" secondAttribute="leading" constant="15" id="ifw-g1-XUd"/>
                             <constraint firstItem="sdD-Il-q4t" firstAttribute="top" secondItem="Rin-nu-Thi" secondAttribute="top" constant="15" id="kJJ-Ms-eOw"/>
                             <constraint firstItem="YRR-zv-4P9" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YP3-1J-JYx" secondAttribute="trailing" constant="15" id="rto-Mr-bWi"/>
+                            <constraint firstItem="YRR-zv-4P9" firstAttribute="trailing" secondItem="0n9-4X-dOt" secondAttribute="trailing" constant="64" id="tP3-gF-BP7"/>
                             <constraint firstItem="3OG-wA-wB8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YRR-zv-4P9" secondAttribute="leading" constant="15" id="veD-oP-P4E"/>
                             <constraint firstItem="prl-ty-mNN" firstAttribute="centerX" secondItem="Rin-nu-Thi" secondAttribute="centerX" id="vsG-3d-X0z"/>
+                            <constraint firstItem="3OG-wA-wB8" firstAttribute="top" secondItem="MTC-sW-VqT" secondAttribute="bottom" constant="11" id="wui-Zo-tZL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YRR-zv-4P9"/>
                     </view>
@@ -199,7 +203,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tn8-uI-avh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1233" y="451"/>
+            <point key="canvasLocation" x="-1234.4000000000001" y="450.22488755622192"/>
         </scene>
         <!--NewWalletNav-->
         <scene sceneID="En7-6C-Xtw">
@@ -958,7 +962,7 @@
                                 <rect key="frame" x="0.0" y="261" width="375" height="161"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IK0-Xv-mIB">
-                                        <rect key="frame" x="17" y="81" width="340" height="22"/>
+                                        <rect key="frame" x="17.5" y="81" width="340" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="340" id="uub-dP-sY1"/>
                                         </constraints>
@@ -2991,7 +2995,7 @@
                                 <rect key="frame" x="0.0" y="424" width="375" height="178"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEs-iU-tfk">
-                                        <rect key="frame" x="17" y="68" width="340" height="22"/>
+                                        <rect key="frame" x="17.5" y="68" width="340" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="W9G-Ak-ZXa"/>
                                             <constraint firstAttribute="width" constant="340" id="sA2-Cy-RDd"/>
