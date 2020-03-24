@@ -736,7 +736,7 @@ class Address(namedtuple("AddressTuple", "hash160 kind")):
         return [cls.from_string(string, net=net) for string in strings]
 
     @classmethod
-    def from_pubkey(cls, pubkey, txin_type='standard'):
+    def from_pubkey(cls, pubkey, txin_type='p2pkh'):
         '''Returns a P2PKH address from a public key.  The public key can
         be bytes or a hex string.'''
         pubkey_byte = pubkey
@@ -744,7 +744,7 @@ class Address(namedtuple("AddressTuple", "hash160 kind")):
             pubkey_byte = hex_to_bytes(pubkey)
         #PublicKey.validate(pubkey)
         #return cls(hash160(pubkey), cls.ADDR_P2PKH)
-        if txin_type == 'standard': #'p2pkh':
+        if txin_type == 'p2pkh': #'p2pkh':
             #return public_key_to_p2pkh(bfh(pubkey), net=net)
             return cls(hash160(pubkey_byte), cls.ADDR_P2PKH)
         elif txin_type == 'p2wpkh':
