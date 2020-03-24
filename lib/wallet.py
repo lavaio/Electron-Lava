@@ -2387,7 +2387,7 @@ class Simple_Deterministic_Wallet(Simple_Wallet, Deterministic_Wallet):
 
     """ Deterministic Wallet with a single pubkey per address """
 
-    def __init__(self, storage, txin_type='standard'): # replace 'p2pkh' with 'standard'
+    def __init__(self, storage, txin_type='p2pkh'): # replace 'p2pkh' with 'standard'
         Deterministic_Wallet.__init__(self, storage)
         self.txin_type = txin_type
         storage.print_error('wdy self.txin_type={}'.format(self.txin_type))
