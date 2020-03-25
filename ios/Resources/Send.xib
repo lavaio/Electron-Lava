@@ -257,7 +257,7 @@
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <state key="normal" title="Max">
-                                        <color key="titleColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" red="1" green="0.71764705882352942" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <state key="highlighted">
                                         <color key="titleColor" red="1" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
@@ -446,9 +446,9 @@
         <image name="bang_red.png" width="18" height="18"/>
         <image name="i_yellow.png" width="18" height="18"/>
         <image name="qrcode_blue.png" width="24" height="24"/>
-        <image name="qrcode_new_framed.png" width="23" height="23"/>
+        <image name="qrcode_new_framed.png" width="28" height="28"/>
         <image name="qrcode_new_framed_hi.png" width="23" height="23"/>
-        <image name="tab_contacts_new.png" width="18" height="25"/>
+        <image name="tab_contacts_new.png" width="20" height="20"/>
         <image name="tab_contacts_new_hi.png" width="18" height="25"/>
     </resources>
 </document>
