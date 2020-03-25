@@ -140,6 +140,7 @@ def uicolor_custom(name : str) -> ObjCInstance:
             'light'     : UIColor.colorInDeviceRGBWithHexString_("#CCCCCC").retain(),
             'ultralight': UIColor.colorInDeviceRGBWithHexString_("#F6F6F6").retain(),
             'nav'       : UIColor.colorInDeviceRGBWithHexString_("#343744").retain(),
+            'tabar'     : UIColor.colorInDeviceRGBWithHexString_("#FFB773").retain(),
             'link'      : UIColor.colorInDeviceRGBWithHexString_("#343744").retain(),
             'linktapped': UIColor.colorInDeviceRGBWithHexString_("#FF8BFF").retain(),
             'navtint'   : UIColor.colorInDeviceRGBWithHexString_("#FFFFFF").retain(),
