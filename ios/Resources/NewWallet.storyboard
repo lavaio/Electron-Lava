@@ -28,7 +28,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTC-sW-VqT">
-                                <rect key="frame" x="17" y="310" width="340" height="37"/>
+                                <rect key="frame" x="17.5" y="310" width="340" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="340" id="sWX-aJ-JEi"/>
                                 </constraints>
@@ -352,7 +352,7 @@
                                                     <constraint firstAttribute="height" constant="31" id="o8g-TN-NrW"/>
                                                     <constraint firstAttribute="width" constant="49" id="wpP-3g-lgS"/>
                                                 </constraints>
-                                                <color key="onTintColor" red="0.73333333329999995" green="1" blue="0.23137254900000001" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="onTintColor" red="0.21176470588235294" green="0.77647058823529413" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="600" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Touch/Face ID" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="23K-Fc-RlZ">
                                                 <rect key="frame" x="175" y="6.5" width="106" height="18"/>
@@ -1324,7 +1324,7 @@
                             </containerView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6Hl-mN-Tmf">
                                 <rect key="frame" x="311" y="213.5" width="51" height="31"/>
-                                <color key="onTintColor" red="0.73333333329999995" green="1" blue="0.23137254900000001" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="onTintColor" red="0.21176470588235294" green="0.77647058823529413" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BIP39 Seed" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3j-Ht-6ua">
                                 <rect key="frame" x="224" y="220" width="80" height="18"/>
@@ -1547,7 +1547,7 @@
                                                     <constraint firstAttribute="height" constant="31" id="C6j-6j-bmR"/>
                                                     <constraint firstAttribute="width" constant="49" id="SW6-bI-c81"/>
                                                 </constraints>
-                                                <color key="onTintColor" red="0.73333333329999995" green="1" blue="0.23137254900000001" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="onTintColor" red="0.21176470588235294" green="0.77647058823529413" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="600" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Touch/Face ID" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iPZ-3Y-LCp">
                                                 <rect key="frame" x="175" y="6.5" width="106" height="18"/>
@@ -2174,7 +2174,7 @@
                                                     <constraint firstAttribute="width" constant="49" id="BE9-rl-qIE"/>
                                                     <constraint firstAttribute="height" constant="31" id="vJM-Ek-ZGC"/>
                                                 </constraints>
-                                                <color key="onTintColor" red="0.73333333329999995" green="1" blue="0.23137254900000001" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="onTintColor" red="0.21176470588235294" green="0.77647058823529413" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="600" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Touch/Face ID" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wZb-wu-4lr">
                                                 <rect key="frame" x="175" y="6.5" width="106" height="18"/>
@@ -2805,7 +2805,7 @@
                                                     <constraint firstAttribute="height" constant="31" id="4Yk-mb-sDS"/>
                                                     <constraint firstAttribute="width" constant="49" id="XBR-Xy-NnA"/>
                                                 </constraints>
-                                                <color key="onTintColor" red="0.73333333329999995" green="1" blue="0.23137254900000001" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="onTintColor" red="0.21176470588235294" green="0.77647058823529413" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="600" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Touch/Face ID" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FN2-h9-1pN">
                                                 <rect key="frame" x="175" y="6.5" width="106" height="18"/>
@@ -3178,12 +3178,12 @@ transfering your Lava</string>
         <image name="Back_Chevron_White.png" width="7" height="13"/>
         <image name="Lava.png" width="170" height="148"/>
         <image name="Rect_For_Chk_18px.png" width="20" height="20"/>
-        <image name="Rect_For_Chk_Chkd_18px.png" width="20" height="20"/>
+        <image name="Rect_For_Chk_Chkd_18px.png" width="16" height="16"/>
         <image name="bang_red.png" width="18" height="18"/>
         <image name="i_yellow.png" width="18" height="18"/>
         <image name="lavawallet.png" width="280" height="183"/>
         <image name="lavawallet2.png" width="231" height="161"/>
-        <image name="qrcode_new_framed.png" width="23" height="23"/>
+        <image name="qrcode_new_framed.png" width="28" height="28"/>
         <image name="undraw_Security_on_ff2u.png" width="198" height="176"/>
     </resources>
     <inferredMetricsTieBreakers>
