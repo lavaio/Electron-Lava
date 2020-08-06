@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,13 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ElectronCashFunkyBG_4.png" translatesAutoresizingMaskIntoConstraints="NO" id="AsC-5H-u1V">
-                                <rect key="frame" x="36" y="37" width="283" height="251"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="251" id="2bK-C5-us3"/>
-                                    <constraint firstAttribute="width" constant="283" id="6at-Bd-mIB"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdD-Il-q4t">
                                 <rect key="frame" x="187.5" y="15" width="0.0" height="22"/>
                                 <constraints>
@@ -34,24 +27,17 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BeLectron_Insignia.png" translatesAutoresizingMaskIntoConstraints="NO" id="0n9-4X-dOt">
-                                <rect key="frame" x="110.5" y="93.5" width="154" height="138"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="138" id="LNP-29-qmX"/>
-                                    <constraint firstAttribute="width" constant="154" id="zyR-77-Iqk"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTC-sW-VqT">
-                                <rect key="frame" x="32.5" y="288" width="310" height="42"/>
+                                <rect key="frame" x="17.5" y="310" width="340" height="37"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="310" id="sWX-aJ-JEi"/>
+                                    <constraint firstAttribute="width" constant="340" id="sWX-aJ-JEi"/>
                                 </constraints>
                                 <attributedString key="attributedText">
-                                    <fragment content="You can have as many wallets as you like! Choose from one of the options below:">
+                                    <fragment content="Pocket is a mobile phone SPV wallet for Lava">
                                         <attributes>
                                             <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <font key="NSFont" size="15" name=".AppleSystemUIFont"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="21" maximumLineHeight="21" tighteningFactorForTruncation="0.0"/>
+                                            <font key="NSFont" size="16" name="PingFangSC-Regular"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="21" maximumLineHeight="21" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
@@ -59,7 +45,7 @@
                             </label>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NAb-h2-ClK">
                                 <rect key="frame" x="15" y="418" width="345" height="50"/>
-                                <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="CrV-y7-dW9">
                                         <variation key="heightClass=compact-widthClass=compact" constant="35"/>
@@ -84,7 +70,7 @@
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="prl-ty-mNN">
                                 <rect key="frame" x="15" y="478" width="345" height="50"/>
-                                <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ZzY-he-bX8">
                                         <variation key="heightClass=compact-widthClass=compact" constant="35"/>
@@ -109,7 +95,7 @@
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YP3-1J-JYx">
                                 <rect key="frame" x="15" y="538" width="345" height="50"/>
-                                <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="NXE-QN-S0w">
                                         <variation key="heightClass=compact-widthClass=compact" constant="35"/>
@@ -143,7 +129,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Create New Standard Wallet">
-                                    <color key="titleColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -158,12 +144,19 @@
                                     <segue destination="FsD-Wr-KwH" kind="show" identifier="NewStandardWallet" id="L1q-Z6-3vA"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lavawallet2.png" translatesAutoresizingMaskIntoConstraints="NO" id="0n9-4X-dOt">
+                                <rect key="frame" x="80" y="132" width="231" height="161"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="161" id="LNP-29-qmX"/>
+                                    <constraint firstAttribute="width" constant="231" id="zyR-77-Iqk"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="0n9-4X-dOt" firstAttribute="centerX" secondItem="Rin-nu-Thi" secondAttribute="centerX" id="4c2-4q-Wy7"/>
                             <constraint firstAttribute="bottom" secondItem="YP3-1J-JYx" secondAttribute="bottom" priority="999" constant="15" id="7Bp-jD-8SF"/>
+                            <constraint firstItem="0n9-4X-dOt" firstAttribute="top" secondItem="YRR-zv-4P9" secondAttribute="top" constant="132" id="F1z-pb-WSE"/>
                             <constraint firstItem="NAb-h2-ClK" firstAttribute="centerX" secondItem="Rin-nu-Thi" secondAttribute="centerX" id="Ggb-ge-dWp"/>
                             <constraint firstItem="NAb-h2-ClK" firstAttribute="top" secondItem="3OG-wA-wB8" secondAttribute="bottom" constant="10" id="Jka-bT-PyI"/>
                             <constraint firstItem="prl-ty-mNN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YRR-zv-4P9" secondAttribute="leading" constant="15" id="JyT-7C-Am0"/>
@@ -171,21 +164,21 @@
                             <constraint firstItem="prl-ty-mNN" firstAttribute="top" secondItem="NAb-h2-ClK" secondAttribute="bottom" constant="10" id="MbM-aj-SNk"/>
                             <constraint firstItem="MTC-sW-VqT" firstAttribute="centerX" secondItem="Rin-nu-Thi" secondAttribute="centerX" id="OiM-y4-XYA"/>
                             <constraint firstItem="YRR-zv-4P9" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="prl-ty-mNN" secondAttribute="trailing" constant="15" id="P3m-pn-oN2"/>
-                            <constraint firstItem="AsC-5H-u1V" firstAttribute="centerX" secondItem="Rin-nu-Thi" secondAttribute="centerX" constant="-10" id="STh-w1-Lzh"/>
+                            <constraint firstItem="MTC-sW-VqT" firstAttribute="top" secondItem="0n9-4X-dOt" secondAttribute="bottom" constant="17" id="Rwu-vk-4gB"/>
                             <constraint firstItem="YP3-1J-JYx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YRR-zv-4P9" secondAttribute="leading" constant="15" id="VDG-LL-lCg"/>
-                            <constraint firstItem="AsC-5H-u1V" firstAttribute="top" secondItem="sdD-Il-q4t" secondAttribute="bottom" id="WX9-5a-tgi"/>
+                            <constraint firstItem="0n9-4X-dOt" firstAttribute="leading" secondItem="YRR-zv-4P9" secondAttribute="leading" constant="80" id="b5I-P0-32m"/>
                             <constraint firstItem="YRR-zv-4P9" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NAb-h2-ClK" secondAttribute="trailing" constant="15" id="d08-Dt-ilR"/>
                             <constraint firstItem="YP3-1J-JYx" firstAttribute="top" secondItem="prl-ty-mNN" secondAttribute="bottom" constant="10" id="dE8-ok-DpK"/>
                             <constraint firstItem="3OG-wA-wB8" firstAttribute="centerX" secondItem="Rin-nu-Thi" secondAttribute="centerX" id="eKj-E2-SFx"/>
-                            <constraint firstItem="0n9-4X-dOt" firstAttribute="centerY" secondItem="AsC-5H-u1V" secondAttribute="centerY" id="eOM-j3-vxQ"/>
                             <constraint firstItem="YRR-zv-4P9" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3OG-wA-wB8" secondAttribute="trailing" constant="15" id="g7t-w9-wg4"/>
                             <constraint firstItem="YP3-1J-JYx" firstAttribute="centerX" secondItem="Rin-nu-Thi" secondAttribute="centerX" id="hwr-k5-8ut"/>
                             <constraint firstItem="NAb-h2-ClK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YRR-zv-4P9" secondAttribute="leading" constant="15" id="ifw-g1-XUd"/>
-                            <constraint firstItem="MTC-sW-VqT" firstAttribute="top" secondItem="AsC-5H-u1V" secondAttribute="bottom" id="kCU-Du-jwZ"/>
                             <constraint firstItem="sdD-Il-q4t" firstAttribute="top" secondItem="Rin-nu-Thi" secondAttribute="top" constant="15" id="kJJ-Ms-eOw"/>
                             <constraint firstItem="YRR-zv-4P9" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YP3-1J-JYx" secondAttribute="trailing" constant="15" id="rto-Mr-bWi"/>
+                            <constraint firstItem="YRR-zv-4P9" firstAttribute="trailing" secondItem="0n9-4X-dOt" secondAttribute="trailing" constant="64" id="tP3-gF-BP7"/>
                             <constraint firstItem="3OG-wA-wB8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YRR-zv-4P9" secondAttribute="leading" constant="15" id="veD-oP-P4E"/>
                             <constraint firstItem="prl-ty-mNN" firstAttribute="centerX" secondItem="Rin-nu-Thi" secondAttribute="centerX" id="vsG-3d-X0z"/>
+                            <constraint firstItem="3OG-wA-wB8" firstAttribute="top" secondItem="MTC-sW-VqT" secondAttribute="bottom" constant="11" id="wui-Zo-tZL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YRR-zv-4P9"/>
                     </view>
@@ -210,7 +203,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tn8-uI-avh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1233" y="451"/>
+            <point key="canvasLocation" x="-1234.4000000000001" y="450.22488755622192"/>
         </scene>
         <!--NewWalletNav-->
         <scene sceneID="En7-6C-Xtw">
@@ -221,7 +214,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="barTintColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -330,7 +323,7 @@
                                     </textField>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zuV-JL-yit">
                                         <rect key="frame" x="15" y="528" width="345" height="50"/>
-                                        <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" priority="999" constant="345" id="kgB-Eq-Rq4"/>
                                             <constraint firstAttribute="height" constant="50" id="ytt-lg-EVy">
@@ -359,7 +352,7 @@
                                                     <constraint firstAttribute="height" constant="31" id="o8g-TN-NrW"/>
                                                     <constraint firstAttribute="width" constant="49" id="wpP-3g-lgS"/>
                                                 </constraints>
-                                                <color key="onTintColor" red="0.73333333329999995" green="1" blue="0.23137254900000001" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="onTintColor" red="0.21176470588235294" green="0.77647058823529413" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="600" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Touch/Face ID" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="23K-Fc-RlZ">
                                                 <rect key="frame" x="175" y="6.5" width="106" height="18"/>
@@ -395,7 +388,7 @@
                                                     <fragment content="There is a problem with your form and action is required bla bla bla...">
                                                         <attributes>
                                                             <color key="NSColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="deviceRGB"/>
-                                                            <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                            <font key="NSFont" metaFont="menu" size="14"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
@@ -552,7 +545,7 @@
                                     <fragment content="ocean laptop noble fiction story firm replace spot laptop run blast social">
                                         <attributes>
                                             <color key="NSColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="deviceRGB"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Bold"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.25" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                         </attributes>
                                     </fragment>
@@ -581,7 +574,7 @@
                                                 <string key="content">Please write your seed phrase down, as it's the only way to recover your funds if you forget your password or your device is stolen.</string>
                                                 <attributes>
                                                     <color key="NSColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
-                                                    <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
                                                     <real key="NSKern" value="0.0"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                 </attributes>
@@ -602,7 +595,7 @@
                             </view>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1sH-56-wzu">
                                 <rect key="frame" x="15" y="528" width="345" height="50"/>
-                                <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="NjO-ep-Z1w"/>
                                     <constraint firstAttribute="width" priority="999" constant="345" id="jTF-xc-ATL"/>
@@ -661,7 +654,7 @@
                         <subviews>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HpL-n9-Q3R">
                                 <rect key="frame" x="15" y="528" width="345" height="50"/>
-                                <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="999" constant="345" id="1Mr-Ik-KVK"/>
                                     <constraint firstAttribute="height" constant="50" id="ZRb-R1-n7N"/>
@@ -695,7 +688,7 @@
                                             <fragment content="Use the virtual keyboard and quick suggestions to save time.">
                                                 <attributes>
                                                     <color key="NSColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
-                                                    <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
                                                     <real key="NSKern" value="0.0"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                 </attributes>
@@ -730,7 +723,7 @@
                                             <fragment content="There is a problem with your form and action is required bla bla bla...">
                                                 <attributes>
                                                     <color key="NSColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="deviceRGB"/>
-                                                    <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -758,7 +751,7 @@
                                     <fragment content="ocean laptop noble fiction story firm replace spot laptop run blast social">
                                         <attributes>
                                             <color key="NSColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="deviceRGB"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Bold"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.25" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                         </attributes>
                                     </fragment>
@@ -863,39 +856,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ElectronCashFunkyBG_4.png" translatesAutoresizingMaskIntoConstraints="NO" id="20E-wH-rET">
-                                <rect key="frame" x="36" y="66" width="283" height="251"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="251" id="5jk-er-QaO"/>
-                                    <constraint firstAttribute="width" constant="283" id="lZe-K1-O5x"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get started now" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jd-51-cat">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get started with your Lava Pocket" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jd-51-cat">
                                 <rect key="frame" x="15" y="41" width="345" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="scb-wO-xAo"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BeLectron_Insignia.png" translatesAutoresizingMaskIntoConstraints="NO" id="XNX-V0-Wvd">
-                                <rect key="frame" x="110.5" y="122.5" width="154" height="138"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="138" id="CtN-Ty-XWN"/>
-                                    <constraint firstAttribute="width" constant="154" id="EUU-Tc-8Lu"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NOe-Oa-APY">
                                 <rect key="frame" x="15" y="482" width="345" height="50"/>
-                                <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="999" constant="345" id="BB6-As-PQU"/>
                                     <constraint firstAttribute="height" constant="50" id="syD-Z0-fCD"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Restore from Seed">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -911,7 +891,7 @@
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ev-e7-jHU">
                                 <rect key="frame" x="15" y="542" width="345" height="50"/>
-                                <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="999" constant="345" id="J0l-uo-Gff"/>
                                     <constraint firstAttribute="height" constant="50" id="nGf-Gr-Slc"/>
@@ -934,7 +914,7 @@
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VoH-8m-5KP">
                                 <rect key="frame" x="15" y="602" width="345" height="50"/>
-                                <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="999" constant="345" id="8UD-1Z-V4J"/>
                                     <constraint firstAttribute="height" constant="50" id="bKT-1i-Obc"/>
@@ -964,7 +944,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Create New Standard Wallet">
-                                    <color key="titleColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -979,18 +959,18 @@
                                 </connections>
                             </button>
                             <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Ge7-ix-gDM" userLabel="VCenterer">
-                                <rect key="frame" x="0.0" y="260.5" width="375" height="161.5"/>
+                                <rect key="frame" x="0.0" y="261" width="375" height="161"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IK0-Xv-mIB">
-                                        <rect key="frame" x="32.5" y="60" width="310" height="42"/>
+                                        <rect key="frame" x="17.5" y="81" width="340" height="22"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="310" id="uub-dP-sY1"/>
+                                            <constraint firstAttribute="width" constant="340" id="uub-dP-sY1"/>
                                         </constraints>
                                         <attributedString key="attributedText">
-                                            <fragment content="and create your standard wallet or restore an existing one with any of the methods below">
+                                            <fragment content="Pocket is a mobile phone SPV wallet for Lava">
                                                 <attributes>
                                                     <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <font key="NSFont" metaFont="system" size="15"/>
+                                                    <font key="NSFont" size="16" name="PingFangSC-Regular"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="21" maximumLineHeight="21" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -1001,24 +981,33 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="IK0-Xv-mIB" firstAttribute="centerX" secondItem="Ge7-ix-gDM" secondAttribute="centerX" id="ON3-Bd-QOP"/>
-                                    <constraint firstItem="IK0-Xv-mIB" firstAttribute="centerY" secondItem="Ge7-ix-gDM" secondAttribute="centerY" id="hSN-kn-vDP"/>
+                                    <constraint firstItem="IK0-Xv-mIB" firstAttribute="centerY" secondItem="Ge7-ix-gDM" secondAttribute="centerY" constant="11.5" id="hSN-kn-vDP"/>
+                                    <constraint firstItem="IK0-Xv-mIB" firstAttribute="top" secondItem="Ge7-ix-gDM" secondAttribute="top" constant="81" id="zDJ-xK-gL7"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lavawallet2.png" translatesAutoresizingMaskIntoConstraints="NO" id="XNX-V0-Wvd">
+                                <rect key="frame" x="80" y="132" width="231" height="161"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="161" id="CtN-Ty-XWN"/>
+                                    <constraint firstAttribute="width" constant="231" id="EUU-Tc-8Lu"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="WSp-u0-SRs" firstAttribute="trailing" secondItem="6jd-51-cat" secondAttribute="trailing" constant="15" id="0eS-Wg-65E"/>
                             <constraint firstItem="WSp-u0-SRs" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CqO-T0-XSe" secondAttribute="trailing" constant="15" id="0xW-rb-k85"/>
                             <constraint firstItem="WSp-u0-SRs" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NOe-Oa-APY" secondAttribute="trailing" constant="15" id="1cw-Ib-C1a"/>
-                            <constraint firstItem="XNX-V0-Wvd" firstAttribute="centerX" secondItem="Znl-xm-od2" secondAttribute="centerX" id="2CS-gb-i7D"/>
                             <constraint firstItem="3ev-e7-jHU" firstAttribute="top" secondItem="NOe-Oa-APY" secondAttribute="bottom" constant="10" id="2PG-DX-wsB"/>
                             <constraint firstItem="6jd-51-cat" firstAttribute="leading" secondItem="WSp-u0-SRs" secondAttribute="leading" constant="15" id="2pg-ac-Chw"/>
                             <constraint firstItem="6jd-51-cat" firstAttribute="top" secondItem="WSp-u0-SRs" secondAttribute="top" constant="21" id="3BV-A8-lTK"/>
                             <constraint firstItem="NOe-Oa-APY" firstAttribute="centerX" secondItem="Znl-xm-od2" secondAttribute="centerX" id="4kQ-ig-3cr"/>
                             <constraint firstItem="NOe-Oa-APY" firstAttribute="top" secondItem="CqO-T0-XSe" secondAttribute="bottom" constant="10" id="5hI-KJ-4Bq"/>
-                            <constraint firstItem="Ge7-ix-gDM" firstAttribute="top" secondItem="XNX-V0-Wvd" secondAttribute="bottom" id="78c-mA-d9m"/>
+                            <constraint firstItem="Ge7-ix-gDM" firstAttribute="top" secondItem="XNX-V0-Wvd" secondAttribute="bottom" constant="-32" id="78c-mA-d9m"/>
                             <constraint firstItem="WSp-u0-SRs" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VoH-8m-5KP" secondAttribute="trailing" constant="15" id="837-SV-o8S"/>
+                            <constraint firstItem="WSp-u0-SRs" firstAttribute="trailing" secondItem="XNX-V0-Wvd" secondAttribute="trailing" constant="64" id="D69-BG-D3l"/>
+                            <constraint firstItem="XNX-V0-Wvd" firstAttribute="leading" secondItem="WSp-u0-SRs" secondAttribute="leading" constant="80" id="IGe-VY-bUf"/>
                             <constraint firstItem="VoH-8m-5KP" firstAttribute="centerX" secondItem="Znl-xm-od2" secondAttribute="centerX" id="JHO-vc-hFu"/>
                             <constraint firstItem="WSp-u0-SRs" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3ev-e7-jHU" secondAttribute="trailing" constant="15" id="KQ7-SX-lPG"/>
                             <constraint firstItem="6jd-51-cat" firstAttribute="centerX" secondItem="Znl-xm-od2" secondAttribute="centerX" id="Krt-8i-Pkf"/>
@@ -1026,7 +1015,6 @@
                             <constraint firstItem="NOe-Oa-APY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WSp-u0-SRs" secondAttribute="leading" constant="15" id="UGe-jz-lCj"/>
                             <constraint firstItem="Ge7-ix-gDM" firstAttribute="leading" secondItem="WSp-u0-SRs" secondAttribute="leading" id="VLp-70-WCW"/>
                             <constraint firstItem="CqO-T0-XSe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WSp-u0-SRs" secondAttribute="leading" constant="15" id="Vq3-E2-KUl"/>
-                            <constraint firstItem="20E-wH-rET" firstAttribute="top" secondItem="6jd-51-cat" secondAttribute="bottom" id="Wcj-p8-4dE"/>
                             <constraint firstItem="CqO-T0-XSe" firstAttribute="top" secondItem="Ge7-ix-gDM" secondAttribute="bottom" id="YxP-KM-JG3"/>
                             <constraint firstItem="3ev-e7-jHU" firstAttribute="centerX" secondItem="Znl-xm-od2" secondAttribute="centerX" id="e1n-1t-CRu"/>
                             <constraint firstAttribute="bottom" secondItem="VoH-8m-5KP" secondAttribute="bottom" constant="15" id="kXd-8O-Pij"/>
@@ -1034,8 +1022,7 @@
                             <constraint firstItem="VoH-8m-5KP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WSp-u0-SRs" secondAttribute="leading" constant="15" id="oRM-yv-zp0"/>
                             <constraint firstItem="VoH-8m-5KP" firstAttribute="top" secondItem="3ev-e7-jHU" secondAttribute="bottom" constant="10" id="pnF-GF-DXV"/>
                             <constraint firstItem="CqO-T0-XSe" firstAttribute="centerX" secondItem="Znl-xm-od2" secondAttribute="centerX" id="tdJ-Wq-J1y"/>
-                            <constraint firstItem="20E-wH-rET" firstAttribute="centerX" secondItem="Znl-xm-od2" secondAttribute="centerX" constant="-10" id="z0y-vL-oJE"/>
-                            <constraint firstItem="XNX-V0-Wvd" firstAttribute="centerY" secondItem="20E-wH-rET" secondAttribute="centerY" id="z3d-GX-pWI"/>
+                            <constraint firstItem="XNX-V0-Wvd" firstAttribute="top" secondItem="6jd-51-cat" secondAttribute="bottom" constant="66" id="yWa-ER-pbA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WSp-u0-SRs"/>
                     </view>
@@ -1063,14 +1050,14 @@
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kwh-QN-h2G">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="657"/>
-                                <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="e8A-0p-Ncz" kind="embed" id="llD-Ma-4qA"/>
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Kwh-QN-h2G" firstAttribute="bottom" secondItem="lgh-6D-LXX" secondAttribute="bottom" constant="-10" id="D2f-kJ-zn2"/>
@@ -1104,14 +1091,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ElectronCashFunkyBG.png" translatesAutoresizingMaskIntoConstraints="NO" id="yud-pJ-xw6">
-                                <rect key="frame" x="64" y="129" width="251" height="283"/>
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Lava.png" translatesAutoresizingMaskIntoConstraints="NO" id="5p7-9Z-k5r">
+                                <rect key="frame" x="102" y="258" width="170" height="148"/>
                             </imageView>
-                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ElecTRONCash.png" translatesAutoresizingMaskIntoConstraints="NO" id="5p7-9Z-k5r">
-                                <rect key="frame" x="17" y="236" width="341" height="112"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omj-Bk-8vK">
-                                <rect key="frame" x="17" y="107" width="341" height="25"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Lava Pocket" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omj-Bk-8vK">
+                                <rect key="frame" x="17" y="120" width="341" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="oJc-i4-3Fd"/>
                                 </constraints>
@@ -1120,19 +1104,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="msS-3n-0EQ" userLabel="VCenterer">
-                                <rect key="frame" x="0.0" y="348" width="375" height="254"/>
+                                <rect key="frame" x="0.0" y="406" width="375" height="196"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="t1Y-o1-Z3K">
-                                        <rect key="frame" x="83.5" y="106" width="208" height="42"/>
+                                        <rect key="frame" x="17.5" y="88" width="340" height="22"/>
+                                        <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="42" id="j6X-Mc-R72"/>
-                                            <constraint firstAttribute="width" constant="208" id="lxK-8b-E6P"/>
+                                            <constraint firstAttribute="height" constant="22" id="j6X-Mc-R72"/>
+                                            <constraint firstAttribute="width" constant="340" id="lxK-8b-E6P"/>
                                         </constraints>
                                         <attributedString key="attributedText">
-                                            <fragment content="Electron Cash is an SPV wallet for Bitcoin Cash">
+                                            <fragment content="Pocket is a mobile phone SPV wallet for Lava">
                                                 <attributes>
                                                     <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <font key="NSFont" metaFont="system" size="15"/>
+                                                    <font key="NSFont" size="16" name="PingFangSC-Regular"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -1142,13 +1127,13 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="t1Y-o1-Z3K" firstAttribute="centerY" secondItem="msS-3n-0EQ" secondAttribute="centerY" id="WPI-B6-tlW"/>
+                                    <constraint firstItem="t1Y-o1-Z3K" firstAttribute="centerY" secondItem="msS-3n-0EQ" secondAttribute="centerY" constant="1" id="WPI-B6-tlW"/>
                                     <constraint firstItem="t1Y-o1-Z3K" firstAttribute="centerX" secondItem="msS-3n-0EQ" secondAttribute="centerX" id="b2q-PF-jJk"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AuA-tQ-rO8">
                                 <rect key="frame" x="15" y="602" width="345" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="57L-SB-9as"/>
                                     <constraint firstAttribute="width" priority="999" constant="345" id="Ovr-Cr-EAy"/>
@@ -1158,7 +1143,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Get Started">
-                                    <color key="titleColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -1170,25 +1155,22 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="yud-pJ-xw6" firstAttribute="leading" secondItem="IiT-1r-Rlw" secondAttribute="leading" constant="64" id="0P0-Lc-DXE"/>
                             <constraint firstItem="AuA-tQ-rO8" firstAttribute="top" secondItem="msS-3n-0EQ" secondAttribute="bottom" id="AVC-Og-4ep"/>
-                            <constraint firstItem="yud-pJ-xw6" firstAttribute="top" secondItem="omj-Bk-8vK" secondAttribute="bottom" constant="-3" id="BFv-jw-ohJ"/>
-                            <constraint firstItem="IiT-1r-Rlw" firstAttribute="trailing" secondItem="5p7-9Z-k5r" secondAttribute="trailing" constant="17" id="HvI-O7-f1Q"/>
+                            <constraint firstItem="IiT-1r-Rlw" firstAttribute="trailing" secondItem="5p7-9Z-k5r" secondAttribute="trailing" constant="103" id="HvI-O7-f1Q"/>
                             <constraint firstItem="msS-3n-0EQ" firstAttribute="top" secondItem="5p7-9Z-k5r" secondAttribute="bottom" id="IX8-9S-Mr5"/>
-                            <constraint firstItem="yud-pJ-xw6" firstAttribute="top" secondItem="JBd-Cg-qV5" secondAttribute="top" constant="129" id="VAS-e3-840"/>
                             <constraint firstItem="IiT-1r-Rlw" firstAttribute="bottom" secondItem="AuA-tQ-rO8" secondAttribute="bottom" constant="15" id="VZM-qh-eul"/>
+                            <constraint firstItem="omj-Bk-8vK" firstAttribute="top" secondItem="IiT-1r-Rlw" secondAttribute="top" constant="100" id="WDO-6u-Jev"/>
                             <constraint firstItem="IiT-1r-Rlw" firstAttribute="trailing" secondItem="omj-Bk-8vK" secondAttribute="trailing" constant="17" id="ac4-30-HJ7"/>
                             <constraint firstItem="msS-3n-0EQ" firstAttribute="leading" secondItem="IiT-1r-Rlw" secondAttribute="leading" id="dwf-5k-9Bc"/>
                             <constraint firstItem="IiT-1r-Rlw" firstAttribute="trailing" secondItem="AuA-tQ-rO8" secondAttribute="trailing" constant="15" id="eVP-o6-n24"/>
                             <constraint firstItem="IiT-1r-Rlw" firstAttribute="trailing" secondItem="msS-3n-0EQ" secondAttribute="trailing" id="gm2-GX-ZJW"/>
-                            <constraint firstItem="5p7-9Z-k5r" firstAttribute="top" secondItem="JBd-Cg-qV5" secondAttribute="top" constant="236" id="i8E-7v-4q1"/>
-                            <constraint firstItem="IiT-1r-Rlw" firstAttribute="trailing" secondItem="yud-pJ-xw6" secondAttribute="trailing" constant="60" id="jaK-6r-x2V"/>
+                            <constraint firstItem="5p7-9Z-k5r" firstAttribute="top" secondItem="JBd-Cg-qV5" secondAttribute="top" constant="258" id="i8E-7v-4q1"/>
                             <constraint firstItem="omj-Bk-8vK" firstAttribute="leading" secondItem="IiT-1r-Rlw" secondAttribute="leading" constant="17" id="lUa-1b-SiH"/>
                             <constraint firstItem="AuA-tQ-rO8" firstAttribute="leading" secondItem="IiT-1r-Rlw" secondAttribute="leading" constant="15" id="tJz-X1-pE9"/>
-                            <constraint firstItem="5p7-9Z-k5r" firstAttribute="leading" secondItem="IiT-1r-Rlw" secondAttribute="leading" constant="17" id="xKa-ic-hdq"/>
+                            <constraint firstItem="5p7-9Z-k5r" firstAttribute="leading" secondItem="IiT-1r-Rlw" secondAttribute="leading" constant="102" id="xKa-ic-hdq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IiT-1r-Rlw"/>
                     </view>
@@ -1212,7 +1194,7 @@
                         <subviews>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1b-Va-qbg">
                                 <rect key="frame" x="15" y="528" width="345" height="50"/>
-                                <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="999" constant="345" id="dri-wE-1yR"/>
                                     <constraint firstAttribute="height" constant="50" id="wy0-ef-saM"/>
@@ -1246,7 +1228,7 @@
                                             <fragment content="Use the virtual keyboard and quick suggestions to save time.">
                                                 <attributes>
                                                     <color key="NSColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
-                                                    <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
                                                     <real key="NSKern" value="0.0"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                 </attributes>
@@ -1281,7 +1263,7 @@
                                             <fragment content="There is a problem with your form and action is required bla bla bla...">
                                                 <attributes>
                                                     <color key="NSColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="deviceRGB"/>
-                                                    <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -1309,7 +1291,7 @@
                                     <fragment content="ocean laptop noble fiction story firm replace spot laptop run blast social">
                                         <attributes>
                                             <color key="NSColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="deviceRGB"/>
-                                            <font key="NSFont" size="16" name="SFProDisplay-Bold"/>
+                                            <font key="NSFont" metaFont="system" size="16"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.25" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                         </attributes>
                                     </fragment>
@@ -1342,7 +1324,7 @@
                             </containerView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6Hl-mN-Tmf">
                                 <rect key="frame" x="311" y="213.5" width="51" height="31"/>
-                                <color key="onTintColor" red="0.73333333329999995" green="1" blue="0.23137254900000001" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="onTintColor" red="0.21176470588235294" green="0.77647058823529413" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BIP39 Seed" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3j-Ht-6ua">
                                 <rect key="frame" x="224" y="220" width="80" height="18"/>
@@ -1536,7 +1518,7 @@
                                     </textField>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bv0-MA-mXh">
                                         <rect key="frame" x="15" y="528" width="345" height="50"/>
-                                        <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Wye-TO-dJL">
                                                 <variation key="heightClass=compact-widthClass=compact" constant="35"/>
@@ -1565,7 +1547,7 @@
                                                     <constraint firstAttribute="height" constant="31" id="C6j-6j-bmR"/>
                                                     <constraint firstAttribute="width" constant="49" id="SW6-bI-c81"/>
                                                 </constraints>
-                                                <color key="onTintColor" red="0.73333333329999995" green="1" blue="0.23137254900000001" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="onTintColor" red="0.21176470588235294" green="0.77647058823529413" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="600" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Touch/Face ID" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iPZ-3Y-LCp">
                                                 <rect key="frame" x="175" y="6.5" width="106" height="18"/>
@@ -1601,7 +1583,7 @@
                                                     <fragment content="There is a problem with your form and action is required bla bla bla...">
                                                         <attributes>
                                                             <color key="NSColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="deviceRGB"/>
-                                                            <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                            <font key="NSFont" metaFont="menu" size="14"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
@@ -1758,7 +1740,7 @@
                                 <attributedString key="attributedText">
                                     <fragment content="19KVgvPXU8Lcucswse4sn9xbf78dev6 19KVgvPXU8Lcucswse4sn9xbf78dev6 19KVgvPXU8Lcucswse4sn9xbf78dev6">
                                         <attributes>
-                                            <font key="NSFont" size="14" name="SFProDisplay-Regular"/>
+                                            <font key="NSFont" metaFont="menu" size="14"/>
                                             <real key="NSKern" value="0.0"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="18" maximumLineHeight="18" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                         </attributes>
@@ -1788,7 +1770,7 @@
                                                 <string key="content">Enter a list of private keys to create a regular spending wallet. Alternatively, you can create a 'watching-only' wallet by entering a list of Bitcoin Cash addresses.</string>
                                                 <attributes>
                                                     <color key="NSColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
-                                                    <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
                                                     <real key="NSKern" value="0.0"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                 </attributes>
@@ -1823,7 +1805,7 @@
                                             <fragment content="There is a problem with your form and action is required bla bla bla...">
                                                 <attributes>
                                                     <color key="NSColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="deviceRGB"/>
-                                                    <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -1842,7 +1824,7 @@
                             </view>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bnK-2o-hmX">
                                 <rect key="frame" x="15" y="528" width="345" height="50"/>
-                                <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="2qc-JI-f8C"/>
                                     <constraint firstAttribute="width" priority="999" constant="345" id="c1W-5t-qjD"/>
@@ -1941,7 +1923,7 @@
                             </tableView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywA-2Z-LLo">
                                 <rect key="frame" x="15" y="528" width="345" height="50"/>
-                                <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="999" constant="345" id="W3Q-E3-atZ"/>
                                     <constraint firstAttribute="height" constant="50" id="vLQ-QX-XfJ"/>
@@ -1976,7 +1958,7 @@
                                                 <string key="content">Enter a list of private keys to create a regular spending wallet. Alternatively, you can create a 'watching-only' wallet by entering a list of Bitcoin Cash addresses.</string>
                                                 <attributes>
                                                     <color key="NSColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
-                                                    <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
                                                     <real key="NSKern" value="0.0"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                 </attributes>
@@ -2011,7 +1993,7 @@
                                             <fragment content="There is a problem with your form and action is required bla bla bla...">
                                                 <attributes>
                                                     <color key="NSColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="deviceRGB"/>
-                                                    <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -2163,7 +2145,7 @@
                                     </textField>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbr-fh-FVD">
                                         <rect key="frame" x="15" y="528" width="345" height="50"/>
-                                        <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="3bk-XI-Auw">
                                                 <variation key="heightClass=compact-widthClass=compact" constant="35"/>
@@ -2192,7 +2174,7 @@
                                                     <constraint firstAttribute="width" constant="49" id="BE9-rl-qIE"/>
                                                     <constraint firstAttribute="height" constant="31" id="vJM-Ek-ZGC"/>
                                                 </constraints>
-                                                <color key="onTintColor" red="0.73333333329999995" green="1" blue="0.23137254900000001" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="onTintColor" red="0.21176470588235294" green="0.77647058823529413" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="600" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Touch/Face ID" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wZb-wu-4lr">
                                                 <rect key="frame" x="175" y="6.5" width="106" height="18"/>
@@ -2228,7 +2210,7 @@
                                                     <fragment content="There is a problem with your form and action is required bla bla bla...">
                                                         <attributes>
                                                             <color key="NSColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="deviceRGB"/>
-                                                            <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                            <font key="NSFont" metaFont="menu" size="14"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
@@ -2384,7 +2366,7 @@
                                 <attributedString key="attributedText">
                                     <fragment content="19KVgvPXU8Lcucswse4sn9xbf78dev6 19KVgvPXU8Lcucswse4sn9xbf78dev6 19KVgvPXU8Lcucswse4sn9xbf78dev6">
                                         <attributes>
-                                            <font key="NSFont" size="14" name="SFProDisplay-Regular"/>
+                                            <font key="NSFont" metaFont="menu" size="14"/>
                                             <real key="NSKern" value="0.0"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="18" maximumLineHeight="18" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                         </attributes>
@@ -2414,7 +2396,7 @@
                                                 <string key="content">Enter a list of private keys to create a regular spending wallet. Alternatively, you can create a 'watching-only' wallet by entering a list of Bitcoin Cash addresses.</string>
                                                 <attributes>
                                                     <color key="NSColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
-                                                    <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
                                                     <real key="NSKern" value="0.0"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                 </attributes>
@@ -2449,7 +2431,7 @@
                                             <fragment content="There is a problem with your form and action is required bla bla bla...">
                                                 <attributes>
                                                     <color key="NSColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="deviceRGB"/>
-                                                    <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -2468,7 +2450,7 @@
                             </view>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S01-Wi-hPR">
                                 <rect key="frame" x="15" y="528" width="345" height="50"/>
-                                <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="999" constant="345" id="5G0-3G-4Qd"/>
                                     <constraint firstAttribute="height" constant="50" id="iKq-iI-WVY"/>
@@ -2567,7 +2549,7 @@
                             </tableView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q08-yY-j47">
                                 <rect key="frame" x="15" y="528" width="345" height="50"/>
-                                <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="999" constant="345" id="QbK-7u-2C1"/>
                                     <constraint firstAttribute="height" constant="50" id="Zyk-tk-V1H"/>
@@ -2602,7 +2584,7 @@
                                                 <string key="content">Enter a list of private keys to create a regular spending wallet. Alternatively, you can create a 'watching-only' wallet by entering a list of Bitcoin Cash addresses.</string>
                                                 <attributes>
                                                     <color key="NSColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
-                                                    <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
                                                     <real key="NSKern" value="0.0"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                 </attributes>
@@ -2637,7 +2619,7 @@
                                             <fragment content="There is a problem with your form and action is required bla bla bla...">
                                                 <attributes>
                                                     <color key="NSColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="deviceRGB"/>
-                                                    <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                    <font key="NSFont" metaFont="menu" size="14"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -2794,7 +2776,7 @@
                                     </textField>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FlG-uc-1Zl">
                                         <rect key="frame" x="15" y="528" width="345" height="50"/>
-                                        <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="F3p-LT-o28">
                                                 <variation key="heightClass=compact-widthClass=compact" constant="35"/>
@@ -2823,7 +2805,7 @@
                                                     <constraint firstAttribute="height" constant="31" id="4Yk-mb-sDS"/>
                                                     <constraint firstAttribute="width" constant="49" id="XBR-Xy-NnA"/>
                                                 </constraints>
-                                                <color key="onTintColor" red="0.73333333329999995" green="1" blue="0.23137254900000001" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="onTintColor" red="0.21176470588235294" green="0.77647058823529413" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="600" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Touch/Face ID" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FN2-h9-1pN">
                                                 <rect key="frame" x="175" y="6.5" width="106" height="18"/>
@@ -2859,7 +2841,7 @@
                                                     <fragment content="There is a problem with your form and action is required bla bla bla...">
                                                         <attributes>
                                                             <color key="NSColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="deviceRGB"/>
-                                                            <font key="NSFont" size="14" name="SFProDisplay-Italic"/>
+                                                            <font key="NSFont" metaFont="menu" size="14"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" lineHeightMultiple="1" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
@@ -2997,14 +2979,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ElectronCashFunkyBG_2.png" translatesAutoresizingMaskIntoConstraints="NO" id="mvt-WK-d9u">
-                                <rect key="frame" x="28" y="115" width="306" height="316"/>
-                            </imageView>
-                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OnBoardingLock.png" translatesAutoresizingMaskIntoConstraints="NO" id="Dob-Qg-7wJ">
-                                <rect key="frame" x="47.5" y="180" width="280" height="195"/>
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lavawallet.png" translatesAutoresizingMaskIntoConstraints="NO" id="Dob-Qg-7wJ">
+                                <rect key="frame" x="53" y="241" width="280" height="183"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Control your own private keys" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="c6o-vS-XDJ">
-                                <rect key="frame" x="15" y="100" width="345" height="25"/>
+                                <rect key="frame" x="15" y="120" width="345" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="g9E-KH-sto"/>
                                 </constraints>
@@ -3013,20 +2992,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="vSp-io-f6D" userLabel="VCenterer">
-                                <rect key="frame" x="0.0" y="375" width="375" height="227"/>
+                                <rect key="frame" x="0.0" y="424" width="375" height="178"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KEs-iU-tfk">
-                                        <rect key="frame" x="77.5" y="92.5" width="220" height="42"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEs-iU-tfk">
+                                        <rect key="frame" x="17.5" y="68" width="340" height="22"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="42" id="W9G-Ak-ZXa"/>
-                                            <constraint firstAttribute="width" constant="220" id="sA2-Cy-RDd"/>
+                                            <constraint firstAttribute="height" constant="22" id="W9G-Ak-ZXa"/>
+                                            <constraint firstAttribute="width" constant="340" id="sA2-Cy-RDd"/>
                                         </constraints>
                                         <attributedString key="attributedText">
-                                            <fragment content="Easily back up your wallet with a mnemonic seed phrase.">
+                                            <fragment content="Pocket is a mobile phone SPV wallet for Lava">
                                                 <attributes>
                                                     <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <font key="NSFont" metaFont="system" size="15"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" tighteningFactorForTruncation="0.0"/>
+                                                    <font key="NSFont" size="16" name="PingFangSC-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
@@ -3035,7 +3014,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="KEs-iU-tfk" firstAttribute="centerY" secondItem="vSp-io-f6D" secondAttribute="centerY" id="GdC-hg-39V"/>
+                                    <constraint firstItem="KEs-iU-tfk" firstAttribute="centerY" secondItem="vSp-io-f6D" secondAttribute="centerY" constant="-10" id="GdC-hg-39V"/>
                                     <constraint firstItem="KEs-iU-tfk" firstAttribute="centerX" secondItem="vSp-io-f6D" secondAttribute="centerX" id="paV-D2-buL"/>
                                 </constraints>
                             </view>
@@ -3051,7 +3030,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Next">
-                                    <color key="titleColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -3063,24 +3042,21 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="mvt-WK-d9u" firstAttribute="top" secondItem="8Q0-2y-pgz" secondAttribute="top" constant="95" id="6bo-Py-1F8"/>
                             <constraint firstItem="vSp-io-f6D" firstAttribute="top" secondItem="Dob-Qg-7wJ" secondAttribute="bottom" id="9HO-L3-9Rd"/>
-                            <constraint firstItem="8Q0-2y-pgz" firstAttribute="trailing" secondItem="mvt-WK-d9u" secondAttribute="trailing" constant="41" id="DHR-iO-NiK"/>
-                            <constraint firstItem="Dob-Qg-7wJ" firstAttribute="top" secondItem="Nj5-Vc-hwa" secondAttribute="top" constant="180" id="DbG-71-2wJ"/>
+                            <constraint firstItem="Dob-Qg-7wJ" firstAttribute="top" secondItem="Nj5-Vc-hwa" secondAttribute="top" constant="241" id="DbG-71-2wJ"/>
                             <constraint firstItem="Hz6-iI-sFf" firstAttribute="leading" secondItem="8Q0-2y-pgz" secondAttribute="leading" constant="15" id="EPF-c4-wD6"/>
                             <constraint firstItem="vSp-io-f6D" firstAttribute="leading" secondItem="8Q0-2y-pgz" secondAttribute="leading" id="GWt-uP-23c"/>
-                            <constraint firstAttribute="trailing" secondItem="Dob-Qg-7wJ" secondAttribute="trailing" constant="47.5" id="K3A-oq-2Qd"/>
+                            <constraint firstAttribute="trailing" secondItem="Dob-Qg-7wJ" secondAttribute="trailing" constant="42" id="K3A-oq-2Qd"/>
                             <constraint firstItem="8Q0-2y-pgz" firstAttribute="bottom" secondItem="Hz6-iI-sFf" secondAttribute="bottom" constant="15" id="LtX-pV-gCR"/>
-                            <constraint firstItem="mvt-WK-d9u" firstAttribute="leading" secondItem="8Q0-2y-pgz" secondAttribute="leading" constant="28" id="Tzk-pj-SNo"/>
                             <constraint firstItem="8Q0-2y-pgz" firstAttribute="trailing" secondItem="Hz6-iI-sFf" secondAttribute="trailing" constant="15" id="Vbi-K2-9ie"/>
                             <constraint firstItem="8Q0-2y-pgz" firstAttribute="trailing" secondItem="vSp-io-f6D" secondAttribute="trailing" id="WNk-UH-zh3"/>
-                            <constraint firstItem="Dob-Qg-7wJ" firstAttribute="leading" secondItem="Nj5-Vc-hwa" secondAttribute="leading" constant="47.5" id="c7o-aE-Ezw"/>
+                            <constraint firstItem="Dob-Qg-7wJ" firstAttribute="leading" secondItem="Nj5-Vc-hwa" secondAttribute="leading" constant="53" id="c7o-aE-Ezw"/>
                             <constraint firstItem="Hz6-iI-sFf" firstAttribute="top" secondItem="vSp-io-f6D" secondAttribute="bottom" id="chn-Ce-qP6"/>
-                            <constraint firstItem="mvt-WK-d9u" firstAttribute="top" secondItem="c6o-vS-XDJ" secondAttribute="bottom" constant="-10" id="dFy-wS-dyi"/>
                             <constraint firstItem="8Q0-2y-pgz" firstAttribute="trailing" secondItem="c6o-vS-XDJ" secondAttribute="trailing" constant="15" id="kxR-b8-LiB"/>
+                            <constraint firstItem="c6o-vS-XDJ" firstAttribute="top" secondItem="8Q0-2y-pgz" secondAttribute="top" constant="100" id="xcp-bF-EXZ"/>
                             <constraint firstItem="c6o-vS-XDJ" firstAttribute="leading" secondItem="8Q0-2y-pgz" secondAttribute="leading" constant="15" id="yNw-F4-CKb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8Q0-2y-pgz"/>
@@ -3093,7 +3069,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tlZ-c2-gxH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1010" y="-758"/>
+            <point key="canvasLocation" x="1008.8" y="-758.77061469265368"/>
         </scene>
         <!--On-Boarding 3-->
         <scene sceneID="wgw-hu-JiA">
@@ -3103,36 +3079,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ElectronCashFunkyBG_3.png" translatesAutoresizingMaskIntoConstraints="NO" id="h8k-qc-p09">
-                                <rect key="frame" x="38" y="115" width="300" height="297"/>
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="undraw_Security_on_ff2u.png" translatesAutoresizingMaskIntoConstraints="NO" id="PbD-G1-Frg">
+                                <rect key="frame" x="84" y="241" width="198" height="176"/>
                             </imageView>
-                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OnBoardingShield.png" translatesAutoresizingMaskIntoConstraints="NO" id="PbD-G1-Frg">
-                                <rect key="frame" x="45.5" y="180" width="284" height="212"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enjoy high security" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zel-6V-tEV">
-                                <rect key="frame" x="15" y="100" width="345" height="25"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zel-6V-tEV">
+                                <rect key="frame" x="85" y="120" width="204" height="56"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="oLW-MK-4SG"/>
+                                    <constraint firstAttribute="height" constant="56" id="oLW-MK-4SG"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <string key="text">Safely storing and 
+transfering your Lava</string>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="IVB-l2-qMd" userLabel="VCenterer">
-                                <rect key="frame" x="0.0" y="392" width="375" height="210"/>
+                                <rect key="frame" x="0.0" y="425" width="375" height="177"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ipm-y1-nXa">
-                                        <rect key="frame" x="52.5" y="84" width="270" height="42"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipm-y1-nXa">
+                                        <rect key="frame" x="17.5" y="67.5" width="340" height="22"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="270" id="A9d-et-tSL"/>
-                                            <constraint firstAttribute="height" constant="42" id="x5w-25-IDM"/>
+                                            <constraint firstAttribute="width" constant="340" id="A9d-et-tSL"/>
+                                            <constraint firstAttribute="height" constant="22" id="x5w-25-IDM"/>
                                         </constraints>
                                         <attributedString key="attributedText">
-                                            <fragment content="without downloading the blockchain or running a full node.">
+                                            <fragment content="Pocket is a mobile phone SPV wallet for Lava">
                                                 <attributes>
                                                     <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <font key="NSFont" metaFont="system" size="15"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" tighteningFactorForTruncation="0.0"/>
+                                                    <font key="NSFont" size="16" name="PingFangSC-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" minimumLineHeight="20" maximumLineHeight="20" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
@@ -3141,7 +3116,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="ipm-y1-nXa" firstAttribute="centerY" secondItem="IVB-l2-qMd" secondAttribute="centerY" id="2GW-YN-3ZG"/>
+                                    <constraint firstItem="ipm-y1-nXa" firstAttribute="centerY" secondItem="IVB-l2-qMd" secondAttribute="centerY" constant="-10" id="2GW-YN-3ZG"/>
                                     <constraint firstItem="ipm-y1-nXa" firstAttribute="centerX" secondItem="IVB-l2-qMd" secondAttribute="centerX" id="aje-mW-mCe"/>
                                 </constraints>
                             </view>
@@ -3157,7 +3132,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Next">
-                                    <color key="titleColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="titleColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -3169,25 +3144,22 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.33333333329999998" green="0.5450980392" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="KWv-be-VJJ" firstAttribute="trailing" secondItem="Zel-6V-tEV" secondAttribute="trailing" constant="15" id="2II-MB-8CR"/>
-                            <constraint firstItem="h8k-qc-p09" firstAttribute="top" secondItem="Zel-6V-tEV" secondAttribute="bottom" constant="-10" id="2J1-2o-mvR"/>
-                            <constraint firstItem="PbD-G1-Frg" firstAttribute="top" secondItem="kKm-5v-Cl6" secondAttribute="top" constant="180" id="4iJ-6n-Zt6"/>
-                            <constraint firstItem="IVB-l2-qMd" firstAttribute="top" secondItem="PbD-G1-Frg" secondAttribute="bottom" id="DBu-KZ-eZW"/>
+                            <constraint firstItem="KWv-be-VJJ" firstAttribute="trailing" secondItem="Zel-6V-tEV" secondAttribute="trailing" constant="86" id="2II-MB-8CR"/>
+                            <constraint firstItem="PbD-G1-Frg" firstAttribute="top" secondItem="kKm-5v-Cl6" secondAttribute="top" constant="241" id="4iJ-6n-Zt6"/>
                             <constraint firstItem="KWv-be-VJJ" firstAttribute="bottom" secondItem="EKK-y8-ktC" secondAttribute="bottom" constant="15" id="Gy1-Zg-qEY"/>
-                            <constraint firstItem="Zel-6V-tEV" firstAttribute="leading" secondItem="KWv-be-VJJ" secondAttribute="leading" constant="15" id="H7n-vE-We9"/>
+                            <constraint firstItem="Zel-6V-tEV" firstAttribute="leading" secondItem="KWv-be-VJJ" secondAttribute="leading" constant="85" id="H7n-vE-We9"/>
                             <constraint firstItem="EKK-y8-ktC" firstAttribute="leading" secondItem="KWv-be-VJJ" secondAttribute="leading" constant="15" id="O01-cM-XiT"/>
                             <constraint firstItem="KWv-be-VJJ" firstAttribute="trailing" secondItem="EKK-y8-ktC" secondAttribute="trailing" constant="15" id="R9G-p3-3jM"/>
                             <constraint firstItem="KWv-be-VJJ" firstAttribute="trailing" secondItem="IVB-l2-qMd" secondAttribute="trailing" id="Se8-cJ-HaF"/>
-                            <constraint firstItem="KWv-be-VJJ" firstAttribute="trailing" secondItem="h8k-qc-p09" secondAttribute="trailing" constant="37" id="UMB-W5-05C"/>
+                            <constraint firstItem="IVB-l2-qMd" firstAttribute="firstBaseline" secondItem="PbD-G1-Frg" secondAttribute="baseline" constant="8" symbolType="layoutAnchor" id="XNx-ci-5xu"/>
                             <constraint firstItem="IVB-l2-qMd" firstAttribute="leading" secondItem="KWv-be-VJJ" secondAttribute="leading" id="fYI-Py-XNA"/>
-                            <constraint firstItem="PbD-G1-Frg" firstAttribute="leading" secondItem="KWv-be-VJJ" secondAttribute="leading" constant="45.5" id="iAb-Ji-fCL"/>
+                            <constraint firstItem="PbD-G1-Frg" firstAttribute="leading" secondItem="KWv-be-VJJ" secondAttribute="leading" constant="84" id="iAb-Ji-fCL"/>
                             <constraint firstItem="EKK-y8-ktC" firstAttribute="top" secondItem="IVB-l2-qMd" secondAttribute="bottom" id="jaD-a0-pHE"/>
-                            <constraint firstItem="KWv-be-VJJ" firstAttribute="trailing" secondItem="PbD-G1-Frg" secondAttribute="trailing" constant="45.5" id="skP-Pk-MIN"/>
-                            <constraint firstItem="h8k-qc-p09" firstAttribute="leading" secondItem="KWv-be-VJJ" secondAttribute="leading" constant="38" id="vni-PD-5ti"/>
-                            <constraint firstItem="h8k-qc-p09" firstAttribute="top" secondItem="KWv-be-VJJ" secondAttribute="top" constant="95" id="zRB-r3-jKs"/>
+                            <constraint firstItem="Zel-6V-tEV" firstAttribute="top" secondItem="KWv-be-VJJ" secondAttribute="top" constant="100" id="o3e-08-8XX"/>
+                            <constraint firstItem="KWv-be-VJJ" firstAttribute="trailing" secondItem="PbD-G1-Frg" secondAttribute="trailing" constant="93" id="skP-Pk-MIN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KWv-be-VJJ"/>
                     </view>
@@ -3199,26 +3171,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BCJ-fT-BCj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1676" y="-758"/>
+            <point key="canvasLocation" x="1676" y="-758.77061469265368"/>
         </scene>
     </scenes>
     <resources>
         <image name="Back_Chevron_White.png" width="7" height="13"/>
-        <image name="BeLectron_Insignia.png" width="154" height="138"/>
-        <image name="ElecTRONCash.png" width="341" height="112"/>
-        <image name="ElectronCashFunkyBG.png" width="251" height="283"/>
-        <image name="ElectronCashFunkyBG_2.png" width="306" height="316"/>
-        <image name="ElectronCashFunkyBG_3.png" width="300" height="297"/>
-        <image name="ElectronCashFunkyBG_4.png" width="283" height="251"/>
-        <image name="OnBoardingLock.png" width="280" height="195"/>
-        <image name="OnBoardingShield.png" width="284" height="212"/>
+        <image name="Lava.png" width="170" height="148"/>
         <image name="Rect_For_Chk_18px.png" width="20" height="20"/>
-        <image name="Rect_For_Chk_Chkd_18px.png" width="20" height="20"/>
+        <image name="Rect_For_Chk_Chkd_18px.png" width="16" height="16"/>
         <image name="bang_red.png" width="18" height="18"/>
         <image name="i_yellow.png" width="18" height="18"/>
-        <image name="qrcode_new_framed.png" width="23" height="23"/>
+        <image name="lavawallet.png" width="280" height="183"/>
+        <image name="lavawallet2.png" width="231" height="161"/>
+        <image name="qrcode_new_framed.png" width="28" height="28"/>
+        <image name="undraw_Security_on_ff2u.png" width="198" height="176"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="IGW-l4-feU"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.20392156862745098" green="0.21568627450980393" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

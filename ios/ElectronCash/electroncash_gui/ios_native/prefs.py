@@ -277,21 +277,21 @@ class PrefsVC(UITableViewController):
         elif secName == 'Transactions':
             l = cell.viewWithTag_(1)
             s = cell.viewWithTag_(2)
+            # if row == 0:
+            #     l.text = _("Enable Schnorr signatures")
+            #     b, enabled = parent.prefs_use_schnorr, parent.prefs_is_schnorr_possible
+            #     s.on = b
+            #     utils.uiview_set_enabled(cell, enabled)
+            #     if s.allTargets.count <= 0:
+            #         s.addTarget_action_forControlEvents_(self, SEL(b'onEnableSchnorr:'), UIControlEventValueChanged)
             if row == 0:
-                l.text = _("Enable Schnorr signatures")
-                b, enabled = parent.prefs_use_schnorr, parent.prefs_is_schnorr_possible
-                s.on = b
-                utils.uiview_set_enabled(cell, enabled)
-                if s.allTargets.count <= 0:
-                    s.addTarget_action_forControlEvents_(self, SEL(b'onEnableSchnorr:'), UIControlEventValueChanged)
-            elif row == 1:
                 l.text = _("Use change addresses")
                 b, enabled = parent.prefs_get_use_change()
                 s.on = b
                 utils.uiview_set_enabled(cell, enabled)
                 if s.allTargets.count <= 0:
                     s.addTarget_action_forControlEvents_(self, SEL(b'onUseChange:'), UIControlEventValueChanged)
-            elif row == 2:
+            elif row == 1:
                 l.text = _("Use multiple change addresses")
                 cell.contentView.tag = TAG_MULTIPLE_CHANGE_CELL
                 b1, enabled = parent.prefs_get_multiple_change()
@@ -299,7 +299,7 @@ class PrefsVC(UITableViewController):
                 utils.uiview_set_enabled(cell.contentView, enabled)
                 if s.allTargets.count <= 0:
                     s.addTarget_action_forControlEvents_(self, SEL(b'onUseMultiple:'), UIControlEventValueChanged)
-            elif row == 3:
+            elif row == 2:
                 l.text = _("Spend only confirmed coins")
                 s.on = parent.prefs_get_confirmed_only()
                 if s.allTargets.count <= 0:

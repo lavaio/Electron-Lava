@@ -955,6 +955,20 @@ class Abstract_Wallet(PrintError, SPVDelegate):
                     prevout_hash = txi['prevout_hash']
                     prevout_n = txi['prevout_n']
                     ser = prevout_hash + ':%d'%prevout_n
+                # get addr from txo if addr is not parsed
+                if addr is None:
+                    self.print_error("wdy addr is none")
+                    tx_dd = self.txo.get(prevout_hash, {})
+                    self.print_error("wdy tx_dd=", tx_dd)
+                    for key, value in tx_dd.items():
+                        for n, v, is_cb in value:
+                            if n == prevout_n:
+                                addr = key
+                                self.print_error("wdy 1 find addr=", addr)
+                                break
+                        if addr: # find addr in txo
+                            self.print_error("wdy 2 find addr=", addr)
+                            break
                 # find value from prev output
                 if self.is_mine(addr):
                     dd = self.txo.get(prevout_hash, {})
@@ -1316,11 +1330,13 @@ class Abstract_Wallet(PrintError, SPVDelegate):
             sendable = sum(map(lambda x:x['value'], inputs))
             _type, data, value = outputs[i_max]
             outputs[i_max] = (_type, data, 0)
-            tx = Transaction.from_io(inputs, outputs, sign_schnorr=sign_schnorr)
+            #tx = Transaction.from_io(inputs, outputs, sign_schnorr=sign_schnorr)
+            tx = Transaction.from_io(inputs, outputs)
             fee = fee_estimator(tx.estimated_size())
             amount = max(0, sendable - tx.output_value() - fee)
             outputs[i_max] = (_type, data, amount)
-            tx = Transaction.from_io(inputs, outputs, sign_schnorr=sign_schnorr)
+            #tx = Transaction.from_io(inputs, outputs, sign_schnorr=sign_schnorr)
+            tx = Transaction.from_io(inputs, outputs)
 
         # If user tries to send too big of a fee (more than 50 sat/byte), stop them from shooting themselves in the foot
         tx_in_bytes=tx.estimated_size()
@@ -2371,7 +2387,7 @@ class Simple_Deterministic_Wallet(Simple_Wallet, Deterministic_Wallet):
 
     """ Deterministic Wallet with a single pubkey per address """
 
-    def __init__(self, storage, txin_type='standard'): # replace 'p2pkh' with 'standard'
+    def __init__(self, storage, txin_type='p2pkh'): # replace 'p2pkh' with 'standard'
         Deterministic_Wallet.__init__(self, storage)
         self.txin_type = txin_type
         storage.print_error('wdy self.txin_type={}'.format(self.txin_type))

@@ -49,7 +49,12 @@ class MainNet(AbstractNet):
     GENESIS = "dfc8e3d348da67cf64fef22c927e593860465ada0546fa1719556958b95c7cf6"
     DEFAULT_PORTS = {'t': '60998', 's': '60999'}
     DEFAULT_SERVERS = _read_json_dict('servers.json')  # DO NOT MODIFY IN CLIENT CODE
-    TITLE = 'Electron Cash'
+    #TITLE = 'Electron Cash'
+    TITLE = 'Electron Lava'
+    # block header add 20 bytes
+    HDR_V4_SIZE = 156
+    HDR_V4_HEIGHT = 67584
+    HDR_V4_OLD_LENGTH = HDR_V4_HEIGHT * 136
 
     # Bitcoin Cash fork block specification
     #BITCOIN_CASH_FORK_BLOCK_HEIGHT = 478559
@@ -98,7 +103,11 @@ class TestNet(AbstractNet):
     GENESIS = "54746281650914f19f4b4e80002c4a9b7ab6e2334b25d6e141bc9130ea4ec572"
     DEFAULT_PORTS = {'t':'20998', 's':'20999'}
     DEFAULT_SERVERS = _read_json_dict('servers_testnet.json')  # DO NOT MODIFY IN CLIENT CODE
-    TITLE = 'Electron Cash Testnet'
+    TITLE = 'Electron Lava Testnet'
+    # block header add 20 bytes
+    HDR_V4_SIZE = 156
+    HDR_V4_HEIGHT = 13115
+    HDR_V4_OLD_LENGTH = HDR_V4_HEIGHT * 136
 
     # Bitcoin Cash fork block specification
     #BITCOIN_CASH_FORK_BLOCK_HEIGHT = 1155876
@@ -127,8 +136,8 @@ class TestNet(AbstractNet):
 
 
 # All new code should access this to get the current network config.
-#net = MainNet
-net = TestNet
+net = MainNet
+#net = TestNet
 
 def set_mainnet():
     global net

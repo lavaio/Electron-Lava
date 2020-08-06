@@ -62,17 +62,6 @@ $SUDO docker build -t $IMGNAME \
 # This is the place where we checkout and put the exact revision we want to work
 # on. Docker will run mapping this directory to /homedir/wine64/drive_c/electroncash
 # which inside wine will look like c:\electroncash.
-FRESH_CLONE=`pwd`/contrib/build-wine/fresh_clone
-FRESH_CLONE_DIR="$FRESH_CLONE/$GIT_DIR_NAME"
-
-(
-    $SUDO rm -fr "$FRESH_CLONE" && \
-        mkdir -p "$FRESH_CLONE" && \
-        cd "$FRESH_CLONE"  && \
-        git clone "$GIT_REPO" && \
-        cd "$GIT_DIR_NAME" && \
-        git checkout $REV
-) || fail "Could not create a fresh clone from git"
 
 (
     # NOTE: We propagate forward the GIT_REPO override to the container's env,
@@ -83,7 +72,7 @@ FRESH_CLONE_DIR="$FRESH_CLONE/$GIT_DIR_NAME"
     -e GIT_REPO="$GIT_REPO" \
     -e PYI_SKIP_TAG="$PYI_SKIP_TAG" \
     --name ec-wine-builder-cont \
-    -v "$FRESH_CLONE_DIR":/homedir/wine64/drive_c/electroncash:delegated \
+    -v $PWD:/homedir/wine64/drive_c/electroncash \
     --rm \
     --workdir /homedir/wine64/drive_c/electroncash/contrib/build-wine \
     $IMGNAME \
@@ -94,15 +83,13 @@ popd
 
 info "Copying .exe files out of our build directory ..."
 mkdir -p dist/
-files="$FRESH_CLONE_DIR"/contrib/build-wine/dist/*.exe
+files=contrib/build-wine/dist/*.exe
 for f in $files; do
     bn=`basename "$f"`
     cp -fpv "$f" dist/"$bn" || fail "Failed to copy $bn"
     touch dist/"$bn" || fail "Failed to update timestamp on $bn"
 done
 
-info "Removing $FRESH_CLONE ..."
-$SUDO rm -fr "$FRESH_CLONE"
 
 echo ""
 info "Done. Built .exe files have been placed in dist/"

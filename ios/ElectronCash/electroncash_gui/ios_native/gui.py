@@ -281,7 +281,7 @@ class ElectrumGui(PrintError):
         self.helper = GuiHelper.alloc().init()
 
         self.tabController = MyTabBarController.alloc().init().autorelease()
-        self.tabController.tabBar.tintColor = utils.uicolor_custom('nav')
+        self.tabController.tabBar.tintColor = utils.uicolor_custom('tabar')
         self.tabController.tabBar.setTranslucent_(False)
 
         self.addressesVC = adr = addresses.AddressesVC.alloc().initWithMode_(UITableViewStylePlain, addresses.ModeNormal).autorelease()

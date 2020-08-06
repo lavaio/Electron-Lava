@@ -84,7 +84,8 @@ class ElectrumGui(QObject, PrintError):
         super(__class__, self).__init__() # QObject init
         assert __class__.instance is None, "ElectrumGui is a singleton, yet an instance appears to already exist! FIXME!"
         __class__.instance = self
-        set_language(config.get('language'))
+        #set_language(config.get('language'))
+        set_language('en_US')
 
         self.config = config
         self.daemon = daemon
@@ -134,7 +135,8 @@ class ElectrumGui(QObject, PrintError):
         # init tray
         self.dark_icon = self.config.get("dark_icon", False)
         self.tray = QSystemTrayIcon(self.tray_icon(), self)
-        self.tray.setToolTip('Electron Cash')
+        #self.tray.setToolTip('Electron Cash')
+        self.tray.setToolTip('Electron Lava')
         self.tray.activated.connect(self.tray_activated)
         self.build_tray_menu()
         self.tray.show()
@@ -440,9 +442,9 @@ class ElectrumGui(QObject, PrintError):
             submenu.addAction(_("Close"), window.close)
         m.addAction(_("Dark/Light"), self.toggle_tray_icon)
         m.addSeparator()
-        m.addAction(_("&Check for updates..."), lambda: self.show_update_checker(None))
-        m.addSeparator()
-        m.addAction(_("Exit Electron Cash"), self.close)
+        #m.addAction(_("&Check for updates..."), lambda: self.show_update_checker(None))
+        #m.addSeparator()
+        m.addAction(_("Exit Electron Lava"), self.close)
         self.tray.setContextMenu(m)
 
     def tray_icon(self):
@@ -712,7 +714,7 @@ class ElectrumGui(QObject, PrintError):
 
     def warn_if_no_network(self, parent):
         if not self.daemon.network:
-            self.warning(message=_('You are using Electron Cash in offline mode; restart Electron Cash if you want to get connected'), title=_('Offline'), parent=parent, rich_text=True)
+            self.warning(message=_('You are using Electron Lava in offline mode; restart Electron Lava if you want to get connected'), title=_('Offline'), parent=parent, rich_text=True)
             return True
         return False
 
@@ -830,9 +832,11 @@ class ElectrumGui(QObject, PrintError):
         if self.tray:
             try:
                 # this requires Qt 5.9
-                self.tray.showMessage("Electron Cash", message, QIcon(":icons/electron-cash.svg"), 20000)
+                #self.tray.showMessage("Electron Cash", message, QIcon(":icons/electron-cash.svg"), 20000)
+                self.tray.showMessage("Electron Lava", message, QIcon(":icons/electron-cash.svg"), 20000)
             except TypeError:
-                self.tray.showMessage("Electron Cash", message, QSystemTrayIcon.Information, 20000)
+                #self.tray.showMessage("Electron Cash", message, QSystemTrayIcon.Information, 20000)
+                self.tray.showMessage("Electron Lava", message, QSystemTrayIcon.Information, 20000)
 
     def is_cashaddr(self):
         return bool(self.config.get('show_cashaddr', True))

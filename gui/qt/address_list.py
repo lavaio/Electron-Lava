@@ -300,9 +300,9 @@ class AddressList(MyTreeWidget):
             else:
                 copy_text = item.text(col)
             menu.addAction(_("Copy {}").format(column_title), lambda: doCopy(copy_text))
-            if alt_copy_text and alt_column_title:
+            #if alt_copy_text and alt_column_title:
                 # Add 'Copy Legacy Address' and 'Copy Cash Address' alternates if right-click is on column 0
-                menu.addAction(_("Copy {}").format(alt_column_title), lambda: doCopy(alt_copy_text))
+                #menu.addAction(_("Copy {}").format(alt_column_title), lambda: doCopy(alt_copy_text))
             a = menu.addAction(_('Details') + "...", lambda: self.parent.show_address(addr))
             if col == 0:
                 where_to_insert_dupe_copy_cash_account = a
@@ -361,8 +361,8 @@ class AddressList(MyTreeWidget):
         if not multi_select:
             ca_list = item.data(0, self.DataRoles.cash_accounts)
             menu.addSeparator()
-            a1 = menu.addAction(_("Cash Accounts"), lambda: None)
-            a1.setDisabled(True)
+            #a1 = menu.addAction(_("Cash Accounts"), lambda: None)
+            #a1.setDisabled(True)
             if ca_list:
                 ca_default = self._ca_get_default(ca_list)
                 for ca_info in ca_list:
@@ -382,10 +382,10 @@ class AddressList(MyTreeWidget):
                         a_def.setCheckable(True)
                         a_def.setChecked(True)
                         a_def.setText(_("Is default for address"))
-            else:
-                a1.setText(_("No Cash Accounts"))
-            a_new = menu.addAction(_("Register new..."), lambda x=None, addr=addr: self.parent.register_new_cash_account(addr))
-            a_new.setIcon(__class__._cashacct_icon)
+            #else:
+            #    a1.setText(_("No Cash Accounts"))
+            #a_new = menu.addAction(_("Register new..."), lambda x=None, addr=addr: self.parent.register_new_cash_account(addr))
+            #a_new.setIcon(__class__._cashacct_icon)
 
 
         run_hook('receive_menu', menu, addrs, self.wallet)

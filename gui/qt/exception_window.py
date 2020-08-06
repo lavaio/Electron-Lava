@@ -50,7 +50,7 @@ issue_template = """<h2>Traceback</h2>
 
 <h2>Additional information</h2>
 <ul>
-  <li>Electron Cash version: {app_version}</li>
+  <li>Electron Lava version: {app_version}</li>
   <li>Python version: {python_version}</li>
   <li>Operating system: {os}</li>
   <li>Wallet type: {wallet_type}</li>
@@ -67,14 +67,16 @@ class Exception_Window(QWidget):
         super().__init__(None) # Top-level window. Note PyQt top level windows are kept alive by strong references, hence _active_window
         self.exc_args = (exctype, value, tb)
         self.config = config
-        self.setWindowTitle('Electron Cash - ' + _('An Error Occurred'))
+        #self.setWindowTitle('Electron Cash - ' + _('An Error Occurred'))
+        self.setWindowTitle('Electron Lava - ' + _('An Error Occurred'))
         self.setMinimumSize(600, 300)
 
         main_box = QVBoxLayout()
 
         heading = QLabel('<h2>' + _('Sorry!') + '</h2>')
         main_box.addWidget(heading)
-        main_box.addWidget(QLabel(_('Something went wrong running Electron Cash.')))
+        #main_box.addWidget(QLabel(_('Something went wrong running Electron Cash.')))
+        main_box.addWidget(QLabel(_('Something went wrong running Electron Lava.')))
 
         main_box.addWidget(QLabel(
             _('To help us diagnose and fix the problem, you can send us a bug report that contains useful debug '

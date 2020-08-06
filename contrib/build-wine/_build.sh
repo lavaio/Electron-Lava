@@ -197,7 +197,7 @@ prepare_wine() {
 
         info "Upgrading pip ..."
         # upgrade pip
-        $PYTHON -m pip install pip --upgrade
+        #$PYTHON -m pip install pip --upgrade
 
         # The below requirements-wine-build.txt uses hashed packages that we
         # need for pyinstaller and other parts of the build.  Using a hashed

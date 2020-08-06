@@ -78,7 +78,7 @@ HEADER_SIZE = 136 # bytes
 MAX_BITS = 0x1d00ffff
 MAX_TARGET = bits_to_target(MAX_BITS)
 # indicates no header in data file
-NULL_HEADER = bytes([0]) * HEADER_SIZE
+#NULL_HEADER = bytes([0]) * HEADER_SIZE
 NULL_HASH_BYTES = bytes([0]) * 32
 NULL_HASH_HEX = NULL_HASH_BYTES.hex()
 
@@ -100,7 +100,11 @@ def deserialize_header(s, height):
     h['timestamp'] = int.from_bytes(s[68:72], 'little')
     h['bits'] = int.from_bytes(s[72:76], 'little')
     h['nonce'] = int.from_bytes(s[76:80], 'little')
-    h['extra'] = hash_encode(s[80:136])
+    #h['extra'] = hash_encode(s[80:136])
+    if height >= networks.net.HDR_V4_HEIGHT:
+        h['extra'] = hash_encode(s[80:156])
+    else:
+        h['extra'] = hash_encode(s[80:136])
     h['block_height'] = height
     return h
 
@@ -144,10 +148,10 @@ def can_connect(header):
             return b
     return False
 
-def verify_proven_chunk(chunk_base_height, chunk_data):
-    chunk = HeaderChunk(chunk_base_height, chunk_data)
+def verify_proven_chunk(chunk_base_height, chunk_data, header_count):
+    chunk = HeaderChunk(chunk_base_height, chunk_data, header_count)
 
-    header_count = len(chunk_data) // HEADER_SIZE
+    #header_count = len(chunk_data) // HEADER_SIZE
     prev_header = None
     prev_header_hash = None
     for i in range(header_count):
@@ -172,13 +176,38 @@ def root_from_proof(hash, branch, index):
         raise ValueError('index out of range for branch')
     return hash
 
+def get_header_offset(height):
+    if (height < networks.net.HDR_V4_HEIGHT):
+        offset = height * HEADER_SIZE
+    else: 
+        offset = networks.net.HDR_V4_OLD_LENGTH + (height-networks.net.HDR_V4_HEIGHT)*networks.net.HDR_V4_SIZE
+    return offset
+
+def get_delta_bytes(high, low):
+    delta_bytes = get_header_offset(high) - get_header_offset(low)
+    return delta_bytes
+
 class HeaderChunk:
-    def __init__(self, base_height, data):
+    def __init__(self, base_height, data, header_count):
         self.base_height = base_height
-        self.header_count = len(data) // HEADER_SIZE
-        self.headers = [deserialize_header(data[i * HEADER_SIZE : (i + 1) * HEADER_SIZE],
-                                           base_height + i)
-                        for i in range(self.header_count)]
+        #self.header_count = len(data) // HEADER_SIZE
+        #self.headers = [deserialize_header(data[i * HEADER_SIZE : (i + 1) * HEADER_SIZE],
+        #                                   base_height + i)
+        #                for i in range(self.header_count)]
+        self.header_count = header_count
+        old_num = 0
+        self.headers = []
+        for i in range(header_count):
+            height = base_height + i
+            if height < networks.net.HDR_V4_HEIGHT:
+                raw_header = data[i*HEADER_SIZE : (i+1)*HEADER_SIZE]
+                old_num = old_num + 1
+            else:
+                start_idx = old_num*HEADER_SIZE + (i-old_num)*networks.net.HDR_V4_SIZE
+                end_idx = old_num*HEADER_SIZE + (i-old_num+1)*networks.net.HDR_V4_SIZE
+                raw_header = data[start_idx : end_idx]
+            header = deserialize_header(raw_header, height)
+            self.headers.append(header)
 
     def __repr__(self):
         return "HeaderChunk(base_height={}, header_count={})".format(self.base_height, self.header_count)
@@ -255,7 +284,15 @@ class Blockchain(util.PrintError):
 
     def update_size(self):
         p = self.path()
-        self._size = os.path.getsize(p)//HEADER_SIZE if os.path.exists(p) else 0
+        #self._size = os.path.getsize(p)//HEADER_SIZE if os.path.exists(p) else 0
+        if os.path.exists(p):
+            size = os.path.getsize(p)
+            if size <= networks.net.HDR_V4_OLD_LENGTH:
+                self._size = size//HEADER_SIZE
+            else:
+                self._size = networks.net.HDR_V4_HEIGHT + (size-networks.net.HDR_V4_OLD_LENGTH)//networks.net.HDR_V4_SIZE
+        else:
+            self._size = 0
 
     def verify_header(self, header, prev_header, bits=None):
         prev_header_hash = hash_header(prev_header)
@@ -275,14 +312,15 @@ class Blockchain(util.PrintError):
             #if int('0x' + this_header_hash, 16) > target:
             #    raise VerifyError("insufficient proof of work: %s vs target %s" % (int('0x' + this_header_hash, 16), target))
 
-    def verify_chunk(self, chunk_base_height, chunk_data):
-        chunk = HeaderChunk(chunk_base_height, chunk_data)
+    def verify_chunk(self, chunk_base_height, chunk_data, expected_header_count=0):
+        chunk = HeaderChunk(chunk_base_height, chunk_data, expected_header_count)
 
         prev_header = None
         if chunk_base_height != 0:
             prev_header = self.read_header(chunk_base_height - 1)
 
-        header_count = len(chunk_data) // HEADER_SIZE
+        #header_count = len(chunk_data) // HEADER_SIZE
+        header_count = expected_header_count
         for i in range(header_count):
             header = chunk.get_header_at_index(i)
             # Check the chain of hashes and the difficulty.
@@ -296,15 +334,17 @@ class Blockchain(util.PrintError):
         filename = 'blockchain_headers' if self.parent_base_height is None else os.path.join('forks', 'fork_%d_%d'%(self.parent_base_height, self.base_height))
         return os.path.join(d, filename)
 
-    def save_chunk(self, base_height, chunk_data):
-        chunk_offset = (base_height - self.base_height) * HEADER_SIZE
+    def save_chunk(self, base_height, chunk_data, expected_header_count):
+        #chunk_offset = (base_height - self.base_height) * HEADER_SIZE
+        chunk_offset = get_delta_bytes(base_height, self.base_height)
         self.print_error('wdy chunk_offset={} len={}'.format(chunk_offset, len(chunk_data)))
         if chunk_offset < 0:
             chunk_data = chunk_data[-chunk_offset:]
             chunk_offset = 0
         # Headers at and before the verification checkpoint are sparsely filled.
         # Those should be overwritten and should not truncate the chain.
-        top_height = base_height + (len(chunk_data) // HEADER_SIZE) - 1
+        #top_height = base_height + (len(chunk_data) // HEADER_SIZE) - 1
+        top_height = base_height + expected_header_count - 1
         truncate = top_height > networks.net.VERIFICATION_BLOCK_HEIGHT
         self.write(chunk_data, chunk_offset, truncate)
         self.swap_with_parent()
@@ -312,27 +352,38 @@ class Blockchain(util.PrintError):
     def swap_with_parent(self):
         if self.parent_base_height is None:
             return
-        parent_branch_size = self.parent().height() - self.base_height + 1
-        if parent_branch_size >= self.size():
+        #parent_branch_size = self.parent().height() - self.base_height + 1
+        #if parent_branch_size >= self.size():
+        #    return
+        # change from height delta to bytes delta
+        parent_branch_size = get_delta_bytes(self.parent().height(), self.base_height - 1)
+        if parent_branch_size >= self.get_header_byte_size():
             return
+        branch_height_delta = self.parent().height() - self.base_height + 1
+        
         self.print_error("swap", self.base_height, self.parent_base_height)
         parent_base_height = self.parent_base_height
         base_height = self.base_height
         parent = self.parent()
         with open(self.path(), 'rb') as f:
             my_data = f.read()
+        #with open(parent.path(), 'rb') as f:
+        #    f.seek((base_height - parent.base_height)*HEADER_SIZE)
+        #    parent_data = f.read(parent_branch_size*HEADER_SIZE)
         with open(parent.path(), 'rb') as f:
-            f.seek((base_height - parent.base_height)*HEADER_SIZE)
-            parent_data = f.read(parent_branch_size*HEADER_SIZE)
+            f.seek(get_delta_bytes(base_height, parent.base_height))
+            parent_data = f.read(parent_branch_size)
         self.write(parent_data, 0)
-        parent.write(my_data, (base_height - parent.base_height)*HEADER_SIZE)
+        #parent.write(my_data, (base_height - parent.base_height)*HEADER_SIZE)
+        parent.write(my_data, get_delta_bytes(base_height, parent.base_height))
         # store file path
         for b in blockchains.values():
             b.old_path = b.path()
         # swap parameters
         self.parent_base_height = parent.parent_base_height; parent.parent_base_height = parent_base_height
         self.base_height = parent.base_height; parent.base_height = base_height
-        self._size = parent._size; parent._size = parent_branch_size
+        #self._size = parent._size; parent._size = parent_branch_size
+        self._size = parent._size; parent._size = branch_height_delta
         # move files
         for b in blockchains.values():
             if b in [self, parent]: continue
@@ -343,11 +394,18 @@ class Blockchain(util.PrintError):
         blockchains[self.base_height] = self
         blockchains[parent.base_height] = parent
 
+    def get_header_byte_size(self):
+        filename = self.path()
+        file_size = os.path.getsize(filename)
+        return file_size
+    
     def write(self, data, offset, truncate=True):
         filename = self.path()
+        file_size = os.path.getsize(filename)
         with self.lock:
             with open(filename, 'rb+') as f:
-                if truncate and offset != self._size*HEADER_SIZE:
+                #if truncate and offset != self._size*HEADER_SIZE:
+                if truncate and offset != file_size:
                     f.seek(offset)
                     f.truncate()
                 f.seek(offset)
@@ -356,12 +414,20 @@ class Blockchain(util.PrintError):
                 os.fsync(f.fileno())
             self.update_size()
 
-    def save_header(self, header):
+    def save_header_old(self, header):
         delta = header.get('block_height') - self.base_height
         data = bfh(serialize_header(header))
         assert delta == self.size()
         assert len(data) == HEADER_SIZE
         self.write(data, delta*HEADER_SIZE)
+        self.swap_with_parent()
+
+    def save_header(self, header):
+        delta = header.get('block_height') - self.base_height
+        data = bfh(serialize_header(header))
+        assert delta == self.size()
+        assert (len(data) == HEADER_SIZE) or (len(data) == networks.net.HDR_V4_SIZE)
+        self.write(data, get_delta_bytes(header.get('block_height'), self.base_height))
         self.swap_with_parent()
 
     def read_header(self, height, chunk=None):
@@ -378,12 +444,25 @@ class Blockchain(util.PrintError):
             return
         delta = height - self.base_height
         name = self.path()
+        #if os.path.exists(name):
+        #    with open(name, 'rb') as f:
+        #        f.seek(delta * HEADER_SIZE)
+        #        h = f.read(HEADER_SIZE)
+        #    # Is it a pre-checkpoint header that has never been requested?
+        #    if h == NULL_HEADER:
+        #        return None
+        delta_bytes = get_delta_bytes(height, self.base_height)
+        if height >= networks.net.HDR_V4_HEIGHT:
+            hd_size = networks.net.HDR_V4_SIZE
+        else:
+            hd_size = HEADER_SIZE
         if os.path.exists(name):
             with open(name, 'rb') as f:
-                f.seek(delta * HEADER_SIZE)
-                h = f.read(HEADER_SIZE)
-            # Is it a pre-checkpoint header that has never been requested?
-            if h == NULL_HEADER:
+                f.seek(delta_bytes)
+                h = f.read(hd_size)
+                if len(h) < hd_size:
+                    raise Exception('Expected to read a full header. This was only {} bytes'.format(len(h)))
+            if h == bytes([0])*hd_size:
                 return None
             return deserialize_header(h, height)
 
@@ -542,10 +621,11 @@ class Blockchain(util.PrintError):
             return False
         return True
 
-    def connect_chunk(self, base_height, hexdata, proof_was_provided=False):
-        chunk = HeaderChunk(base_height, hexdata)
+    def connect_chunk(self, base_height, hexdata, proof_was_provided=False, expected_header_count=0):
+        chunk = HeaderChunk(base_height, hexdata, expected_header_count)
 
-        header_count = len(hexdata) // HEADER_SIZE
+        #header_count = len(hexdata) // HEADER_SIZE
+        header_count = expected_header_count
         top_height = base_height + header_count - 1
         # We know that chunks before the checkpoint height, end at the checkpoint height, and
         # will be guaranteed to be covered by the checkpointing. If no proof is provided then
@@ -594,8 +674,8 @@ class Blockchain(util.PrintError):
 
         try:
             if not proof_was_provided:
-                self.verify_chunk(base_height, hexdata)
-            self.save_chunk(base_height, hexdata)
+                self.verify_chunk(base_height, hexdata, expected_header_count)
+            self.save_chunk(base_height, hexdata, expected_header_count)
             return CHUNK_ACCEPTED
         except VerifyError as e:
             self.print_error('verify_chunk failed: {}'.format(e))

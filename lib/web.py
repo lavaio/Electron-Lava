@@ -36,27 +36,18 @@ from . import cashacct
 from .i18n import _
 
 
-DEFAULT_EXPLORER = "Blockchair.com"
+DEFAULT_EXPLORER = "lavatech.org"
 
 mainnet_block_explorers = {
-    'Bitcoin.com': ('https://explorer.bitcoin.com/bch',
-                    Address.FMT_CASHADDR,
+    'lavatech.org': ('http://explorer.lavatech.org/',
+                    Address.FMT_LEGACY,
                     {'tx': 'tx', 'addr': 'address', 'block' : 'block'}),
-    'Blockchair.com': ('https://blockchair.com/bitcoin-cash',
-                       Address.FMT_CASHADDR,
-                       {'tx': 'transaction', 'addr': 'address', 'block' : 'block'}),
-    'BTC.com': ('https://bch.btc.com',
-                       Address.FMT_CASHADDR,
-                       {'tx': '', 'addr': '', 'block' : 'block'}),
-    'ViaBTC.com': ('https://www.viabtc.com/bch',
-                   Address.FMT_CASHADDR,
-                   {'tx': 'tx', 'addr': 'address', 'block' : 'block'}),
 }
 
-DEFAULT_EXPLORER_TESTNET = 'Bitcoin.com'
+DEFAULT_EXPLORER_TESTNET = 'lavatech.org'
 
 testnet_block_explorers = {
-    'Bitcoin.com'   : ('https://explorer.bitcoin.com/tbch',
+    'lavatech.org'   : ('http://testnet-explorer.lavatech.org/',
                        Address.FMT_LEGACY,  # For some reason testnet expects legacy and fails on bchtest: addresses.
                        {'tx': 'tx', 'addr': 'address', 'block' : 'block'}),
 }
