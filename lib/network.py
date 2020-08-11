@@ -239,7 +239,7 @@ class Network(util.DaemonThread):
             self.verifications_required = 3
         self.checkpoint_servers_verified = {}
         self.checkpoint_height = networks.net.VERIFICATION_BLOCK_HEIGHT
-        self.debug = True
+        self.debug = False
         self.irc_servers = {} # returned by interface (list from irc)
         self.recent_servers = self.read_recent_servers()
 
@@ -1075,8 +1075,6 @@ class Network(util.DaemonThread):
 
     def on_block_headers(self, interface, request, response):
         '''Handle receiving a chunk of block headers'''
-        interface.print_error('request: {}'.format(request))
-        interface.print_error('response: {}'.format(response))
         error = response.get('error')
         result = response.get('result')
         params = response.get('params')

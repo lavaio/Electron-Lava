@@ -469,7 +469,6 @@ class Abstract_Wallet(PrintError, SPVDelegate):
         ''' Note this method assumes that the entire address set is
         composed of self.get_change_addresses() + self.get_receiving_addresses().
         In subclasses, if that is not the case -- REIMPLEMENT this method! '''
-        self.print_error('wdy type={}'.format(type(address)))
         assert not isinstance(address, str)
         # assumption here is get_receiving_addresses and get_change_addresses
         # are cheap constant-time operations returning a list reference.
@@ -944,7 +943,6 @@ class Abstract_Wallet(PrintError, SPVDelegate):
             # bad tx came in off the wire -- all 0's or something, see #987
             self.print_error("add_transaction: WARNING a tx came in from the network with 0 inputs! Bad server? Ignoring tx:", tx_hash)
             return
-        self.print_error("wdy tx inputs=", tx.inputs())
         is_coinbase = tx.inputs()[0]['type'] == 'coinbase'
         with self.lock:
             # add inputs
@@ -987,7 +985,6 @@ class Abstract_Wallet(PrintError, SPVDelegate):
             self.txo[tx_hash] = d = {}
             op_return_ct = 0
             deferred_cashacct_add = None
-            self.print_error("wdy outputs=", tx.outputs())
             for n, txo in enumerate(tx.outputs()):
                 ser = tx_hash + ':%d'%n
                 _type, addr, v = txo

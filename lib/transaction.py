@@ -485,8 +485,6 @@ def parse_witness(vds, txin, full_parse: bool):
     if not full_parse:
         return
 
-    print_error("wdy type ", txin['type'])
-
     try:
         if txin.get('witness_version', 0) != 0:
             raise UnknownTxinType()
@@ -522,6 +520,8 @@ def parse_witness(vds, txin, full_parse: bool):
     except UnknownTxinType:
         txin['type'] = 'unknown'
     except BaseException as ex:
+        import traceback
+        traceback.print_exc()
         txin['type'] = 'unknown'
         print_error("failed to parse witness ", txin.get('witness'), ex, txin['type'])
 
@@ -537,6 +537,77 @@ def parse_output(vds, i):
     d['scriptPubKey'] = bh2u(scriptPubKey)
     d['prevout_n'] = i
     return d
+
+TX_VERSION_CA = 3
+OUTPOINT_INDEX_MASK = 0x7fffffff
+OUTPOINT_ISSUANCE_FLAG = (1 << 31)
+
+
+def parse_ca_proof_field(vds):
+    read_varint = vds.read_compact_size
+    read_nbytes = vds.read_bytes
+    proof1, proof2 = read_nbytes(read_varint()), read_nbytes(read_varint())
+    return [proof1, proof2]
+
+
+def parse_ca_proof(vds, infields, outfields):
+    return [parse_ca_proof_field(vds) for i in range(infields)], [parse_ca_proof_field(vds) for i in range(outfields)]
+
+
+def parse_confidential_commitment(vds, explicit_size=33):
+    prefixes = 2, 3, 8, 9, 10, 11
+    version = vds.read_bytes(1)[0]
+    if version in prefixes:
+        return vds.read_bytes(32)
+    if version == 1:
+        return vds.read_bytes(explicit_size - 1)
+    return None
+
+
+def parse_issuance(vds):
+    asset_blinding_nonce = vds.read_bytes(32)
+    asset_entropy = vds.read_bytes(32)
+    asset_amount = parse_confidential_commitment(vds, 9)
+    inflation_keys = parse_confidential_commitment(vds, 9)
+    return asset_blinding_nonce, asset_entropy, asset_amount, inflation_keys
+
+
+def parse_input_ca(vds, full_parse: bool):
+    d = {}
+
+    prevout_hash = hash_encode(vds.read_bytes(32))
+    prevout_n = vds.read_int32()
+    with_issuance = (prevout_n != -1) and (prevout_n & OUTPOINT_ISSUANCE_FLAG)
+    prevout_n = prevout_n & OUTPOINT_INDEX_MASK
+    scriptSig = vds.read_bytes(vds.read_compact_size())
+    sequence = vds.read_uint32()
+    d['prevout_hash'] = prevout_hash
+    d['prevout_n'] = prevout_n
+    d['scriptSig'] = bh2u(scriptSig)
+    d['sequence'] = sequence
+    d['type'] = 'unknown' if prevout_hash != '00'*32 else 'coinbase'
+    d['address'] = None
+    d['num_sig'] = 0
+    if with_issuance:
+        issuance = parse_issuance(vds)
+    return d
+
+
+def parse_output_ca(vds, idx):
+    d = {}
+    d['value'] = vds.read_int64()
+    scriptPubKey = vds.read_bytes(vds.read_compact_size())
+    d['type'], d['address'] = get_address_from_output_script(scriptPubKey)
+    d['scriptPubKey'] = bh2u(scriptPubKey)
+    d['prevout_n'] = idx
+    flag = vds.read_bytes(1)[0]
+    if flag == 1:
+        asset = parse_confidential_commitment(vds)
+        value_ca = parse_confidential_commitment(vds, 9)
+        nonce = parse_confidential_commitment(vds)
+
+    return d
+
 
 def deserialize(raw: str, force_full_parse=False) -> dict:
     raw_bytes = bfh(raw)
@@ -557,18 +628,25 @@ def deserialize(raw: str, force_full_parse=False) -> dict:
     n_vin = vds.read_compact_size()
     is_segwit = (n_vin == 0)
     if is_segwit:
-        marker = vds.read_bytes(1)
-        if marker != b'\x01':
+        marker = vds.read_bytes(1)[0]
+        if marker > 3:
             raise ValueError('invalid txn marker byte: {}'.format(marker))
+        d['marker'] = marker
         n_vin = vds.read_compact_size()
     d['segwit_ser'] = is_segwit
-    d['inputs'] = [parse_input(vds, full_parse=full_parse) for i in range(n_vin)]
+    
+    parse_input_ = parse_input_ca if d['version'] == TX_VERSION_CA else parse_input
+    parse_output_ = parse_output_ca if d['version'] == TX_VERSION_CA else parse_output
+
+    d['inputs'] = [parse_input_(vds, full_parse=full_parse) for i in range(n_vin)]
     n_vout = vds.read_compact_size()
-    d['outputs'] = [parse_output(vds, i) for i in range(n_vout)]
+    d['outputs'] = [parse_output_(vds, i) for i in range(n_vout)]
     if is_segwit:
         for i in range(n_vin):
             txin = d['inputs'][i]
             parse_witness(vds, txin, full_parse=full_parse)
+    if d['version'] == TX_VERSION_CA and d['marker'] & 0x02:
+        parse_ca_proof(vds, len(d['inputs']), len(d['outputs']))
     d['lockTime'] = vds.read_uint32()
     if vds.can_read_more():
         raise SerializationError('extra junk at the end')
