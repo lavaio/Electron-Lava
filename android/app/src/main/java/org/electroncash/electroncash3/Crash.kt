@@ -34,7 +34,7 @@ class CrashhubDialog : CrashReportDialog() {
                 }
             }
             setText(String.format(
-                DIALOG_TEMPLATE, getString (R.string.something_went), getString(R.string.to_help),
+                DIALOG_TEMPLATE, getString (R.string.something_went_wrong_running_electron_lava), getString(R.string.to_help),
                 json.getJSONObject("id").getString("type"), json.getString("exc_string"),
                 json.getString("stack"), appInfo.joinToString("\n")))
         }

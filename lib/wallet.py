@@ -2386,7 +2386,7 @@ class Simple_Deterministic_Wallet(Simple_Wallet, Deterministic_Wallet):
 
     def __init__(self, storage, txin_type='p2pkh'): # replace 'p2pkh' with 'standard'
         Deterministic_Wallet.__init__(self, storage)
-        self.txin_type = txin_type
+        self.load_keystore()
         storage.print_error('wdy self.txin_type={}'.format(self.txin_type))
 
     def get_public_key(self, address):
