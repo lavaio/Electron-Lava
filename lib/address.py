@@ -29,8 +29,8 @@ import struct
 
 from . import cashaddr, networks
 from enum import IntEnum
-from .bitcoin import EC_KEY, is_minikey, minikey_to_private_key, SCRIPT_TYPES
-from .util import cachedproperty, inv_dict
+from .bitcoin import EC_KEY, is_minikey, minikey_to_private_key, SCRIPT_TYPES, hash_160
+from .util import cachedproperty, inv_dict, bfh, bh2u
 
 _sha256 = hashlib.sha256
 _new_hash = hashlib.new
@@ -751,7 +751,7 @@ class Address(namedtuple("AddressTuple", "hash160 kind")):
             return cls(hash160(pubkey_byte), cls.ADDR_P2WPKH, witver=0)
         elif txin_type == 'p2wpkh-p2sh':
             scriptSig = p2wpkh_nested_script(pubkey)
-            return cls(hash_160(bfh(scriptSig)), cls.ADDRTYPE_P2SH)
+            return cls(hash_160(bfh(scriptSig)), cls.ADDR_P2SH)
         else:
             raise AddressError('unknown type : {}'.format(txin_type))
 
@@ -775,6 +775,16 @@ class Address(namedtuple("AddressTuple", "hash160 kind")):
         '''Construct from a P2WSH hash160.'''
         return cls(hash160, cls.ADDR_P2WSH, witver)
 
+    def to_cltv(self, locktime):
+        assert self.kind in (Address.ADDR_P2PKH, Address.ADDR_P2WPKH)
+        redeem_script = Script.cltv_script(locktime, self.hash160)
+        hash160 = hash_160(redeem_script)
+        address = Address(hash160, Address.ADDR_P2SH)
+        setattr(address, 'orignal', self)
+        setattr(address, 'redeem_script', bh2u(redeem_script))
+        setattr(address, 'locktime', locktime)
+        return address
+        
     @classmethod
     def from_multisig_script(cls, script):
         return cls(hash160(script), cls.ADDR_P2SH)
@@ -957,6 +967,12 @@ class Script:
         return (bytes([OpCodes.OP_1 + m - 1])
                 + b''.join(cls.push_data(pubkey) for pubkey in pubkeys)
                 + bytes([OpCodes.OP_1 + n - 1, OpCodes.OP_CHECKMULTISIG]))
+
+    @classmethod
+    def cltv_script(cls, locktime, hash160):
+        '''Return the script for CLTV transaction'''
+        assert len(hash160) == 20
+        return cls.push_data(cls.script_num_to_hex(locktime)) + P2PKH_prefix + hash160 + P2PKH_suffix
 
     @classmethod
     def push_data_bch(cls, data):

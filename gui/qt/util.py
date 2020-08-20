@@ -49,6 +49,19 @@ expiration_values = [
     (_('Never'), None)
 ]
 
+# fixed 30 * 24 * 60 / 4 blocks per month
+locktime_values = [
+    (_('1 month'), 1 * 30 * 24 * 60 / 4),
+    (_('3 months'), 3 * 30 * 24 * 60 / 4),
+    (_('5 months'), 5 * 30 * 24 * 60 / 4),
+    (_('6 months'), 6 * 30 * 24 * 60 / 4),
+    (_('12 months'), 12 * 30 * 24 * 60 / 4),
+    (_('18 months'), 18 * 30 * 24 * 60 / 4),
+    (_('2 years'), 2 * 12 * 30 * 24 * 60 / 4),
+    (_('3 years'), 3 * 12 * 30 * 24 * 60 / 4),
+    (_('5 years'), 5 * 12 * 30 * 24 * 60 / 4),
+]
+
 del _
 from electroncash.i18n import _
 

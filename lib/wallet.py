@@ -1206,7 +1206,7 @@ class Abstract_Wallet(PrintError, SPVDelegate):
 
     def get_label(self, tx_hash):
         label = self.labels.get(tx_hash, '')
-        if label is '':
+        if label == '':
             label = self.get_default_label(tx_hash)
         return label
 

@@ -53,9 +53,10 @@ else:
     # On Linux & macOS it looks fine so we go with the more fancy unicode
     SCHNORR_SIGIL = "ⓢ"
 
-def show_transaction(tx, parent, desc=None, prompt_if_unsaved=False):
-    d = TxDialog(tx, parent, desc, prompt_if_unsaved)
+def show_transaction(tx, parent, desc=None, prompt_if_unsaved=False, show_model=False):
+    d = TxDialog(tx, parent, desc, prompt_if_unsaved, not show_model)
     dialogs.append(d)
+    d.setModal(show_model)
     d.show()
     return d
 
@@ -66,7 +67,7 @@ class TxDialog(QDialog, MessageBoxMixin, PrintError):
 
     BROADCAST_COOLDOWN_SECS = 5.0
 
-    def __init__(self, tx, parent, desc, prompt_if_unsaved):
+    def __init__(self, tx, parent, desc, prompt_if_unsaved, is_send_action=True):
         '''Transactions in the wallet will show their description.
         Pass desc to give a description for txs not yet in the wallet.
         '''
@@ -88,6 +89,7 @@ class TxDialog(QDialog, MessageBoxMixin, PrintError):
         self.tx_hash = self.tx.txid_fast() if self.tx.raw and self.tx.is_complete() else None
         self.tx_height = self.wallet.get_tx_height(self.tx_hash)[0] or None
         self.block_hash = None
+        self.is_send_action = is_send_action
         Weak.finalization_print_error(self)  # track object lifecycle
 
         self.setMinimumWidth(750)
@@ -148,6 +150,7 @@ class TxDialog(QDialog, MessageBoxMixin, PrintError):
         self.last_broadcast_time = 0
 
         self.save_button = b = QPushButton(_("S&ave"))
+        b.setEnabled(self.is_send_action)
         b.clicked.connect(self.save)
 
         self.cancel_button = b = CloseButton(self)
@@ -317,6 +320,7 @@ class TxDialog(QDialog, MessageBoxMixin, PrintError):
         def sign_done(success):
             if success:
                 self.sign_button.setDisabled(True)
+                self.save_button.setEnabled(True)
                 self.prompt_if_unsaved = True
                 self.saved = False
             self.update()
@@ -330,10 +334,24 @@ class TxDialog(QDialog, MessageBoxMixin, PrintError):
         fileName = self.main_window.getSaveFileName(_("Select where to save your signed transaction"), name, "*.txn")
         if fileName:
             tx_dict = self.tx.as_dict()
+            lock_dict = {}
+            tx_dict['lock'] = lock_dict
+            lock_dict['txid'] = self.tx.txid()
+            if not self.is_send_action:
+                for typ, addr, v in self.tx.outputs():
+                    locktime = getattr(addr, 'locktime', None)
+                    if locktime:
+                        lock_dict['height'] = locktime
+                        redeem_script = getattr(addr, 'redeem_script', '')
+                        lock_dict['redeem_script'] = redeem_script
+                        lock_dict['address'] = addr.to_ui_string()
+                        addr = getattr(addr, 'orignal', addr)
+                        lock_dict['dest'] = addr.to_ui_string()
             with open(fileName, "w+", encoding='utf-8') as f:
                 f.write(json.dumps(tx_dict, indent=4) + '\n')
             self.show_message(_("Transaction saved successfully"))
             self.saved = True
+            self.update()
 
     @rate_limited(0.5, ts_after=True)
     def throttled_update(self):
@@ -374,7 +392,7 @@ class TxDialog(QDialog, MessageBoxMixin, PrintError):
         #    the "Broadcast" button for a time after a successful broadcast.
         #    This prevents the user from being able to spam the broadcast
         #    button. See #1483.
-        self.broadcast_button.setEnabled(can_broadcast
+        self.broadcast_button.setEnabled(can_broadcast and (self.saved or self.is_send_action)
                                          and time.time() - self.last_broadcast_time
                                                 >= self.BROADCAST_COOLDOWN_SECS)
 
@@ -612,6 +630,7 @@ class TxDialog(QDialog, MessageBoxMixin, PrintError):
         for i, tup in enumerate(self.tx.outputs()):
             my_addr_in_script = None
             typ, addr, v = tup
+            locktime = getattr(addr, 'locktime', None)
             for fmt in (ext, rec, chg, lnk):
                 fmt.setAnchorNames([f"output {i}"])  # anchor name for this line (remember input#); used by context menu creation
             # CashAccounts support
@@ -661,6 +680,15 @@ class TxDialog(QDialog, MessageBoxMixin, PrintError):
                 # insert enough spaces until column 43, to line up amounts
                 cursor.insertText(' '*(43 - len(addrstr)), ext)
                 cursor.insertText(format_amount(v), ext)
+            if locktime:
+                cursor.insertBlock()
+                addr = getattr(addr, 'orignal', addr)
+                addrstr = '  \u21b3 '
+                cursor.insertText(addrstr, ext)
+                addrstr = addr.to_ui_string()
+                cursor.insertText(addrstr, text_format(addr))
+                addrstr = ' '*(43 - len(addrstr)) + f" LockHeight = {locktime}"
+                cursor.insertText(addrstr, ext)
             cursor.insertBlock()
             # /Mark B. Lundeberg's patented output formatting logic™
 

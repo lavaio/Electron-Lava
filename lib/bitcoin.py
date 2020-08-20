@@ -575,7 +575,7 @@ def verify_message(address, sig, message, *, net=None):
     # check public key using the right address
     pubkey = point_to_ser(public_key.pubkey.point, compressed)
     addr = Address.from_pubkey(pubkey)
-    if address != addr:
+    if address.hash160 != addr.hash160:
         return False
     # check message
     try:

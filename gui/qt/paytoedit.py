@@ -54,12 +54,13 @@ normal_style = "PayToEdit { }"
 
 class PayToEdit(PrintError, ScanQRTextEdit):
 
-    def __init__(self, win):
+    def __init__(self, win, isLock = False):
         from .main_window import ElectrumWindow
         assert isinstance(win, ElectrumWindow) and win.amount_e and win.wallet
         ScanQRTextEdit.__init__(self)
         self.win = win
-        self.amount_edit = win.amount_e
+        self.isLock = isLock
+        self.amount_edit = win.amount_e if not isLock else win.Lamount_e
         document = self.document()
         document.contentsChanged.connect(self.update_size)
 
@@ -173,7 +174,7 @@ class PayToEdit(PrintError, ScanQRTextEdit):
                 except:
                     pass
             if self.payto_address or self.cointext:
-                self.win.lock_amount(False)
+                self.win.lock_amount(False, self.isLock)
                 return
 
         is_max = False
@@ -190,15 +191,16 @@ class PayToEdit(PrintError, ScanQRTextEdit):
             else:
                 total += amount
 
-        self.win.max_button.setChecked(is_max)
+        max_button = self.win.max_button if not self.isLock else self.win.Lmax_button
+        max_button.setChecked(is_max)
         self.outputs = outputs
         self.payto_address = None
 
-        if self.win.max_button.isChecked():
+        if max_button.isChecked():
             self.win.do_update_fee()
         else:
             self.amount_edit.setAmount(total if outputs else None)
-            self.win.lock_amount(total or len(lines)>1)
+            self.win.lock_amount(total or len(lines)>1, self.isLock)
 
     def get_errors(self):
         return self.errors
