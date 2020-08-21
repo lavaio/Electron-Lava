@@ -683,6 +683,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         raw_transaction_menu.addAction(_("From the &blockchain") + "...", self.do_process_from_txid, QKeySequence("Ctrl+B"))
         raw_transaction_menu.addAction(_("From &QR code") + "...", self.read_tx_from_qrcode)
         self.raw_transaction_menu = raw_transaction_menu
+
+        tools_menu.addAction(_("Load lock transaction") + "...", self.do_process_from_lock_txn)
         #tools_menu.addSeparator()
         #if ColorScheme.dark_scheme and sys.platform != 'darwin':  # use dark icon in menu except for on macOS where we can't be sure it will look right due to the way menus work on macOS
         #    icon = QIcon(":icons/cashacct-button-darkmode.png")
@@ -1702,13 +1704,10 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
               _("You may enter:"
                 "<ul>"
                 "<li> Lava <b>Address</b> <b>★</b>"
-                "<li> <b>CoinText</b> e.g. <i>cointext:+1234567</i>"
                 "</ul><br>"
-                "&nbsp;&nbsp;&nbsp;<b>★</b> = Supports <b>pay-to-many</b>, where"
-                " you may optionally enter multiple lines of the form:"
+                "&nbsp;&nbsp;&nbsp;<b>★</b> = Supports <b>p2pkh and p2wpkh</b>"
                 "</span><br><pre>"
-                "    recipient1, amount1 \n"
-                "    recipient2, amount2 \n"
+                "    bc1qzs82zqh4qx5nm9mn90tc7fcxlns2nn9fyjm628 \n"
                 "    etc..."
                 "</pre>")
         self.Lpayto_label = payto_label = HelpLabel(_('Lock &to'), msg)
@@ -1732,8 +1731,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         description_label.setBuddy(self.Lmessage_e)
         grid.addWidget(self.Lmessage_e, 2, 1, 1, -1)
 
-        msg = _('locktime')
-        self.locktime_label = HelpLabel(_('Locktime'), msg)
+        self.locktime_label = QLabel(_('Locktime'))
         grid.addWidget(self.locktime_label,  3, 0)
         self.locktime_combo = QComboBox()
         self.locktime_combo.addItems([_(i[0]) for i in locktime_values])
@@ -1807,7 +1805,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         grid.addWidget(self.Lfee_custom_lbl, 6, 1)
         grid.addWidget(self.Lfee_e, 6, 2)
 
-        self.Lpreview_button = EnterButton(_("&Next"), self.do_preview)
+        self.Lpreview_button = EnterButton(_("Next"), self.do_preview)
         self.Lpreview_button.setToolTip(_('Display the details of your transactions before signing it.'))
         self.Lsend_button = EnterButton(_("&Send"), self.do_send)
         self.Lcointext_button = EnterButton(_("Coin&Text"), self.do_cointext)
@@ -1971,6 +1969,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
                 self.statusBar().showMessage(str(e))
                 return
             except BaseException as ex:
+                import traceback
+                traceback.print_exc()
                 self.print_error('wdy ex={}', ex)
                 return
 
@@ -3621,6 +3621,36 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         except SerializationError as e:
             self.show_critical(_("Electron Lava was unable to deserialize the transaction:") + "\n" + str(e))
 
+    def do_process_from_lock_txn(self, *, fileName = None):
+        fileName = fileName or self.getOpenFileName(_("Select your transaction file"), "*.txn")
+        if not fileName:
+            return
+        try:
+            with open(fileName, "r", encoding='utf-8') as f:
+                file_content = f.read()
+            file_content = file_content.strip()
+            tx_file_dict = json.loads(str(file_content))
+            if 'lock' not in tx_file_dict:
+                self.show_error(_('Not a valid lock transaction file'))
+                return
+
+            lock_data = tx_file_dict['lock']
+            locktime = lock_data.get('height', None)
+            dest = lock_data.get('dest', None)
+            if not locktime or not dest:
+                self.show_error(_('Not a valid lock transaction file'))
+                return
+
+            dest = Address.from_string(dest)
+            address = dest.to_cltv(locktime)
+            if lock_data.get('address', '') != address.to_ui_string():
+                self.show_error(_('Not a valid lock transaction file'))
+
+            self.wallet.add_lock_address(address)
+        except (ValueError, IOError, OSError, json.decoder.JSONDecodeError) as reason:
+            self.show_critical(_("Electron Lava was unable to open your transaction file") + "\n" + str(reason), title=_("Unable to read file or no transaction found"))
+            return
+        
     def do_process_from_txid(self, *, txid=None, parent=None, tx_desc=None):
         parent = parent or self
         if self.gui_object.warn_if_no_network(parent):

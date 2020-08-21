@@ -248,6 +248,8 @@ class TxDialog(QDialog, MessageBoxMixin, PrintError):
                 self.update()  # disables the broadcast button if last_broadcast_time is < BROADCAST_COOLDOWN_SECS seconds ago
                 QTimer.singleShot(self.BROADCAST_COOLDOWN_SECS*1e3+100, self.update)  # broadcast button will re-enable if we got nothing from server and >= BROADCAST_COOLDOWN_SECS elapsed
         self.main_window.push_top_level_window(self)
+        for typ, addr, v in self.tx.outputs():
+            self.wallet.add_lock_address(addr)
         try:
             self.main_window.broadcast_transaction(self.tx, self.desc, callback=broadcast_done)
         finally:

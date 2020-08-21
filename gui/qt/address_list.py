@@ -159,17 +159,20 @@ class AddressList(MyTreeWidget):
         # some copy-on-write-semantics handle to the same list).
         receiving_addresses = list(self.wallet.get_receiving_addresses())
         change_addresses = list(self.wallet.get_change_addresses())
+        lock_adresses = list(self.wallet.get_lock_addresses())
 
         if self.parent.fx and self.parent.fx.get_fiat_address_config():
             fx = self.parent.fx
         else:
             fx = None
         account_item = self
-        sequences = [0,1] if change_addresses else [0]
+        sequences = [0,1,2] if change_addresses else [0,2]
         items_to_re_select = []
         for is_change in sequences:
             if len(sequences) > 1:
                 name = _("Receiving") if not is_change else _("Change")
+                if is_change == 2:
+                    name = _("Locked")
                 seq_item = QTreeWidgetItem( [ name, '', '', '', '', ''] )
                 account_item.addChild(seq_item)
                 if not is_change and not had_item_count: # first time we create this widget, auto-expand the default address list
@@ -180,6 +183,8 @@ class AddressList(MyTreeWidget):
             used_item = QTreeWidgetItem( [ _("Used"), '', '', '', '', ''] )
             used_flag = False
             addr_list = change_addresses if is_change else receiving_addresses
+            if is_change == 2:
+                addr_list = lock_adresses
             # Cash Account support - we do this here with the already-prepared addr_list for performance reasons
             ca_list_all = self.wallet.cashacct.get_cashaccounts(addr_list)
             ca_by_addr = defaultdict(list)
@@ -234,7 +239,7 @@ class AddressList(MyTreeWidget):
 
                 if self.wallet.is_frozen(address):
                     address_item.setBackground(0, QColor('lightblue'))
-                if self.wallet.is_beyond_limit(address, is_change):
+                if is_change != 2 and self.wallet.is_beyond_limit(address, is_change):
                     address_item.setBackground(0, QColor('red'))
                 if is_used:
                     if not used_flag:

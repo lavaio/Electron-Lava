@@ -29,7 +29,7 @@ import struct
 
 from . import cashaddr, networks
 from enum import IntEnum
-from .bitcoin import EC_KEY, is_minikey, minikey_to_private_key, SCRIPT_TYPES, hash_160
+from .bitcoin import EC_KEY, is_minikey, minikey_to_private_key, SCRIPT_TYPES, hash_160, b58_address_to_hash160, p2wpkh_nested_script
 from .util import cachedproperty, inv_dict, bfh, bh2u
 
 _sha256 = hashlib.sha256
@@ -597,12 +597,8 @@ def segwit_address_decode(hrp, addr):
 def segwit_address_encode(hrp, witver, witprog):
     """Encode a segwit address."""
     ret = bech32_encode(hrp, [witver] + convertbits(witprog, 8, 5))
-    assert segwit_address_decode(hrp, ret) is not (None, None)
+    assert segwit_address_decode(hrp, ret) != (None, None)
     return ret
-
-def p2wpkh_nested_script(pubkey: str) -> str:
-    pkh = bh2u(hash_160(bfh(pubkey)))
-    return '00' + push_script(pkh)
 
 def is_segwit_address(addr: str, hrp) -> bool:
     try:

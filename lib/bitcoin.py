@@ -35,6 +35,7 @@ import pyaes
 
 from typing import Tuple
 
+from . import segwit_addr
 from . import networks
 from .util import (bfh, bh2u, to_string, print_error, InvalidPassword,
                    assert_bytes, to_bytes, inv_dict, profiler)
@@ -338,6 +339,18 @@ def hash160_to_p2sh(h160, *, net=None):
 def public_key_to_p2pkh(public_key, *, net=None):
     if net is None: net = networks.net
     return hash160_to_p2pkh(hash_160(public_key), net=net)
+
+def hash_to_segwit_addr(h: bytes, witver: int, *, net=None) -> str:
+    if net is None: net = networks.net
+    return segwit_addr.encode(net.SEGWIT_HRP, witver, h)
+
+def public_key_to_p2wpkh(public_key: bytes, *, net=None) -> str:
+    if net is None: net = networks.net
+    return hash_to_segwit_addr(hash_160(public_key), witver=0, net=net)
+
+def p2wpkh_nested_script(pubkey: str) -> str:
+    pkh = bh2u(hash_160(bfh(pubkey)))
+    return '00' + push_script(pkh)
 
 def pubkey_to_address(txin_type, pubkey, *, net=None):
     if net is None: net = networks.net

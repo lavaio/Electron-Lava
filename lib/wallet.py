@@ -214,6 +214,16 @@ class Abstract_Wallet(PrintError, SPVDelegate):
         self.use_change            = storage.get('use_change', True)
         self.multiple_change       = storage.get('multiple_change', False)
         self.labels                = storage.get('labels', {})
+        self.lock_balance          = storage.get('lock_balance', {})
+        '''lock_balance:
+        {
+            "3PRS6qwB5Vu3w9JzvQf3PJePJNnyEetHhg": {
+                "height": 192614,
+                "dest": "bc1qzs82zqh4qx5nm9mn90tc7fcxlns2nn9fyjm628",
+                "redeem_script": "0366f00276a914140ea102f501a93d97732bd78f2706fce0a9cca988ac",
+            }
+        }
+        '''
         # Frozen addresses
         frozen_addresses = storage.get('frozen_addresses',[])
         self.frozen_addresses = set(Address.from_string(addr)
@@ -489,7 +499,8 @@ class Abstract_Wallet(PrintError, SPVDelegate):
         # addresses, it starts to add up siince is_mine() is called frequently
         # especially while downloading address history.
         return (address in self._recv_address_set_cached
-                    or address in self._change_address_set_cached)
+                    or address in self._change_address_set_cached
+                    or address.to_ui_string() in self.lock_balance)
 
     def is_change(self, address):
         assert not isinstance(address, str)
@@ -906,10 +917,13 @@ class Abstract_Wallet(PrintError, SPVDelegate):
         return self.get_receiving_addresses()[0]
 
     def get_addresses(self):
-        return self.get_receiving_addresses() + self.get_change_addresses()
+        return self.get_receiving_addresses() + self.get_change_addresses() + self.get_lock_addresses()
 
     def get_change_addresses(self):
         ''' Reimplemented in subclasses for wallets that have a change address set/derivation path. '''
+        return []
+
+    def get_lock_addresses(self):
         return []
 
     def get_frozen_balance(self):
@@ -1358,6 +1372,10 @@ class Abstract_Wallet(PrintError, SPVDelegate):
         tx = self.make_unsigned_transaction(coins, outputs, config, fee, change_addr, sign_schnorr=sign_schnorr)
         self.sign_transaction(tx, password)
         return tx
+
+    def is_lock(self, addr):
+        assert isinstance(addr, Address)
+        return addr.to_ui_string() in self.lock_balance
 
     def is_frozen(self, addr):
         ''' Address-level frozen query. Note: this is set/unset independent of 'coin' level freezing. '''
@@ -2274,6 +2292,9 @@ class Deterministic_Wallet(Abstract_Wallet):
     def get_change_addresses(self):
         return self.change_addresses
 
+    def get_lock_addresses(self):
+        return [Address.from_string(addr) for addr in self.lock_balance.keys()]
+
     def get_seed(self, password):
         return self.keystore.get_seed(password)
 
@@ -2337,6 +2358,22 @@ class Deterministic_Wallet(Abstract_Wallet):
             self.add_address(address)
             return address
 
+    def add_lock_address(self, address):
+        assert isinstance(address, Address) 
+        orignal_addr = getattr(address, 'orignal', None)
+        if orignal_addr and address.to_ui_string() not in self.lock_balance:
+            with self.lock:
+                self.frozen_addresses.add(address)
+                self.set_frozen_state([address], True)
+                self.lock_balance[address.to_ui_string()] = {
+                    "height": getattr(address, 'locktime', -1),
+                    "dest": orignal_addr.to_ui_string(),
+                    "redeem_script": getattr(address, 'redeem_script', '')
+                }
+                self.storage.put('lock_balance', self.lock_balance)
+                self.storage.write()
+                self.add_address(address)
+
     def synchronize_sequence(self, for_change):
         limit = self.gap_limit_for_change if for_change else self.gap_limit
         while True:
@@ -2353,6 +2390,10 @@ class Deterministic_Wallet(Abstract_Wallet):
         with self.lock:
             self.synchronize_sequence(False)
             self.synchronize_sequence(True)
+
+            (self.add_address(Address.from_string(addr)) 
+                for addr in self.lock_balance.keys() 
+                    if self.address_is_old(addr))
 
     def is_beyond_limit(self, address, is_change):
         with self.lock:
@@ -2388,6 +2429,21 @@ class Simple_Deterministic_Wallet(Simple_Wallet, Deterministic_Wallet):
         Deterministic_Wallet.__init__(self, storage)
         self.load_keystore()
         storage.print_error('wdy self.txin_type={}'.format(self.txin_type))
+
+    def get_address_index(self, address):
+        try:
+            return False, self.receiving_addresses.index(address)
+        except ValueError:
+            pass
+        try:
+            return True, self.change_addresses.index(address)
+        except ValueError:
+            pass
+        if address.kind == Address.ADDR_P2SH and self.is_lock(address):
+            lock = self.lock_balance[address.to_ui_string()]
+            return super().get_address_index(Address.from_string(lock['dest']))
+        assert not isinstance(address, str)
+        raise Exception("Address {} not found".format(address))
 
     def get_public_key(self, address):
         sequence = self.get_address_index(address)
