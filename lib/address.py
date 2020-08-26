@@ -188,7 +188,7 @@ class OpCodes(IntEnum):
 
 P2PKH_prefix = bytes([OpCodes.OP_DUP, OpCodes.OP_HASH160, 20])
 P2PKH_suffix = bytes([OpCodes.OP_EQUALVERIFY, OpCodes.OP_CHECKSIG])
-
+CLTV_CODE    = bytes([OpCodes.OP_CHECKLOCKTIMEVERIFY, OpCodes.OP_DROP])
 P2SH_prefix = bytes([OpCodes.OP_HASH160, 20])
 P2SH_suffix = bytes([OpCodes.OP_EQUAL])
 
@@ -968,7 +968,7 @@ class Script:
     def cltv_script(cls, locktime, hash160):
         '''Return the script for CLTV transaction'''
         assert len(hash160) == 20
-        return cls.push_data(cls.script_num_to_hex(locktime)) + P2PKH_prefix + hash160 + P2PKH_suffix
+        return cls.push_data(cls.script_num_to_hex(locktime)) + CLTV_CODE + P2PKH_prefix + hash160 + P2PKH_suffix
 
     @classmethod
     def push_data_bch(cls, data):
