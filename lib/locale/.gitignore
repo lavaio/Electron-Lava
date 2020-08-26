@@ -1,3 +1,4 @@
-*
+*.mo
+*.pot
 !.gitignore
 !__init__.py
