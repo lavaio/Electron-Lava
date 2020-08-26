@@ -893,7 +893,6 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             # Server height can be 0 after switching to a new server
             # until we get a headers subscription request response.
             # Display the synchronizing message in that case.
-            #self.print_error('wdy up to date={} server_height={}'.format(self.wallet.up_to_date, server_height))
             if not self.wallet.up_to_date or server_height == 0:
                 text = _("Synchronizing...")
                 icon = icon_dict["status_waiting"]
@@ -1735,7 +1734,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         grid.addWidget(self.locktime_label,  3, 0)
         self.locktime_combo = QComboBox()
         self.locktime_combo.addItems([_(i[0]) for i in locktime_values])
-        self.locktime_combo.setCurrentIndex(4)
+        self.locktime_combo.setCurrentIndex(DEFAULT_LOCKTIME_VALUE_INDEX)
         self.locktime_combo.setFixedWidth(self.Lamount_e.width())
         self.locktime_label.setBuddy(self.locktime_combo)
         self.prompt_label = HelpLabel(_('unlock at block height: '), None)
@@ -1745,11 +1744,11 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         grid.addLayout(hbox,  3 , 1, 1, -1)
 
         def locktime_changed(index: int):
-            self.prompt_label.help_text = (_('unlock at block height: ') + '%s [%s + %s blocks]' %(self.wallet.get_local_height() + int(locktime_values[index][1]), self.wallet.get_local_height(), int(locktime_values[index][1])))
-            self.prompt_label.setText(_('unlock at block height: ') + '%s' %(self.wallet.get_local_height() + int(locktime_values[index][1])))
+            self.prompt_label.help_text = (_('unlock at block height: ') + '%s [%s + %s blocks]' %(self.wallet.get_local_height() + 1 + int(locktime_values[index][1]), self.wallet.get_local_height(), 1 + int(locktime_values[index][1])))
+            self.prompt_label.setText(_('unlock at block height: ') + '%s' %(self.wallet.get_local_height() + 1 + int(locktime_values[index][1])))
 
         self.locktime_combo.currentIndexChanged.connect(locktime_changed)
-        locktime_changed(4)
+        locktime_changed(DEFAULT_LOCKTIME_VALUE_INDEX)
 
         msg = _('Amount to be sent.') + '\n\n' \
               + _('The amount will be displayed in red if you do not have enough funds in your wallet.') + ' ' \
@@ -1790,7 +1789,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
                                         + "\n\n" + _('Generally, a fee of 1.0 sats/B is a good minimal rate to ensure your transaction will make it into the next block.'))
         self.Lfee_custom_lbl.setFixedWidth(140)
 
-        self.fee_slider_mogrifier()
+        self.Lfee_slider_mogrifier()
 
         self.Lfee_e = BTCAmountEdit(self.get_decimal_point)
         if not self.config.get('show_fee', False):
@@ -1931,9 +1930,10 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         max_button = self.max_button if is_send_action else self.Lmax_button
         payto_e = self.payto_e if is_send_action else self.Lpayto_e
         fee_e = self.fee_e if is_send_action else self.Lfee_e
+        fee_slider_mogrifier = self.fee_slider_mogrifier if is_send_action else self.Lfee_slider_mogrifier
 
-        freeze_fee = (self.fee_e.isModified()
-                      and (self.fee_e.text() or self.fee_e.hasFocus()))
+        freeze_fee = (fee_e.isModified()
+                      and (fee_e.text() or fee_e.hasFocus()))
         amount = '!' if max_button.isChecked() else amount_e.get_amount()
         fee_rate = None
         if amount is None:
@@ -1960,7 +1960,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             except NotEnoughFunds:
                 self.not_enough_funds = True
                 if not freeze_fee:
-                    self.fee_e.setAmount(None)
+                    fee_e.setAmount(None)
                 return
             except OPReturnTooLarge:
                 self.op_return_toolong = True
@@ -1971,25 +1971,30 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             except BaseException as ex:
                 import traceback
                 traceback.print_exc()
-                self.print_error('wdy ex={}', ex)
                 return
 
             if not freeze_fee:
                 fee = None if self.not_enough_funds else tx.get_fee()
-                self.fee_e.setAmount(fee)
+                fee_e.setAmount(fee)
 
             if max_button.isChecked():
                 amount = tx.output_value()
                 amount_e.setAmount(amount)
             if fee is not None:
                 fee_rate = fee / tx.estimated_size()
-        self.fee_slider_mogrifier(self.get_custom_fee_text(fee_rate))
+        fee_slider_mogrifier(self.get_custom_fee_text(fee_rate))
 
     def fee_slider_mogrifier(self, text = None):
         fee_slider_hidden = self.config.has_custom_fee_rate()
         self.fee_slider.setHidden(fee_slider_hidden)
         self.fee_custom_lbl.setHidden(not fee_slider_hidden)
         if text is not None: self.fee_custom_lbl.setText(text)
+
+    def Lfee_slider_mogrifier(self, text = None):
+        fee_slider_hidden = self.config.has_custom_fee_rate()
+        self.Lfee_slider.setHidden(fee_slider_hidden)
+        self.Lfee_custom_lbl.setHidden(not fee_slider_hidden)
+        if text is not None: self.Lfee_custom_lbl.setText(text)
 
     def from_list_delete(self, name):
         item = self.from_list.currentItem()
@@ -2789,7 +2794,6 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
 
     def get_coins(self, isInvoice = False):
         coins = []
-        self.print_error('wdy pay_from={}'.format(self.pay_from))
         if self.pay_from:
             coins = self.pay_from.copy()
         else:
@@ -4359,6 +4363,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             self.config.set_key('customfee', m)
             self.fee_slider.update()
             self.fee_slider_mogrifier()
+            self.Lfee_slider.update()
+            self.Lfee_slider_mogrifier()
 
         customfee_e = BTCSatsByteEdit()
         customfee_e.setAmount(self.config.custom_fee_rate() / 1000.0 if self.config.has_custom_fee_rate() else None)
@@ -4372,6 +4378,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         def on_feebox(x):
             self.config.set_key('show_fee', x == Qt.Checked)
             self.fee_e.setVisible(bool(x))
+            self.Lfee_e.setVisible(bool(x))
         feebox_cb.stateChanged.connect(on_feebox)
         fee_widgets.append((feebox_cb, None))
 

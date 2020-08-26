@@ -52,7 +52,9 @@ expiration_values = [
 # fixed 30 * 24 * 60 / 4 blocks per month
 locktime_values = [
     (_('1 month'), 1 * 30 * 24 * 60 / 4),
+    (_('2 months'), 2 * 30 * 24 * 60 / 4),
     (_('3 months'), 3 * 30 * 24 * 60 / 4),
+    (_('4 months'), 4 * 30 * 24 * 60 / 4),
     (_('5 months'), 5 * 30 * 24 * 60 / 4),
     (_('6 months'), 6 * 30 * 24 * 60 / 4),
     (_('12 months'), 12 * 30 * 24 * 60 / 4),
@@ -61,6 +63,7 @@ locktime_values = [
     (_('3 years'), 3 * 12 * 30 * 24 * 60 / 4),
     (_('5 years'), 5 * 12 * 30 * 24 * 60 / 4),
 ]
+DEFAULT_LOCKTIME_VALUE_INDEX = 6
 
 del _
 from electroncash.i18n import _
