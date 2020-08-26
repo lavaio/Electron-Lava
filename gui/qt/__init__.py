@@ -84,7 +84,7 @@ class ElectrumGui(QObject, PrintError):
         super(__class__, self).__init__() # QObject init
         assert __class__.instance is None, "ElectrumGui is a singleton, yet an instance appears to already exist! FIXME!"
         __class__.instance = self
-        #set_language(config.get('language'))
+        set_language(config.get('language'))
 
         self.config = config
         self.daemon = daemon
@@ -559,11 +559,9 @@ class ElectrumGui(QObject, PrintError):
                     self.warn_if_no_secp(relaxed=True)
 
                 try:
-                    self.print_error('wdy path={}'.format(path))
                     wallet = self.daemon.load_wallet(path, None)
                 except BaseException as e:
                     self.print_error(repr(e))
-                    self.print_error('wdy e={}'.format(e))
                     if self.windows:
                         # *Not* starting up. Propagate exception out to present
                         # error message box to user.
