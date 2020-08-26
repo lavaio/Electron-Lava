@@ -20,7 +20,7 @@ fi
 
 set -e
 
-git checkout "$to_build" || fail "Could not branch or tag $to_build"
+#git checkout "$to_build" || fail "Could not branch or tag $to_build"
 
 GIT_COMMIT_HASH=$(git rev-parse HEAD)
 

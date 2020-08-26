@@ -6,9 +6,9 @@
 ;--------------------------------
 ;Variables
 
-  !define PRODUCT_NAME "Electron Cash"
-  !define INTERNAL_NAME "Electron-Cash"
-  !define PRODUCT_WEB_SITE "https://github.com/Electron-Cash/Electron-Cash"
+  !define PRODUCT_NAME "Electron Lava"
+  !define INTERNAL_NAME "Electron-Lava"
+  !define PRODUCT_WEB_SITE "https://github.com/lavaio/Electron-Lava"
   !define PRODUCT_PUBLISHER "Electron Cash LLC"
   !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 
