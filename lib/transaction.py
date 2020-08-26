@@ -63,6 +63,12 @@ class InputValueMissing(Exception):
 class UnknownTxinType(Exception):
     pass
 
+class NotRecognizedRedeemScript(Exception):
+    pass
+
+class MalformedBitcoinScript(Exception):
+    pass
+
 class BIP143SharedTxDigestFields(NamedTuple):
     hashPrevouts: str
     hashSequence: str
@@ -324,26 +330,24 @@ def parse_scriptSig(d, _bytes):
         return
 
     # p2sh transaction, m of n
-    match = [opcodes.OP_0] + [OPPushDataGeneric] * (len(decoded) - 1)
+    match = [OPPushDataGeneric] * len(decoded)
     if match_decoded(decoded, match):
         x_sig = [bh2u(x[1]) for x in decoded[1:-1]]
         redeem_script_unsanitized = decoded[-1][1]  # for partial multisig txn, this has x_pubkeys
         try:
             m, n, x_pubkeys, pubkeys, redeem_script = parse_redeemScript_multisig(redeem_script_unsanitized)
+            # write result in d
+            d['num_sig'] = m
+            d['signatures'] = parse_sig(x_sig)
+            d['x_pubkeys'] = x_pubkeys
+            d['pubkeys'] = pubkeys
+            d['redeem_script'] = redeem_script
+            d['address'] = hash160_to_p2sh(hash_160(bfh(redeem_script)))
         except NotRecognizedRedeemScript:
-            print_error("3 parse_scriptSig: cannot find address in input script (p2sh?) ", bh2u(_bytes))
-
-            # we could still guess:
-            # d['address'] = hash160_to_p2sh(hash_160(decoded[-1][1]))
-            return
-        # write result in d
+            print_error("3 parse_scriptSig: cannot find address in input script (p2sh?) ", bh2u(redeem_script_unsanitized))
+            d['address'] = hash160_to_p2sh(hash_160(redeem_script_unsanitized))
         d['type'] = 'p2sh'
-        d['num_sig'] = m
-        d['signatures'] = parse_sig(x_sig)
-        d['x_pubkeys'] = x_pubkeys
-        d['pubkeys'] = pubkeys
-        d['redeem_script'] = redeem_script
-        d['address'] = hash160_to_p2sh(hash_160(bfh(redeem_script)))
+        d['address'] = Address.from_string(d['address'])
         return
 
     # custom partial format for imported addresses
@@ -365,7 +369,7 @@ def parse_scriptSig(d, _bytes):
 def parse_redeemScript_multisig(redeem_script: bytes):
     try:
         dec2 = [ x for x in script_GetOp(redeem_script) ]
-    except MalformedBitcoinScript:
+    except Exception:
         raise NotRecognizedRedeemScript()
     try:
         m = dec2[0][0] - opcodes.OP_1 + 1
@@ -940,7 +944,7 @@ class Transaction:
             pubkey_size = self.estimate_pubkey_size_for_txin(txin)
             pk_list = ["00" * pubkey_size] * len(txin.get('x_pubkeys', [None]))
             # we assume that signature will be 0x48 bytes long
-            sig_list = [ "00" * 0x48 ] * num_sig
+            sig_list = [ "00" * 0x47 ] * num_sig
         else:
             pubkeys, x_pubkeys = self.get_sorted_pubkeys(txin)
             x_signatures = txin['signatures']
@@ -1025,10 +1029,11 @@ class Transaction:
         if _type == 'p2pk':
             pass
         elif _type == 'p2sh':
-            # put op_0 before script
-            script = '00' + script
-            redeem_script = multisig_script(pubkeys, txin['num_sig'])
-            script += push_script(redeem_script)
+            redeem_script = txin.get('redeem_script', None)
+            if redeem_script:
+                script += push_script(pubkeys[0]) + push_script(redeem_script)
+            else:
+                script += multisig_script(pubkeys, txin['num_sig'])
         elif _type == 'p2pkh':
             script += push_script(pubkeys[0])
         elif _type in ['p2wpkh', 'p2wsh']:
@@ -1089,7 +1094,7 @@ class Transaction:
         if txin['type'] == 'p2pkh':
             return txin['address'].to_script().hex()
         elif txin['type'] in ['p2sh', 'p2wsh', 'p2wsh-p2sh']:
-            return multisig_script(pubkeys, txin['num_sig'])
+            return txin.get('redeem_script', None) or multisig_script(pubkeys, txin['num_sig'])
         elif txin['type'] in ['p2wpkh', 'p2wpkh-p2sh']:
             pubkey = pubkeys[0]
             pkh = bh2u(hash_160(bfh(pubkey)))
