@@ -891,6 +891,11 @@ class Abstract_Wallet(PrintError, SPVDelegate):
             if exclude_frozen:
                 domain = set(domain) - self.frozen_addresses
             for addr in domain:
+                original = self.lock_balance.get(addr.to_ui_string(), None)
+                if  original:
+                    lockheight = original.get('height', 0xffffffff)
+                    if lockheight >= mempoolHeight:
+                        continue
                 utxos = self.get_addr_utxo(addr)
                 len_before = len(coins)
                 for x in utxos.values():
@@ -969,17 +974,13 @@ class Abstract_Wallet(PrintError, SPVDelegate):
                     ser = prevout_hash + ':%d'%prevout_n
                 # get addr from txo if addr is not parsed
                 if addr is None:
-                    self.print_error("wdy addr is none")
                     tx_dd = self.txo.get(prevout_hash, {})
-                    self.print_error("wdy tx_dd=", tx_dd)
                     for key, value in tx_dd.items():
                         for n, v, is_cb in value:
                             if n == prevout_n:
                                 addr = key
-                                self.print_error("wdy 1 find addr=", addr)
                                 break
                         if addr: # find addr in txo
-                            self.print_error("wdy 2 find addr=", addr)
                             break
                 # find value from prev output
                 if self.is_mine(addr):
@@ -1341,12 +1342,10 @@ class Abstract_Wallet(PrintError, SPVDelegate):
             sendable = sum(map(lambda x:x['value'], inputs))
             _type, data, value = outputs[i_max]
             outputs[i_max] = (_type, data, 0)
-            #tx = Transaction.from_io(inputs, outputs, sign_schnorr=sign_schnorr)
             tx = Transaction.from_io(inputs, outputs)
             fee = fee_estimator(tx.estimated_size())
             amount = max(0, sendable - tx.output_value() - fee)
             outputs[i_max] = (_type, data, amount)
-            #tx = Transaction.from_io(inputs, outputs, sign_schnorr=sign_schnorr)
             tx = Transaction.from_io(inputs, outputs)
 
         # If user tries to send too big of a fee (more than 50 sat/byte), stop them from shooting themselves in the foot
@@ -1568,6 +1567,11 @@ class Abstract_Wallet(PrintError, SPVDelegate):
             tx_height, value, is_cb = item
             txin['value'] = value
             self.add_input_sig_info(txin, address)
+            if address.kind == Address.ADDR_P2SH:
+                original = self.lock_balance.get(address.to_ui_string(), None)
+                if original:
+                    txin['type'] = 'p2sh'
+                    txin['redeem_script'] = original['redeem_script']
 
     def can_sign(self, tx):
         if tx.is_complete():
@@ -2363,8 +2367,8 @@ class Deterministic_Wallet(Abstract_Wallet):
         orignal_addr = getattr(address, 'orignal', None)
         if orignal_addr and address.to_ui_string() not in self.lock_balance:
             with self.lock:
-                self.frozen_addresses.add(address)
-                self.set_frozen_state([address], True)
+                #self.frozen_addresses.add(address)
+                #self.set_frozen_state([address], True)
                 self.lock_balance[address.to_ui_string()] = {
                     "height": getattr(address, 'locktime', -1),
                     "dest": orignal_addr.to_ui_string(),
@@ -2488,7 +2492,6 @@ class Standard_Wallet(Simple_Deterministic_Wallet):
     def pubkeys_to_address(self, pubkey):
         return Address.from_pubkey(pubkey, self.txin_type)
     def get_txin_type(self, address):
-        self.storage.print_error('wdy address type={}'.format(type(address)))
         if self.storage.get('seed_type', '') == 'segwit':
             return Address.guess_txintype_from_address(address.to_ui_string())
         return self.txin_type
