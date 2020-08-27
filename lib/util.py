@@ -46,6 +46,7 @@ def inv_dict(d):
 base_units = {'LV':8, 'mLV':5, 'bits':2}
 inv_base_units = inv_dict(base_units)
 base_unit_labels = tuple(inv_base_units[dp] for dp in sorted(inv_base_units.keys(), reverse=True))  # ('BCH', 'mBCH', 'bits')
+DEFAULT_BASE_UNIT = 'LV'
 
 def _(message): return message
 

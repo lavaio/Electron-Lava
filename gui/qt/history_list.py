@@ -116,7 +116,6 @@ class HistoryList(MyTreeWidget):
         fx = self.parent.fx
         if fx: fx.history_used_spot = False
         for h_item in h:
-            #self.parent.print_error('wdy h_item={}'.format(h_item))
             tx_hash, height, conf, timestamp, value, balance = h_item
             label = self.wallet.get_label(tx_hash)
             should_skip = run_hook("history_list_filter", self, h_item, label)

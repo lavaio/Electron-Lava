@@ -253,7 +253,6 @@ class Synchronizer(ThreadJob):
 
             # 3. Detect if situation has changed
             up_to_date = self.is_up_to_date()
-            #self.print_error('wdy up_to_date={}'.format(up_to_date))
             if up_to_date != self.wallet.is_up_to_date():
                 self.wallet.set_up_to_date(up_to_date)
                 self.network.trigger_callback('wallet_updated', self.wallet)

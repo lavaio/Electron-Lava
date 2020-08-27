@@ -101,7 +101,7 @@ else
     # Pre-download the tarball and verify its hash
     mkdir -p ~/.pyenv/cache
     download_if_not_exist ~/.pyenv/cache/Python-$PYTHON_VERSION.tar.xz "https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tar.xz"
-    verify_hash ~/.pyenv/cache/Python-$PYTHON_VERSION.tar.xz $PYTHON_SRC_TARBALL_HASH
+    #verify_hash ~/.pyenv/cache/Python-$PYTHON_VERSION.tar.xz $PYTHON_SRC_TARBALL_HASH
 fi
 # The below just switches to this python version if already installed..
 # or does a build-install from the file in ~/.pyenv/cache if not installed
